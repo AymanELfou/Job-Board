@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Documen</title>
-</head>
-<body>
-    <h1>Hello Laravel</h1>
-    
-</body>
-</html>
+<!-- resources/views/pages/accueil.blade.php -->
+@extends('layout.app')
+
+@section('titre', 'Page daccueil')
+
+@section('content')
+    <h1>Bienvenue sur la page d'accueil</h1>
+    <p>Ceci est le contenu de la page d'accueil.</p>
+@endsection
