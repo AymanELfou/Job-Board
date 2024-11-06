@@ -42,4 +42,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+
+
+
+
+
+
+    public function profilEmployer()
+    {
+        return $this->hasOne(ProfilEmployer::class, 'id_utilisateur');
+    }
+
+    public function profilJobseeker()
+    {
+        return $this->hasOne(ProfilJobseeker::class, 'id_utilisateur');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'id_utilisateur');
+    }
 }
