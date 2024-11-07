@@ -2,9 +2,118 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
-    //
+    // Afficher le formulaire de création
+    public function create()
+    {
+        return view("Jobs.createJob");
+    }
+
+    // Afficher toutes les offres d'emploi
+    public function index()
+    {
+        $jobs = Job::all();
+        return view("Jobs.jobs", compact('jobs'));
+    }
+
+    // Créer une nouvelle offre d'emploi
+    public function store(Request $request)
+{
+    $request->validate([
+        'titre' => 'required|string',
+        'description' => 'required|string',
+        'location' => 'required|string',
+        'job_type' => 'string|required',
+        'categorie' => 'string|nullable',
+        'salaire' => 'numeric|nullable',
+        'type_contrat' => 'string|nullable',
+        'date_publication' => 'required|date',
+    ]);
+
+    $job = new Job();
+    $job->id_employeur = auth()->user()->id; // Set the employer ID from the logged-in user
+    $job->titre = $request->titre;
+    $job->description = $request->description;
+    $job->location = $request->location;
+    $job->job_type = $request->job_type;
+    $job->categorie = $request->categorie;
+    $job->salaire = $request->salaire;
+    $job->type_contrat = $request->type_contrat;
+    $job->date_publication = $request->date_publication;
+    $job->save();
+
+    return redirect()->route('jobs.index');
+}
+
+    // Afficher le formulaire d'édition
+    public function edit($id)
+    {
+        $job = Job::findOrFail($id);
+        return view("Jobs.editJob", compact('job'));
+    }
+
+    // Mettre à jour une offre d'emploi
+    public function update(Request $request, $id)
+    {
+        $job = Job::findOrFail($id);
+
+        $request->validate([
+            'titre' => 'string|nullable',
+            'company' => 'string|nullable',
+            'description' => 'string|nullable',
+            'location' => 'string|nullable',
+            'job_type' => 'string|nullable',
+            'categorie' => 'string|nullable',
+            'salaire' => 'numeric|nullable',
+            'type_contrat' => 'string|nullable',
+            'date_publication' => 'date|nullable',
+        ]);
+
+        $job->titre = $request->titre ?? $job->titre;
+        $job->company = $request->company ?? $job->company;
+        $job->description = $request->description ?? $job->description;
+        $job->location = $request->location ?? $job->location;
+        $job->job_type = $request->job_type ?? $job->job_type;
+        $job->categorie = $request->categorie ?? $job->categorie;
+        $job->salaire = $request->salaire ?? $job->salaire;
+        $job->type_contrat = $request->type_contrat ?? $job->type_contrat;
+        $job->date_publication = $request->date_publication ?? $job->date_publication;
+        $job->save();
+
+        return redirect()->route('jobs.index');
+    }
+
+    // Supprimer une offre d'emploi
+    public function destroy($id)
+    {
+        $job = Job::findOrFail($id);
+        $job->delete();
+
+        return redirect()->route('jobs.index');
+    }
+
+    // Filtrer les offres d'emploi par critères
+    public function search(Request $request)
+    {
+        $query = Job::query();
+
+        if ($request->has('location')) {
+            $query->where('location', $request->location);
+        }
+
+        if ($request->has('categorie')) {
+            $query->where('categorie', $request->categorie);
+        }
+
+        if ($request->has('type_contrat')) {
+            $query->where('type_contrat', $request->type_contrat);
+        }
+
+        $jobs = $query->get();
+        return response()->json($jobs);
+    }
 }
