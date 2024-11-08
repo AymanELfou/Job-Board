@@ -1,97 +1,65 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-center h-screen">
-            <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
-                {{ __('Job Management') }}
-            </h2>
-        </div>
+        <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
+            {{ __('Job Management') }}
+        </h2>
     </x-slot>
 
+    <!-- Custom Inline CSS -->
+  <style>
+    .add-job-btn {
+        width: 100%;
+        max-width: 200px;
+        transition: background-color 0.3s, color 0.3s; /* Transition douce */
+    }
+    .add-job-btn:hover {
+        background-color: red;
+        color: white;
+    }
+    
+    .search-input {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 5px; /* Coins arrondis */
+        border: 1px solid #ced4da; /* Bordure grise */
+        transition: border-color 0.3s; /* Transition douce pour la bordure */
+    }
+    
+    .search-input:focus {
+        border-color: #28a745; /* Changement de couleur de la bordure au focus */
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Ombre au focus */
+    }
 
+    .search-btn {
+        background-color: #28a745;
+        color: white;
+        transition: background-color 0.3s; /* Transition douce */
+    }
 
-    <div class="flex justify-center">
-        <a href="{{ route('jobs.create') }}" class="btn btn-primary mt-4 text-3xl bg-blue-500 leading-tight text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
-            Créer un Job <img src="{{{ asset('') }}}" alt="" srcset="">
-        </a>
-    </div>
+    .search-btn:hover {
+        background-color: darkgreen; /* Couleur au survol */
+    }
+</style>
 
+<!-- Button to add a new job -->
+<div class="d-flex justify-content-start mb-4">
+    <a href="{{ route('jobs.create') }}" class="btn btn-primary add-job-btn d-flex align-items-center text-white font-semibold py-2 px-3 rounded">
+        <img src="{{ asset('imgs/plus.png') }}" alt="Add" class="me-2" style="width: 30px; height: 30px;">
+       <h5>Add Job</h5> 
+    </a>
+</div>
 
-
-    @foreach($jobs as $job)
-        <div class="card rounded-3 mb-4">
-          <div class="card-body p-4">
-            <div class="row d-flex justify-content-between align-items-center">
-              
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <p class="lead fw-normal mb-2">Titre {{ $job['titre'] }}</p>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <h5 class="mb-0">{{ $job['company'] }}</h5>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <h5 class="mb-0">{{ $job['location'] }}</h5>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <h5 class="mb-0">{{ $job['type'] }}</h5>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <h5 class="mb-0">{{ $job['category'] }}</h5>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <h5 class="mb-0">{{ $job['salaire'] }}</h5>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <h5 class="mb-0">{{ $job['type_contrat'] }}</h5>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <h5 class="mb-0">{{ $job['date_publication'] }}</h5>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <h5 class="mb-0">{{ $job['description'] }}</h5>
-              </div>
-              
-
-
-
-
-
-
-
-
-              {{-- edit/destroy --}}
-              <div class="col-md-3 col-lg-3 col-xl-2">
-                <h5 class="mb-0">
-                  <div class="d-flex col-6">
-                    
-                  
-                  <form action="{{ route('jobs.destroy',$job->id) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    
-                    <button style="border: none; cursor: pointer;">
-                      <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 50px; height: 50px;" />
-                    </button>
-                    
-                  </form>
-                  
-                  
-                  <a href="jobs/{{ $job->id }}/edit"><img src="{{ asset('imgs/pen.png') }}" alt="modify" style="width: 50px; height: 50px;" /></div></a>
-                </h5>
-                
-
-              </div>
-            </div>
-          </div>
-        </div>
-        @endforeach
-
-
-
+<!-- Search Bar and Button aligned in the same row -->
+<div class="container">
+    <form action="{{ route('jobs.search') }}" method="GET" class="d-flex align-items-center mt-4">
+        <input class="form-control me-2 search-input flex-grow-1" name="keyword" type="search" placeholder="Job category, location, job type" aria-label="Search">
+        <button class="btn search-btn flex-shrink-0 add-job-btn" type="submit">Search</button>
+    </form>
+</div>
 
     
-    
-    
 
-
+    <!-- Job List Component -->
+    <x-job-list :jobs="$jobs" />
 
 </x-app-layout>

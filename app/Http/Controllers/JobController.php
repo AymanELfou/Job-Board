@@ -98,22 +98,23 @@ class JobController extends Controller
 
     // Filtrer les offres d'emploi par critères
     public function search(Request $request)
-    {
-        $query = Job::query();
+{
+    $keyword = $request->input('keyword');
 
-        if ($request->has('location')) {
-            $query->where('location', $request->location);
-        }
+    $query = Job::query();
 
-        if ($request->has('categorie')) {
-            $query->where('categorie', $request->categorie);
-        }
-
-        if ($request->has('type_contrat')) {
-            $query->where('type_contrat', $request->type_contrat);
-        }
-
-        $jobs = $query->get();
-        return response()->json($jobs);
+    if ($keyword) {
+        $query->where(function ($q) use ($keyword) {
+            $q->where('location', 'like', '%' . $keyword . '%')
+              ->orWhere('categorie', 'like', '%' . $keyword . '%')
+              ->orWhere('job_type', 'like', '%' . $keyword . '%')
+              ->orWhere('titre', 'like', '%' . $keyword . '%'); // Optional: search by job title as well
+        });
     }
+
+    $jobs = $query->get();
+
+    return view("Jobs.jobs", compact('jobs'));
+}
+
 }

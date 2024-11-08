@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Filtrer les offres d'emploi par critères
     Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
+    
 });
 
 
