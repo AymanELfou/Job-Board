@@ -21,7 +21,16 @@
                         Job Management
                     </a>
                 </li>
-                
+                <li>
+                    <a href="{{ route('jobseeker.index') }}" class="nav-link fs-5 text-white fw-bold mt-4 {{ request()->routeIs('jobseeker.index') ? 'active  ' : '' }}">
+                        User Management
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="nav-link fs-5 text-white fw-bold mt-4">
+                        Application Management
+                    </a>
+                </li>
                 <!-- Add more links here as needed -->
             </ul>
         </div>

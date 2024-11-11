@@ -56,7 +56,6 @@
         <button class="btn search-btn flex-shrink-0 add-job-btn" type="submit">Search</button>
     </form>
 </div>
-
     
 
     <!-- Job List Component -->

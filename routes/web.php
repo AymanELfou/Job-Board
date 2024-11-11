@@ -5,7 +5,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilEmployerController;
 use App\Http\Controllers\ProfilJobseekerController;
-
+use App\Models\ProfilJobseeker;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +36,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    //Route::get('/job-Managment', [JobController::class, 'index'])->name('jobs.index');
+    //**************************** /* Job Management ************************************
 
     // Affiche la liste des offres d'emploi
     Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
@@ -58,6 +58,59 @@ Route::middleware(['auth'])->group(function () {
 
     // Filtrer les offres d'emploi par critères
     Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
+
+
+    
+    
+    //****************************  JobSeeker Management ************************************
+
+    // Route to display the list of job seekers
+    Route::get('/jobseekers', [ProfilJobseekerController::class, 'index'])->name('jobseeker.index');
+
+    // Route to show the form for creating a new job seeker profile
+    Route::get('/jobseekers/create', [ProfilJobseekerController::class, 'create'])->name('jobseeker.create');
+
+    // Route to save a new job seeker profile
+    Route::post('/jobseekers', [ProfilJobseekerController::class, 'store'])->name('jobseeker.store');
+
+    // Route to show the edit form for a specific job seeker profile
+    Route::get('/jobseekers/{id}/edit', [ProfilJobseekerController::class, 'edit'])->name('jobseeker.edit');
+
+    // Route to update a specific job seeker profile
+    Route::put('/jobseekers/{id}', [ProfilJobseekerController::class, 'update'])->name('jobseeker.update');
+
+    // Route to delete a specific job seeker profile
+    Route::delete('/jobseekers/{id}', [ProfilJobseekerController::class, 'destroy'])->name('jobseeker.destroy');
+
+    // Route to filter job seekers by criteria
+    Route::get('/jobseekers/search', [ProfilJobseekerController::class, 'search'])->name('jobseeker.search');
+
+
+    
+
+
+
+
+    //****************************  JobSeeker Management ************************************
+
+    // Route to display the list of employers
+    Route::get('/employers', [ProfilEmployerController::class, 'index'])->name('employers.index');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 });
 
