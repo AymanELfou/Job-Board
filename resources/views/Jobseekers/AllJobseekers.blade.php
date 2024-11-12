@@ -9,7 +9,7 @@
 
 <!-- Button to add a new job -->
 <div class="text-center">
-    <a href="{{ route('jobseeker.index') }}" class=" button-77 mt-5">
+    <a href="{{ route('jobseeker.index') }}" class=" button-77 mt-2">
        <h5>Job seeker</h5> 
     </a>
 
@@ -26,11 +26,21 @@
 
 
 
-<div class="d-flex justify-content-start  mt-2">
+<div class="mx-5 col-2 mt-1">
     <a href="{{ route('jobseeker.create') }}" class="btn btn-primary add-job-btn d-flex align-items-center text-white font-semibold py-2 px-3 rounded">
         <img src="{{ asset('imgs/plus.png') }}" alt="Add" class="me-2" style="width: 30px; height: 30px;">
        <h5>Add Jobseeker</h5>
     </a>
+</div>
+
+
+
+<!-- Search Bar and Button aligned in the same row -->
+<div class="container col-12 col-md-6 col-lg-4">
+    <form action="{{ route('jobseeker.search') }}" method="GET" class="d-flex align-items-center mt-4">
+        <input class="form-control me-2 search-input flex-grow-1" name="fullName" type="search" placeholder="Name" aria-label="Search">
+        <button class="btn search-btn flex-shrink-0" type="submit" style="background-color: rgba(245, 16, 0, 0.705); border-radius: 10px; color: white">Search</button>
+    </form>
 </div>
 
 
@@ -41,13 +51,15 @@
     
     <section class="our-webcoderskull">
         <div class="container">
-            @foreach($Jobseekers as $jobseeker)
+            
           <div class="row mt-5"></div>
+          
           <ul class="row">
+            @foreach($Jobseekers as $jobseeker)
             <li class="col-12 col-md-6 col-lg-4">
-                <div class="cnt-block " >
+                <div class="cnt-block ">
                   <figure><img src="http://www.webcoderskull.com/img/team4.png" class="img-responsive" alt=""></figure>
-                  <h3><a href="http://www.webcoderskull.com/">{{ $jobseeker['fullName'] }}</a></h3>
+                  <h3>{{ $jobseeker['fullName'] }}</h3>
                   <p>Freelance Web Developer</p>
                   
                     <p class="pd">Personel information:  {{ $jobseeker['contact_information'] }}</p>
@@ -58,8 +70,8 @@
 
 
                     <div class="d-flex justify-content-center mt-2">
-                        <a href="jobseeker/{{ $jobseeker->id }}/edit" class="btn">
-                            <img src="{{ asset('imgs/penc.png') }}" alt="modify" style="width: 40px; height: 40px;"  />
+                        <a href="jobseekers/{{ $jobseeker->id }}/edit" class="btn">
+                            <img src="{{ asset('imgs/penc.png') }}" alt="modify" style="width: 40px; height: 40px;" />
                         </a>
 
                         <form action="{{ route('jobseeker.destroy', $jobseeker->id) }}" method="post">
@@ -75,8 +87,9 @@
                   
                 </div>
             </li>
+            @endforeach
           </ul>
-          @endforeach
+          
         </div>
         
     </section>

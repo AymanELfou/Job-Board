@@ -29,16 +29,20 @@ class ProfilJobseekerController extends Controller
 
 
     public function store(Request $request){
+
+        
     
     $request->validate([
-        'resume' => 'nullable|file:pdf|max:2048', // Validate that resume is a PDF file with a max size of 2MB
+        'resume' => 'nullable|file|max:2048', // Validate that resume is a PDF file with a max size of 2MB
         'competences' => 'string|nullable',
         'experience' => 'string|nullable',
         'education' => 'string|nullable',
         'fullName' => 'string|nullable',
         'contact_information' => 'string|nullable',
+        
     ]);
-    dd($request);
+
+    
 
     // Create a new profile for the job seeker
     $Jobseeker = new ProfilJobseeker();
@@ -51,12 +55,15 @@ class ProfilJobseekerController extends Controller
     }
 
     $Jobseeker->competences = $request->competences;
+    $Jobseeker->fullName = $request->fullName;
+    $Jobseeker->contact_information = $request->contact_information;
     $Jobseeker->experience = $request->experience;
     $Jobseeker->education = $request->education;
     $Jobseeker->derniere_mise_a_jour = now();
+    
     $Jobseeker->save();
 
-    return redirect()->route('jobseekers.index')->with('success', 'Profile created successfully.');
+    return redirect()->route('jobseeker.index');/* ->with('success', 'Profile created successfully.') */
 }
 
 
@@ -69,28 +76,37 @@ class ProfilJobseekerController extends Controller
 
 
 
-    public function update(Request $request, $id){
-
-    $profile = ProfilJobseeker::findOrFail($id);
+    public function update(Request $request, $id)
+{
+    $Jobseeker = ProfilJobseeker::findOrFail($id);
 
     $request->validate([
-        'resume' => 'string|nullable',
+        'resume' => 'nullable|file|max:2048', // Validate resume as a PDF file
         'competences' => 'string|nullable',
         'experience' => 'string|nullable',
         'education' => 'string|nullable',
+        'fullName' => 'string|nullable',
+        'contact_information' => 'string|nullable',
     ]);
 
-    $profile->resume = $request->resume ?? $profile->resume;
-    $profile->competences = $request->competences ?? $profile->competences;
-    $profile->experience = $request->experience ?? $profile->experience;
-    $profile->education = $request->education ?? $profile->education;
-    $profile->derniere_mise_a_jour = now(); //Update the timestamp
+    $Jobseeker->fullName = $request->fullName ?? $Jobseeker->fullName;
+    $Jobseeker->contact_information = $request->contact_information ?? $Jobseeker->contact_information;
+    $Jobseeker->competences = $request->competences ?? $Jobseeker->competences;
+    $Jobseeker->experience = $request->experience ?? $Jobseeker->experience;
+    $Jobseeker->education = $request->education ?? $Jobseeker->education;
 
-    $profile->save();
-
-    return redirect()->route('jobseekers.index')->with('success', 'Profile updated successfully.');
-    
+    // Handle PDF upload if a new file is provided
+    if ($request->hasFile('resume')) {
+        $pdfPath = $request->file('resume')->store('resume', 'public'); // Store the file in 'resume' directory in the public disk
+        $Jobseeker->resume = $pdfPath;
     }
+
+    $Jobseeker->derniere_mise_a_jour = now(); // Update timestamp
+    $Jobseeker->save();
+
+    return redirect()->route('jobseeker.index')->with('success', 'Profile updated successfully.');
+}
+
 
 
 
@@ -98,9 +114,27 @@ class ProfilJobseekerController extends Controller
     public function destroy($id){
         $Jobseeker=ProfilJobseeker::findOrFail($id);
         $Jobseeker->delete();
-        
-        return redirect()->route('jobseekers.index')->with('success', 'Profile deleted successfully.');
+
+        return redirect()->route('jobseeker.index')->with('success', 'Profile deleted successfully.');
     }
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('fullName'); // Get search query from the request
+    
+        // Validate the search query (optional)
+        $request->validate([
+            'query' => 'nullable|string|max:255',
+        ]);
+    
+        // Perform search on the 'fullName' column in the 'profil_jobseekers' table
+        $Jobseekers = ProfilJobseeker::where('fullName', 'like', '%' . $query . '%')->get();
+    
+        // Return search results to a view (replace 'jobseekers.index' with your view name)
+        return view('Jobseekers.AllJobseekers',compact('Jobseekers'));
+    }
+    
 
 
 

@@ -91,11 +91,31 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    //****************************  JobSeeker Management ************************************
+    //**************************** Employer Management ************************************
 
-    // Route to display the list of employers
-    Route::get('/employers', [ProfilEmployerController::class, 'index'])->name('employers.index');
+// Route to display the list of employers
+Route::get('/employers', [ProfilEmployerController::class, 'index'])->name('employers.index');
 
+// Route to show the form for creating a new employer
+Route::get('/employers/create', [ProfilEmployerController::class, 'create'])->name('employers.create');
+
+// Route to store a new employer in the database
+Route::post('/employers', [ProfilEmployerController::class, 'store'])->name('employers.store');
+
+// Route to show the details of a specific employer
+Route::get('/employers/{id}', [ProfilEmployerController::class, 'show'])->name('employers.show');
+
+// Route to show the form for editing a specific employer
+Route::get('/employers/{id}/edit', [ProfilEmployerController::class, 'edit'])->name('employers.edit');
+
+// Route to update a specific employer's information
+Route::put('/employers/{id}', [ProfilEmployerController::class, 'update'])->name('employers.update');
+
+// Route to delete a specific employer from the database
+Route::delete('/employers/{id}', [ProfilEmployerController::class, 'destroy'])->name('employers.destroy');
+
+ // Route to filter employer by criteria
+ Route::get('/employer/search', [ProfilEmployerController::class, 'search'])->name('employers.search');
 
 
 

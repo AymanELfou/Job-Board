@@ -222,7 +222,7 @@ ul {
     margin: 0 0 28px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
-    height: 550px; /* Set height to make card larger */
+    height: 570px; /* Set height to make card larger */
 }
 
 .our-webcoderskull .cnt-block:hover {

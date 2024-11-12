@@ -51,7 +51,7 @@
 
 <!-- Search Bar and Button aligned in the same row -->
 <div class="container">
-    <form action="{{ route('jobs.search') }}" method="GET" class="d-flex align-items-center mt-4">
+    <form action="{{ route('jobseeker.search') }}" method="GET" class="d-flex align-items-center mt-4">
         <input class="form-control me-2 search-input flex-grow-1" name="keyword" type="search" placeholder="Job category, location, job type" aria-label="Search">
         <button class="btn search-btn flex-shrink-0 add-job-btn" type="submit">Search</button>
     </form>
