@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilEmployerController;
@@ -27,7 +29,119 @@ Route::get('/', function () {
 
 
 
- Route::get('/dashboard', function () {
+// Admin Routes
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Dashboard for Admin
+    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+// Job Management for Admin
+    Route::prefix('jobs')->group(function () {
+        Route::get('/', [JobController::class, 'index'])->name('jobs.index');
+        Route::get('/create', [JobController::class, 'create'])->name('jobs.create');
+        Route::post('/', [JobController::class, 'store'])->name('jobs.store');
+        Route::get('/{id}/edit', [JobController::class, 'edit'])->name('jobs.edit');
+        Route::put('/{id}', [JobController::class, 'update'])->name('jobs.update');
+        Route::delete('/{id}', [JobController::class, 'destroy'])->name('jobs.destroy');
+        Route::get('/search', [JobController::class, 'search'])->name('jobs.search');
+    });
+
+    // Job Seeker Management
+    Route::get('/jobseekers', [ProfilJobseekerController::class, 'index'])->name('jobseeker.index');
+    Route::get('/jobseekers/create', [ProfilJobseekerController::class, 'create'])->name('jobseeker.create');
+    Route::post('/jobseekers', [ProfilJobseekerController::class, 'store'])->name('jobseeker.store');
+    Route::get('/jobseekers/{id}/edit', [ProfilJobseekerController::class, 'edit'])->name('jobseeker.edit');
+    Route::put('/jobseekers/{id}', [ProfilJobseekerController::class, 'update'])->name('jobseeker.update');
+    Route::delete('/jobseekers/{id}', [ProfilJobseekerController::class, 'destroy'])->name('jobseeker.destroy');
+    Route::get('/jobseekers/search', [ProfilJobseekerController::class, 'search'])->name('jobseeker.search');
+
+    // Employer Management
+    Route::get('/employers', [ProfilEmployerController::class, 'index'])->name('employers.index');
+    Route::get('/employers/create', [ProfilEmployerController::class, 'create'])->name('employers.create');
+    Route::post('/employers', [ProfilEmployerController::class, 'store'])->name('employers.store');
+    Route::get('/employers/{id}/edit', [ProfilEmployerController::class, 'edit'])->name('employers.edit');
+    Route::put('/employers/{id}', [ProfilEmployerController::class, 'update'])->name('employers.update');
+    Route::delete('/employers/{id}', [ProfilEmployerController::class, 'destroy'])->name('employers.destroy');
+    Route::get('/employers/search', [ProfilEmployerController::class, 'search'])->name('employers.search');
+
+    // Application Management for Admin
+    Route::prefix('applications')->group(function () {
+        Route::get('/', [ApplicationController::class, 'index'])->name('applications.index');
+        Route::get('/search', [ApplicationController::class, 'search'])->name('applications.search');
+        Route::get('/{id}', [ApplicationController::class, 'show'])->name('applications.show');
+        Route::delete('/{id}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
+    });
+});
+
+
+
+
+// Job Seeker Routes
+Route::middleware(['auth', 'role:jobseeker'])->group(function () {
+    // Dashboard for Job Seeker
+    Route::get('/jobseeker/dashboard', [ProfilJobseekerController::class, 'dashboard'])->name('jobseeker.dashboard');
+
+    // View Available Jobs (Browse)
+    Route::get('/jobs', [JobController::class, 'index'])->name('jobseeker.jobs.index');
+    Route::get('/jobs/{id}', [JobController::class, 'show'])->name('jobseeker.jobs.show');
+
+    // Application Management (Job Seeker can view their applications and apply for jobs)
+    Route::get('/applications', [ApplicationController::class, 'index'])->name('jobseeker.applications.index');
+    Route::get('/applications/{id}', [ApplicationController::class, 'show'])->name('jobseeker.applications.show');
+    Route::post('/applications', [ApplicationController::class, 'store'])->name('jobseeker.applications.store');
+});
+
+
+
+
+
+/* // Employer Routes
+Route::middleware(['auth', 'role:employer'])->group(function () {
+    // Dashboard for Employer
+    Route::get('/employer/dashboard', [ProfilEmployerController::class, 'dashboard'])->name('employer.dashboard');
+
+    // Manage Jobs
+    Route::get('/jobs', [JobController::class, 'index'])->name('employer.jobs.index');
+    Route::get('/jobs/create', [JobController::class, 'create'])->name('employer.jobs.create');
+    Route::post('/jobs', [JobController::class, 'store'])->name('employer.jobs.store');
+    Route::get('/jobs/{id}/edit', [JobController::class, 'edit'])->name('employer.jobs.edit');
+    Route::put('/jobs/{id}', [JobController::class, 'update'])->name('employer.jobs.update');
+    Route::delete('/jobs/{id}', [JobController::class, 'destroy'])->name('employer.jobs.destroy');
+
+    // View Applications for Jobs Posted by Employer
+    Route::get('/applications', [ApplicationController::class, 'index'])->name('employer.applications.index');
+    Route::get('/applications/{id}', [ApplicationController::class, 'show'])->name('employer.applications.show');
+    Route::delete('/applications/{id}', [ApplicationController::class, 'destroy'])->name('employer.applications.destroy');
+}); */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -35,6 +149,8 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
 
     //**************************** /* Job Management ************************************
 
@@ -59,8 +175,6 @@ Route::middleware(['auth'])->group(function () {
     // Filtrer les offres d'emploi par critères
     Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
 
-
-    
     
     //****************************  JobSeeker Management ************************************
 
@@ -86,53 +200,50 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/jobseekers/search', [ProfilJobseekerController::class, 'search'])->name('jobseeker.search');
 
 
-    
-
-
-
-
     //**************************** Employer Management ************************************
 
-// Route to display the list of employers
-Route::get('/employers', [ProfilEmployerController::class, 'index'])->name('employers.index');
+    // Route to display the list of employers
+    Route::get('/employers', [ProfilEmployerController::class, 'index'])->name('employers.index');
 
-// Route to show the form for creating a new employer
-Route::get('/employers/create', [ProfilEmployerController::class, 'create'])->name('employers.create');
+    // Route to show the form for creating a new employer
+    Route::get('/employers/create', [ProfilEmployerController::class, 'create'])->name('employers.create');
 
-// Route to store a new employer in the database
-Route::post('/employers', [ProfilEmployerController::class, 'store'])->name('employers.store');
+    // Route to store a new employer in the database
+    Route::post('/employers', [ProfilEmployerController::class, 'store'])->name('employers.store');
 
-// Route to show the details of a specific employer
-Route::get('/employers/{id}', [ProfilEmployerController::class, 'show'])->name('employers.show');
+    // Route to show the details of a specific employer
+    Route::get('/employers/{id}', [ProfilEmployerController::class, 'show'])->name('employers.show');
 
-// Route to show the form for editing a specific employer
-Route::get('/employers/{id}/edit', [ProfilEmployerController::class, 'edit'])->name('employers.edit');
+    // Route to show the form for editing a specific employer
+    Route::get('/employers/{id}/edit', [ProfilEmployerController::class, 'edit'])->name('employers.edit');
 
-// Route to update a specific employer's information
-Route::put('/employers/{id}', [ProfilEmployerController::class, 'update'])->name('employers.update');
+    // Route to update a specific employer's information
+    Route::put('/employers/{id}', [ProfilEmployerController::class, 'update'])->name('employers.update');
 
-// Route to delete a specific employer from the database
-Route::delete('/employers/{id}', [ProfilEmployerController::class, 'destroy'])->name('employers.destroy');
+    // Route to delete a specific employer from the database
+    Route::delete('/employers/{id}', [ProfilEmployerController::class, 'destroy'])->name('employers.destroy');
 
- // Route to filter employer by criteria
- Route::get('/employer/search', [ProfilEmployerController::class, 'search'])->name('employers.search');
-
-
+    // Route to filter employer by criteria
+    Route::get('/employer/search', [ProfilEmployerController::class, 'search'])->name('employers.search');
 
 
+    //**************************** Application Management ************************************
 
+    // Route to display the list of all applications
+    Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
 
+    // Route to display a specific application by its ID
+    Route::get('/applications/{id}', [ApplicationController::class, 'show'])->where('id', '[0-9]+') ->name('applications.show');
 
+    // Route to delete a specific application by its ID
+    Route::delete('/applications/{id}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
 
-
-
-
-
-
+    // Route to search for applications based on specified criteria
+    Route::get('/applications/search', [ApplicationController::class, 'search'])->name('applications.search');
 
 
     
-});
+}); */
 
 
 

@@ -19,7 +19,7 @@ class Application extends Model
         return $this->belongsTo(ProfilJobseeker::class, 'id_jobseeker');
     }
 
-    public function jobs()
+    public function job()
     {
         return $this->belongsTo(Job::class, 'id_job');
     }

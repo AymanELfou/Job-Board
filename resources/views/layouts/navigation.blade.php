@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" style="width: 350px; background-color: #343a40;">
     <div class="d-flex flex-column align-items-center p-3 min-vh-100">
         <!-- Centered Logo -->
-        <a href="{{ route('dashboard') }}" class="d-flex align-items-center mb-4 text-decoration-none text-white">
+        <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center mb-4 text-decoration-none text-white">
             <img src="{{ asset('imgs/Admin.png') }}" alt="modify" style="width: 280px; height: 250px;" />
         </a>
 
@@ -9,7 +9,10 @@
         <div class="mt-5" >
             <ul class="nav nav-pills flex-column w-100 text-center mt-5" style="width: 500px">
                 <li class="nav-item ">
-                    <a href="{{ route('dashboard') }}" class=" nav-link fs-5 text-white fw-bold {{ request()->routeIs('dashboard') ? 'active  danger' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}" class="mx-5 nav-link fs-5 text-white fw-bold {{ request()->routeIs('dashboard') ? 'active  danger' : '' }}" style=" background-color: rgba(107, 180, 92, 0.705); 
+        border-radius: 15px; 
+        color: white;
+        transition: background-color 0.3s; padding:10px; ">
                         Dashboard
                     </a>
                 </li>
@@ -27,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="nav-link fs-5 text-white fw-bold mt-4">
+                    <a href="{{ route('applications.index') }}" class="nav-link fs-5 text-white fw-bold mt-4 {{ request()->routeIs('applications.index') ? 'active  ' : '' }}">
                         Application Management
                     </a>
                 </li>
@@ -51,7 +54,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
