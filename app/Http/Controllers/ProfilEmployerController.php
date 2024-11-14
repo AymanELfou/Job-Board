@@ -12,13 +12,13 @@ class ProfilEmployerController extends Controller
    public function index()
    {
        $Employers = ProfilEmployer::all();
-       return view('Employers.AllEmployers', compact('Employers'));
+       return view('Admin.Employers.AllEmployers', compact('Employers'));
    }
 
    // Show the form for creating a new employer profile
    public function create()
    {
-       return view('Employers.createEmployer');
+       return view('Admin.Employers.createEmployer');
    }
 
    // Store a newly created employer in storage
@@ -112,7 +112,7 @@ class ProfilEmployerController extends Controller
     $Employers = ProfilEmployer::where('nom_entreprise', 'like', '%' . $query . '%')->get();
 
     // Return search results to a view (replace 'Employers.AllEmployers' with your view name)
-    return view('Employers.AllEmployers', compact('Employers'));
+    return view('Admin.Employers.AllEmployers', compact('Employers'));
 }
 
 

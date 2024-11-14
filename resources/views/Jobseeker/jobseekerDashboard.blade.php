@@ -9,7 +9,7 @@
         <div class="container">
             <div class="card shadow-sm">
                 <div class="card-body text-dark">
-                    {{ __("You're logged in!") }}
+                    {{ __("You're logged in As Job Seeker!") }}
                 </div>
             </div>
         </div>

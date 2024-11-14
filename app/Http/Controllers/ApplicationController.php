@@ -17,7 +17,7 @@ class ApplicationController extends Controller
 
         // Retrieve applications with related job and jobseeker data
 
-        return view('Application.Applications',compact('applications'));
+        return view('Admin.Application.Applications',compact('applications'));
     }
 
 
@@ -25,7 +25,7 @@ class ApplicationController extends Controller
 
         $application = Application::with(['job','profilJobseeker'])->find($id);
 
-        return view('Application.show',compact('application'));
+        return view('Admin.Application.show',compact('application'));
 
     }
 
@@ -56,7 +56,7 @@ class ApplicationController extends Controller
     })->get();
 
     // Retourner les résultats de la recherche à une vue
-    return view('Application.Applications', compact('applications'));
+    return view('Admin.Application.Applications', compact('applications'));
     }
 
 

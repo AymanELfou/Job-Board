@@ -24,13 +24,23 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+{
+    $request->authenticate();
+    $request->session()->regenerate();
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+    // Role-based redirection
+    $user = Auth::user();
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    } elseif ($user->role === 'employer') {
+        return redirect()->route('employer.dashboard');
+    } elseif ($user->role === 'Job Seeker') {
+        return redirect()->route('jobseeker.dashboard');
     }
+
+    return redirect('/'); // Fallback redirect if role not matched
+}
+
 
     /**
      * Destroy an authenticated session.
@@ -45,4 +55,25 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+
+    // In App\Http\Controllers\Auth\AuthenticatedSessionController
+    /* protected function authenticated(Request $request, $user)
+    {
+    // Check user role and redirect accordingly
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    } elseif ($user->role === 'employer') {
+        return redirect()->route('employer.dashboard');
+    } elseif ($user->role === 'Job Seeker') {
+        return redirect()->route('jobseeker.dashboard');
+    }
+
+    // Default redirect if role is not matched
+    return redirect()->route('home');
+    }    */
+
+
+
+    
 }

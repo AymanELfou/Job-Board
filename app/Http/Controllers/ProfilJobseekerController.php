@@ -8,13 +8,15 @@ use Illuminate\Http\Request;
 class ProfilJobseekerController extends Controller
 {
     
-
+    public function dashboardJobseker(){
+        return view('Jobseeker.jobseekerDashboard');
+    }
     
     //Display a listing of job seekers' profiles.
 
     public function index(){
         $Jobseekers=ProfilJobseeker::all();
-        return view('Jobseekers.AllJobseekers',compact('Jobseekers'));
+        return view('Admin.Jobseekers.AllJobseekers',compact('Jobseekers'));
     }
 
 
@@ -22,7 +24,7 @@ class ProfilJobseekerController extends Controller
 
      public function create()
     {
-       return view("Jobseekers.createJobseeker");
+       return view("Admin.Jobseekers.createJobseeker");
     }
 
 
@@ -71,7 +73,7 @@ class ProfilJobseekerController extends Controller
 
     public function edit($id){
         $Jobseeker=ProfilJobseeker::find($id);
-        return view('Jobseekers.editJobseeker',compact('Jobseeker'));
+        return view('Admin.Jobseekers.editJobseeker',compact('Jobseeker'));
     }
 
 
@@ -132,7 +134,7 @@ class ProfilJobseekerController extends Controller
         $Jobseekers = ProfilJobseeker::where('fullName', 'like', '%' . $query . '%')->get();
     
         // Return search results to a view (replace 'jobseekers.index' with your view name)
-        return view('Jobseekers.AllJobseekers',compact('Jobseekers'));
+        return view('Admin.Jobseekers.AllJobseekers',compact('Jobseekers'));
     }
     
 

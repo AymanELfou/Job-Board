@@ -10,14 +10,14 @@ class JobController extends Controller
     // Afficher le formulaire de création
     public function create()
     {
-        return view("Jobs.createJob");
+        return view("Admin.Jobs.createJob");
     }
 
     // Afficher toutes les offres d'emploi
     public function index()
     {
         $jobs = Job::all();
-        return view("Jobs.jobs", compact('jobs'));
+        return view("Admin.Jobs.jobs", compact('jobs'));
     }
 
     // Créer une nouvelle offre d'emploi
@@ -53,7 +53,7 @@ class JobController extends Controller
     public function edit($id)
     {
         $job = Job::findOrFail($id);
-        return view("Jobs.editJob", compact('job'));
+        return view("Admin.Jobs.editJob", compact('job'));
     }
 
     // Mettre à jour une offre d'emploi
@@ -114,7 +114,7 @@ class JobController extends Controller
 
     $jobs = $query->get();
 
-    return view("Jobs.jobs", compact('jobs'));
+    return view("Admin.Jobs.jobs", compact('jobs'));
 }
 
 }
