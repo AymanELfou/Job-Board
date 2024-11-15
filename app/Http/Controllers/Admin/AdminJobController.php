@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Job;
 use Illuminate\Http\Request;
 
-class JobController extends Controller
+
+class AdminJobController extends Controller
 {
     // Afficher le formulaire de création
     public function create()
     {
-        return view("Admin.Jobs.createJob");
+        return view("Admin.Jobs.createJob"); 
     }
 
     // Afficher toutes les offres d'emploi

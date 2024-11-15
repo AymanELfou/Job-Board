@@ -1,13 +1,12 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\Admin\AdminApplicationController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminJobController;
+use App\Http\Controllers\Admin\AdminProfilEmployerController;
+use App\Http\Controllers\Admin\AdminProfilJobseekerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProfilEmployerController;
-use App\Http\Controllers\ProfilJobseekerController;
 use App\Models\ProfilJobseeker;
 use Illuminate\Support\Facades\Route;
 
@@ -48,46 +47,46 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
     // Job Management for Admin
     Route::prefix('jobs')->group(function () {
-        Route::get('/', [JobController::class, 'index'])->name('jobs.index');
-        Route::get('/create', [JobController::class, 'create'])->name('jobs.create');
-        Route::post('/', [JobController::class, 'store'])->name('jobs.store');
-        Route::get('/{id}/edit', [JobController::class, 'edit'])->name('jobs.edit');
-        Route::put('/{id}', [JobController::class, 'update'])->name('jobs.update');
-        Route::delete('/{id}', [JobController::class, 'destroy'])->name('jobs.destroy');
-        Route::get('/search', [JobController::class, 'search'])->name('jobs.search');
+        Route::get('/', [AdminJobController::class, 'index'])->name('jobs.index');
+        Route::get('/create', [AdminJobController::class, 'create'])->name('jobs.create');
+        Route::post('/', [AdminJobController::class, 'store'])->name('jobs.store');
+        Route::get('/{id}/edit', [AdminJobController::class, 'edit'])->name('jobs.edit');
+        Route::put('/{id}', [AdminJobController::class, 'update'])->name('jobs.update');
+        Route::delete('/{id}', [AdminJobController::class, 'destroy'])->name('jobs.destroy');
+        Route::get('/search', [AdminJobController::class, 'search'])->name('jobs.search');
     });
 
 
     // Job Seeker Management
     Route::prefix('jobseekers')->group(function () {
-        Route::get('/', [ProfilJobseekerController::class, 'index'])->name('jobseeker.index');
-        Route::get('/create', [ProfilJobseekerController::class, 'create'])->name('jobseeker.create');
-        Route::post('/', [ProfilJobseekerController::class, 'store'])->name('jobseeker.store');
-        Route::get('/{id}/edit', [ProfilJobseekerController::class, 'edit'])->name('jobseeker.edit');
-        Route::put('/{id}', [ProfilJobseekerController::class, 'update'])->name('jobseeker.update');
-        Route::delete('/{id}', [ProfilJobseekerController::class, 'destroy'])->name('jobseeker.destroy');
-        Route::get('/search', [ProfilJobseekerController::class, 'search'])->name('jobseeker.search');
+        Route::get('/', [AdminProfilJobseekerController::class, 'index'])->name('jobseeker.index');
+        Route::get('/create', [AdminProfilJobseekerController::class, 'create'])->name('jobseeker.create');
+        Route::post('/', [AdminProfilJobseekerController::class, 'store'])->name('jobseeker.store');
+        Route::get('/{id}/edit', [AdminProfilJobseekerController::class, 'edit'])->name('jobseeker.edit');
+        Route::put('/{id}', [AdminProfilJobseekerController::class, 'update'])->name('jobseeker.update');
+        Route::delete('/{id}', [AdminProfilJobseekerController::class, 'destroy'])->name('jobseeker.destroy');
+        Route::get('/search', [AdminProfilJobseekerController::class, 'search'])->name('jobseeker.search');
     });
 
 
     // Employer Management
     Route::prefix('employers')->group(function () {
-        Route::get('/', [ProfilEmployerController::class, 'index'])->name('employers.index');
-        Route::get('/create', [ProfilEmployerController::class, 'create'])->name('employers.create');
-        Route::post('/', [ProfilEmployerController::class, 'store'])->name('employers.store');
-        Route::get('/{id}/edit', [ProfilEmployerController::class, 'edit'])->name('employers.edit');
-        Route::put('/{id}', [ProfilEmployerController::class, 'update'])->name('employers.update');
-        Route::delete('/{id}', [ProfilEmployerController::class, 'destroy'])->name('employers.destroy');
-        Route::get('/search', [ProfilEmployerController::class, 'search'])->name('employers.search');
+        Route::get('/', [AdminProfilEmployerController::class, 'index'])->name('employers.index');
+        Route::get('/create', [AdminProfilEmployerController::class, 'create'])->name('employers.create');
+        Route::post('/', [AdminProfilEmployerController::class, 'store'])->name('employers.store');
+        Route::get('/{id}/edit', [AdminProfilEmployerController::class, 'edit'])->name('employers.edit');
+        Route::put('/{id}', [AdminProfilEmployerController::class, 'update'])->name('employers.update');
+        Route::delete('/{id}', [AdminProfilEmployerController::class, 'destroy'])->name('employers.destroy');
+        Route::get('/search', [AdminProfilEmployerController::class, 'search'])->name('employers.search');
     });
 
 
     // Application Management for Admin
     Route::prefix('applications')->group(function () {
-        Route::get('/', [ApplicationController::class, 'index'])->name('applications.index');
-        Route::get('/search', [ApplicationController::class, 'search'])->name('applications.search');
-        Route::get('/{id}', [ApplicationController::class, 'show'])->name('applications.show');
-        Route::delete('/{id}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
+        Route::get('/', [AdminApplicationController::class, 'index'])->name('applications.index');
+        Route::get('/search', [AdminApplicationController::class, 'search'])->name('applications.search');
+        Route::get('/{id}', [AdminApplicationController::class, 'show'])->name('applications.show');
+        Route::delete('/{id}', [AdminApplicationController::class, 'destroy'])->name('applications.destroy');
     });
 });
 
@@ -103,16 +102,16 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
 
         // Dashboard for Job Seeker
-        Route::get('/jobseeker/dashboard', [ProfilJobseekerController::class, 'dashboardJobseker'])->name('jobseeker.dashboard');
+        Route::get('/jobseeker/dashboard', [AdminProfilJobseekerController::class, 'dashboardJobseker'])->name('jobseeker.dashboard');
 
         // View Available Jobs (Browse)
-        Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+        Route::get('/jobs', [AdminJobController::class, 'index'])->name('jobs.index');
         //Route::get('/jobs/{id}', [JobController::class, 'show'])->name('jobseeker.jobs.show');
 
         // Application Management (Job Seeker can view their applications and apply for jobs)
-        Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
-        Route::get('/applications/{id}', [ApplicationController::class, 'show'])->name('applications.show');
-        Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store');
+        Route::get('/applications', [AdminApplicationController::class, 'index'])->name('applications.index');
+        Route::get('/applications/{id}', [AdminApplicationController::class, 'show'])->name('applications.show');
+        Route::post('/applications', [AdminApplicationController::class, 'store'])->name('applications.store');
     });
 
 

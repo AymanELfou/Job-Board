@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\ProfilJobseeker;
 use Illuminate\Http\Request;
 
-class ProfilJobseekerController extends Controller
+class AdminProfilJobseekerController extends Controller
 {
     
     public function dashboardJobseker(){

@@ -26,10 +26,7 @@ class CheckUserRole
         // Vérifie le rôle de l'utilisateur
         $user = Auth::user();
 
-        /* if(Auth::check() && Auth::user()->role=='Job Seeker'){
-            return redirect()->route('jobseeker.dashboard');
-        }
- */
+       
 
         // If the user does not have the required role, abort with 403
         if ($user->role !== $role) {
