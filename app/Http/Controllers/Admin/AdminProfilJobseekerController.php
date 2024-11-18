@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 class AdminProfilJobseekerController extends Controller
 {
     
-    public function dashboardJobseker(){
-        return view('Jobseeker.jobseekerDashboard');
-    }
+    
     
     //Display a listing of job seekers' profiles.
 

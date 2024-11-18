@@ -11,6 +11,24 @@ class Job extends Model
 
 
 
+    public function savedJobs()
+    {
+        return $this->hasMany(SavedJob::class, 'id_job');
+    }
+
+    // Define the isSavedBy method
+    public function isSavedBy($user)
+    {
+        // Check if the job is saved by the given user
+        return $this->savedJobs()->where('id_utilisateur', $user->id)->exists();
+    }
+
+
+
+
+
+
+
 
 
     public function profilEmployer()

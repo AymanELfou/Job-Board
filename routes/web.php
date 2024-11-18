@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminJobController;
 use App\Http\Controllers\Admin\AdminProfilEmployerController;
 use App\Http\Controllers\Admin\AdminProfilJobseekerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Jobseeker\JobseekerJobController;
 use App\Http\Controllers\ProfileController;
 use App\Models\ProfilJobseeker;
 use Illuminate\Support\Facades\Route;
@@ -102,10 +103,19 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
 
         // Dashboard for Job Seeker
-        Route::get('/jobseeker/dashboard', [AdminProfilJobseekerController::class, 'dashboardJobseker'])->name('jobseeker.dashboard');
+        Route::get('/jobseeker/dashboard', [JobseekerJobController::class, 'dashboardJobseker'])->name('jobseeker.dashboard');
 
         // View Available Jobs (Browse)
-        Route::get('/jobs', [AdminJobController::class, 'index'])->name('jobs.index');
+        Route::get('/jobseeker/jobs', [JobseekerJobController::class, 'index'])->name('jobseeker.jobs.index');
+
+        Route::post('/jobs/{job}/apply', [JobseekerJobController::class, 'apply'])->name('jobs.apply');
+        Route::post('/jobs/{job}/save', [JobseekerJobController::class, 'saveJob'])->name('jobs.save');
+
+
+        Route::get('/jobseeker/search', [JobseekerJobController::class, 'search'])->name('jobseeker.jobs.search');
+
+
+
         //Route::get('/jobs/{id}', [JobController::class, 'show'])->name('jobseeker.jobs.show');
 
         // Application Management (Job Seeker can view their applications and apply for jobs)
