@@ -10,9 +10,19 @@ class JobseekerApplicationController extends Controller
 {
     public function index(){
 
+        // Get the authenticated user
         $user=auth()->user();
-        $applications = Application::with('job')->where('id_utilisateur',$user->id)->get();
+
+        // Retrieve applications for the user
+        $applications = Application::with('job')->where('id_jobseeker',$user->id)->get();
 
         return view("Jobseeker.applicationjobs",compact('applications'));
+    }
+
+
+    public function show($id){
+        $application=Application::with('job')->find($id);
+
+        return view("Jobseeker.showapplication",compact("application"));
     }
 }

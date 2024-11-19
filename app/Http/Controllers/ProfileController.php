@@ -15,11 +15,15 @@ class ProfileController extends Controller
      * Display the user's profile form.
      */
     public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+{
+    $user = $request->user();
+    $jobSeekerProfile = $user->profilJobseeker; // Assurez-vous qu'une relation a été définie dans le modèle User
+
+    return view('profile.edit', [
+        'user' => $user,
+        'profile' => $jobSeekerProfile,
+    ]);
+}
 
     /**
      * Update the user's profile information.
@@ -32,7 +36,7 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $request->user()->save(); 
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

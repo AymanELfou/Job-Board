@@ -8,9 +8,9 @@
 
 <style>
     .card {
-    border-color: red;
     border-width: 2px;
     border-radius: 10px;
+    
     transition: transform 0.2s; /* Ajoute une animation de transition */
   }
 

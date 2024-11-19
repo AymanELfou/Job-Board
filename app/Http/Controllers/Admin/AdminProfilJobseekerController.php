@@ -40,7 +40,6 @@ class AdminProfilJobseekerController extends Controller
         'education' => 'string|nullable',
         'fullName' => 'string|nullable',
         'contact_information' => 'string|nullable',
-        
     ]);
 
     

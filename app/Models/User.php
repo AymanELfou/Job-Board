@@ -44,11 +44,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-
-
-
-
-
     //Relashionships:
 
     public function profilEmployer()

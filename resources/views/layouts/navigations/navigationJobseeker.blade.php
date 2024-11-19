@@ -49,13 +49,13 @@
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="{{ route('applications.index') }}" class="nav-link text-white {{ request()->routeIs('applications.index') ? 'active' : '' }}">
+                <a href="{{ route('jobseeker.applications.index') }}" class="nav-link text-white {{ request()->routeIs('jobseeker.applications.index') ? 'active' : '' }}">
                     <i class="bi bi-inbox me-2"></i> Applications
 
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="" class="nav-link text-white {{ request()->routeIs('profile.index') ? 'active' : '' }}">
+                <a href="{{ route('profile.edit') }}" class="nav-link text-white {{ request()->routeIs('profile.index') ? 'active' : '' }}">
                     <i class="bi bi-person-circle"></i> Profile
 
                 </a>
