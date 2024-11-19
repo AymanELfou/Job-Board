@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminProfilEmployerController;
 use App\Http\Controllers\Admin\AdminProfilJobseekerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Jobseeker\JobseekerJobController;
+use App\Http\Controllers\Jobseeker\SavedJobsController;
 use App\Http\Controllers\ProfileController;
 use App\Models\ProfilJobseeker;
 use Illuminate\Support\Facades\Route;
@@ -110,9 +111,11 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
         Route::post('/jobs/{job}/apply', [JobseekerJobController::class, 'apply'])->name('jobs.apply');
         Route::post('/jobs/{job}/save', [JobseekerJobController::class, 'saveJob'])->name('jobs.save');
+        Route::get('/saved-jobs', [SavedJobsController::class, 'index'])->name('savedJobs.index');
 
 
         Route::get('/jobseeker/search', [JobseekerJobController::class, 'search'])->name('jobseeker.jobs.search');
+        
 
 
 

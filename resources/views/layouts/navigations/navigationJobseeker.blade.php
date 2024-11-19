@@ -39,12 +39,12 @@
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="{{ route('jobseeker.jobs.index') }}" class="nav-link text-white {{ request()->routeIs('jobs.index') ? 'active' : '' }}">
+                <a href="{{ route('jobseeker.jobs.index') }}" class="nav-link text-white {{ request()->routeIs('jobseeker.jobs.index') ? 'active' : '' }}">
                     <i class="bi bi-briefcase me-2"></i> Jobs
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="" class="nav-link text-white {{ request()->routeIs('saved.jobs') ? 'active' : '' }}">
+                <a href="{{ route('savedJobs.index') }}" class="nav-link text-white {{ request()->routeIs('savedJobs.index') ? 'active' : '' }}">
                     <i class="bi bi-bookmark me-2"></i> Saved Jobs
                 </a>
             </li>

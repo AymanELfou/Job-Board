@@ -91,17 +91,18 @@
                         <div class="mt-3">
                                 {{-- Apply button --}}
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal{{ $job->id }}">
-                                Apply
+                                <i class="bi bi-check-circle fill"></i> Apply
                             </button>
 
                             {{-- Save button --}}
                             <form action="{{ route('jobs.save',$job->id) }}" method="POST" class="d-inline">
                                 @csrf
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="">
                                     @if($job->isSavedBy(auth()->user())) 
-                                    Unsave
+                                    <span class="btn btn-danger"><i class="bi bi-bookmark-x save-icon"></i>
+                                        UnSave</span>
                                 @else 
-                                    Save
+                                <span class="btn btn-success"><i class="bi bi-bookmark"></i> Save</span>
                                 @endif
                                 </button>
 
