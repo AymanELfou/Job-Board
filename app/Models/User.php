@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function profilJobseeker()
     {
-        return $this->hasOne(ProfilJobseeker::class, 'id_utilisateur');
+        return $this->hasOne(ProfilJobseeker::class,'id_utilisateur');
     }
 
     public function notifications()

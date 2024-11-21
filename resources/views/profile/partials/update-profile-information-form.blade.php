@@ -9,21 +9,13 @@
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
+        @method('PUT')
+        @include('incs.alert')
+    
+        
+        {{-- <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
@@ -45,6 +37,50 @@
                     @endif
                 </div>
             @endif
+        </div> --}}
+
+
+
+        <!-- Full Name -->
+        <div>
+            <x-input-label for="fullName" :value="__('Full Name')" />
+            <x-text-input id="fullName" name="fullName"  type="text" class="mt-1 block w-full" 
+                :value="old('fullName', $profile->fullName ?? '')" required autofocus autocomplete="fullName" />
+            <x-input-error class="mt-2" :messages="$errors->get('fullName')" />
+        </div>
+
+        <!-- Contact Information -->
+        <div>
+            <x-input-label for="contact_information" :value="__('Contact Information')" />
+            <x-text-input id="contact_information" name="contact_information" type="text" class="mt-1 block w-full" 
+                :value="old('contact_information', $profile->contact_information ?? '')" required autocomplete="contact-information" />
+            <x-input-error class="mt-2" :messages="$errors->get('contact_information')" />
+        </div>
+
+        <!-- Other Fields -->
+        <div>
+            <x-input-label for="resume" :value="__('Resume')" />
+            <x-text-input id="resume" name="resume" type="file" class="form-control mt-1 block w-full form-iput" 
+                :value="old('resume', $profile->resume ?? '')" autocomplete="resume" />
+            <x-input-error class="mt-2" :messages="$errors->get('resume')" />
+        </div>
+
+        <div>
+            <x-input-label for="competences" :value="__('Competences')" />
+            <x-text-input id="competences" name="competences" class="mt-1 block w-full">{{ old('competences', $profile->competences ?? 'none') }}</x-text-input>
+            <x-input-error class="mt-2" :messages="$errors->get('competences')" />
+        </div>
+
+        <div>
+            <x-input-label for="experience" :value="__('Experience')" />
+            <textarea id="experience" name="experience" class="form-control mt-1 block w-full">{{ old('experience', $profile->experience ?? '') }}</textarea>
+            <x-input-error class="mt-2" :messages="$errors->get('experience')" />
+        </div>
+
+        <div>
+            <x-input-label for="education" :value="__('Education')" />
+            <textarea id="education" name="education" class="mt-1 block w-full form-control">{{ old('education', $profile->education ?? '') }}</textarea>
+            <x-input-error class="mt-2" :messages="$errors->get('education')" />
         </div>
 
         <div class="flex items-center gap-4">

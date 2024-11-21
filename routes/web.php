@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminProfilJobseekerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Jobseeker\JobseekerApplicationController;
 use App\Http\Controllers\Jobseeker\JobseekerJobController;
+use App\Http\Controllers\Jobseeker\ProfileJobseekerController;
 use App\Http\Controllers\Jobseeker\SavedJobsController;
 use App\Http\Controllers\ProfileController;
 use App\Models\ProfilJobseeker;
@@ -123,10 +124,22 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::delete('/jobseeker/applications/{id}', [JobseekerApplicationController::class, 'destroy'])->name('jobseeker.applications.destroy');
 
         Route::controller(ProfileController::class)->group(function () {
-            Route::get('/profile', 'edit')->name('profile.edit');
-            Route::patch('/profile', 'update')->name('profile.update');
+            Route::get('/profilc', 'create')->name('profile.create');
+            Route::post('/profilc', 'store')->name('profile.store');
+
+           /*  Route::get('/profile', 'edit')->name('profile.edit');
+            Route::patch('/profile/update', 'updated')->name('profil.update'); */
             Route::delete('/profile', 'destroy')->name('profile.destroy');
         });
+
+
+        Route::get('/profilejobseeker/edit', [ProfileJobseekerController::class, 'edit'])->name('profile.edit');
+        Route::put('/profilejobseeker/update', [ProfileJobseekerController::class, 'update'])->name('profile.update');
+
+        
+        
+        
+        Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 
         //Route::get('/jobs/{id}', [JobController::class, 'show'])->name('jobseeker.jobs.show');

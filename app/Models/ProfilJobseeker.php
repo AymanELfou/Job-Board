@@ -10,7 +10,15 @@ class ProfilJobseeker extends Model
     use HasFactory;
 
 
-
+    protected $fillable = [
+        'resume',
+        'competences',
+        'experience',
+        'education',
+        'fullName',
+        'contact_information',
+    ];
+    
 
 
     //Relashionships:

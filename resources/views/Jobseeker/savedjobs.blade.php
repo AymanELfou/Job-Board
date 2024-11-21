@@ -48,14 +48,6 @@
 
 
 
-
-
-
-
-
-
-
-
 <div class="container mt-3 pt-4">
     @include('incs.alert')
     
@@ -129,25 +121,6 @@
             @endforeach
         </div><!--end row-->
 </div><!--end container-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </x-apps.app-jobseeker>

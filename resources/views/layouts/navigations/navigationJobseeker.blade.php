@@ -55,7 +55,7 @@
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="{{ route('profile.edit') }}" class="nav-link text-white {{ request()->routeIs('profile.index') ? 'active' : '' }}">
+                <a href="{{ route('profile.edit') }}" class="nav-link text-white {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
                     <i class="bi bi-person-circle"></i> Profile
 
                 </a>
@@ -63,6 +63,12 @@
             <li class="nav-item mb-3">
                 <a href="" class="nav-link text-white {{ request()->routeIs('profile.index') ? 'active' : '' }}">
                     <i class="bi bi-bell"></i> Notification
+
+                </a>
+            </li>
+            <li class="nav-item mb-3">
+                <a href="{{ route('logout') }}" class="nav-link text-white {{ request()->routeIs('logout') ? 'active' : '' }}">
+                    <i class="bi bi-box-arrow-right"></i> Logout
 
                 </a>
             </li>
