@@ -100,7 +100,7 @@ public function destroy(Request $request): RedirectResponse
 public function create()
 {
     // Return the view to create a new profile
-    return view('profile.create');
+    return view('Jobseeker.create');
 }
 
 /**
