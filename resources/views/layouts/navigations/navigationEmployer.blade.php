@@ -54,7 +54,7 @@
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="{{ route('jobseeker.applications.index') }}" class="nav-link text-white {{ request()->routeIs('jobseeker.applications.index') ? 'active' : '' }}">
+                <a href="{{ route('employer.candidates') }}" class="nav-link text-white {{ request()->routeIs('employer.candidates') ? 'active' : '' }}">
                     <i class="bi bi-inbox me-2"></i> Candidates
 
                 </a>
@@ -72,9 +72,8 @@
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="{{ route('logout') }}" class="nav-link text-white {{ request()->routeIs('logout') ? 'active' : '' }}">
+                <a href="/employer/logout" class="nav-link text-white {{ request()->routeIs('logout') ? 'active' : '' }}">
                     <i class="bi bi-box-arrow-right"></i> Logout
-
                 </a>
             </li>
         </ul>

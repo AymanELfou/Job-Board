@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminProfilEmployerController;
 use App\Http\Controllers\Admin\AdminProfilJobseekerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Employer\EmployerApplicationController;
+use App\Http\Controllers\Employer\EmployerCondidateController;
 use App\Http\Controllers\Employer\EmployerJobController;
 use App\Http\Controllers\Jobseeker\JobseekerApplicationController;
 use App\Http\Controllers\Jobseeker\JobseekerJobController;
@@ -139,7 +140,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::put('/profilejobseeker/update', [ProfileJobseekerController::class, 'update'])->name('profile.update');
 
         // Logout Route
-        Route::get('/jobseeker/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+        Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 
         //Route::get('/jobs/{id}', [JobController::class, 'show'])->name('jobseeker.jobs.show');
@@ -173,8 +174,26 @@ Route::middleware(['auth', 'role:employer'])->group(function () {
     Route::delete('/employer/applications/{id}', [EmployerApplicationController::class, 'destroy'])->name('employer.applications.destroy');
 
     Route::put('/applications/{application}/status', [EmployerApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
+    
+
+
+
+    Route::get('/employer/candidates', [EmployerCondidateController::class, 'candidates'])->name('employer.candidates');
+    Route::get('/employer/candidates/{id}', [EmployerCondidateController::class, 'show'])->name('candidates.show');
+
+
+
+
+
+
+
+
+
+
+
+
+
     Route::get('/employer/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
- 
 });
 
 

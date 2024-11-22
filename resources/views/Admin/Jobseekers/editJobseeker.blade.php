@@ -30,7 +30,7 @@
 
             <!-- Input for competences -->
             <div>
-                <label for="competences" class="block text-sm font-medium text-gray-700">Skills</label>
+                <label for="competences" class="block text-sm font-medium text-gray-700">Competences</label>
                 <input type="text" class="mt-1 mb-2 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="competences" name="competences" value="{{ old('competences', $Jobseeker->competences) }}">
             </div>
 
