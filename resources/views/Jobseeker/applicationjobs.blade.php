@@ -7,9 +7,6 @@
     </x-slot>
 
 
-
-
-
     <style>
         .card {
         border-width: 2px;
@@ -22,23 +19,8 @@
       .card:hover {
         transform: scale(1.05); /* Agrandit la carte au survol */
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée au survol */
-    }
-    
-    
-    
-        
-        
-    
-        
+    } 
     </style>
-
-
-
-
-
-
-
-
 
 
     <div class="container mt-5">

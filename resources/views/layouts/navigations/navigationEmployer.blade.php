@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="{{ route('savedJobs.index') }}" class="nav-link text-white {{ request()->routeIs('savedJobs.index') ? 'active' : '' }}">
+                <a href="{{ route('employer.applications.index') }}" class="nav-link text-white {{ request()->routeIs('employer.applications.index') ? 'active' : '' }}">
                     <i class="bi bi-file-earmark-text me-2"></i> Applications Management
                 </a>
             </li>

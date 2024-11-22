@@ -10,7 +10,11 @@ class Application extends Model
     use HasFactory;
 
 
-
+    protected $fillable = [
+        'id_jobseeker',
+        'id_job',
+        'status', // Include the status field here
+    ];
 
 
 
