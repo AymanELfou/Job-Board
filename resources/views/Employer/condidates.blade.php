@@ -1,10 +1,10 @@
 <x-apps.app-employer>
 
     <x-slot name="header">
-        <div class="flex items-center justify-center h-screen">
-            <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
+        <div class="flex items-center justify-start h-screen">
+            <h1 class="font-semibold text-3xl text-gray-800 leading-tight" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
                 {{ __('Condidates') }}
-            </h2>
+            </h1>
         </div>
     </x-slot>
 

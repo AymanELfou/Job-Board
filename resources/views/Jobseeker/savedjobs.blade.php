@@ -1,9 +1,9 @@
 <x-apps.app-jobseeker>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
-            {{ __('Find the perfect jobs') }}
-        </h2>
+        <h1 class="text-3xl text-gray-800 leading-tight" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+            {{ __('Saved Jobs') }}
+        </h1>
     </x-slot>
 
 <style>

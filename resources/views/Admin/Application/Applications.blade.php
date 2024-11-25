@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
+        <h2 class="h1 text-3xl text-gray-800 leading-tight" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
             {{ __('Application Management') }}
         </h2>
     </x-slot>
@@ -97,6 +97,7 @@
         </div> --}}
 
         <div class="row">
+            @include('incs.alert')
     @foreach($applications as $application)
         <div class="card rounded-3 mb-4">
             <div class="card-body p-4">
@@ -118,15 +119,25 @@
 
                     <!-- Status -->
                     <div class="col-2 text-warning">
-                        <h5 class="mb-0">{{ $application->status ?? 'Status' }}</h5>
+                        <form action="{{ route('updateStatus', $application->id) }}" method="POST" class="mb-0 m-1">
+                            @csrf
+                            @method('PUT')
+                    
+                            <!-- Menu déroulant pour changer le statut -->
+                            <select name="status" id="status-{{ $application->id }}" class="form-select" onchange="this.form.submit()">
+                                <option value="pending" {{ $application->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="approved" {{ $application->status == 'approved' ? 'selected' : '' }}>Approved</option>
+                                <option value="rejected" {{ $application->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                            </select>
+                        </form>
                     </div>
 
                     <!-- View Details Button -->
                     <div class="col-2">
-                        <a href="{{ route('applications.show', $application->id) }}" class="btn btn-primary btn-sm" role="button">
-                            View Details
+                        <a href="{{ route('applications.show', $application->id) }}" class="btn btn-sm" role="button">
+                            <img src="{{ asset('imgs/eye.png') }}" alt="delete" style="width: 42px; height: 42px;" />
                         </a>
-                        <button type="submit" class="btn btn-link p-0 m-2" onclick="return confirm('Are you sure you want to delete?')">
+                        <button type="submit" class="btn btn-link p-0" onclick="return confirm('Are you sure you want to delete?')">
                             <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 30px; height: 30px;" />
                         </button>
                     </div>

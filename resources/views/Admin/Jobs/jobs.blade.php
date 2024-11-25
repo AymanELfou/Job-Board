@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
+        <h2 class="h1 text-3xl text-gray-800 leading-tight" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
             {{ __('Job Management') }}
         </h2>
     </x-slot>
@@ -43,7 +43,7 @@
 
 <!-- Button to add a new job -->
 <div class="d-flex justify-content-start mb-4">
-    <a href="{{ route('jobs.create') }}" class="btn btn-primary add-job-btn d-flex align-items-center text-white font-semibold py-2 px-3 rounded">
+    <a href="{{ route('jobs.create') }}" class="btn btn-primary add-job-btn d-flex align-items-center text-dark font-semibold px-2 p-3" style="border-radius: 15px; background-color: #FFD700">
         <img src="{{ asset('imgs/plus.png') }}" alt="Add" class="me-2" style="width: 30px; height: 30px;">
        <h5>Add Job</h5> 
     </a>

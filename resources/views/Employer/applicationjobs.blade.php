@@ -66,13 +66,13 @@
         
                             <!-- View Details Button -->
                             <div class="col-2">
-                                <a href="{{ route('employer.applications.show', $application->id) }}" class="btn btn-primary btn-sm" role="button">
-                                    View
+                                <a href="{{ route('employer.applications.show', $application->id) }}" class="btn btn-sm" role="button">
+                                    <img src="{{ asset('imgs/eye.png') }}" alt="delete" style="width: 42px; height: 42px;" />
                                 </a>
                                 <form action="{{ route('employer.applications.destroy', $application->id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-link p-0 m-2" onclick="return confirm('Are you sure you want to delete?')">
+                                    <button type="submit" class="btn btn-link p-0 " onclick="return confirm('Are you sure you want to delete?')">
                                         <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 30px; height: 30px;" />
                                     </button>
                                 </form>

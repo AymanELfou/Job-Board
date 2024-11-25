@@ -24,15 +24,15 @@
     }
 </style>
 
-<nav x-data="{ open: false }" class="bg-dark text-white" style="width: 300px;">
+<nav x-data="{ open: false }" class="bg-dark text-white" style="width: 330px; ">
     <div class="d-flex flex-column align-items-center p-3 min-vh-100">
         <!-- Centered Logo -->
         <a href="{{ route('jobseeker.dashboard') }}" class="d-flex align-items-center mb-4 text-decoration-none text-white">
-            <img src="{{ asset('imgs/seeek.jpg') }}" alt="Logo" style="width: 200px; height: auto;" class="rounded mb-4" />
+            <img src="{{ asset('imgs/seeek.jpg') }}" alt="Logo" style="width: 200px; height: auto; border-radius: 30px" class=" mb-4"/>
         </a>
 
         <!-- Navigation Links -->
-        <ul class="nav flex-column w-100">
+        <ul class="nav flex-column w-100 ml-4">
             <li class="nav-item mb-3">
                 <a href="{{ route('jobseeker.dashboard') }}" class="nav-link text-white {{ request()->routeIs('jobseeker.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-house-door me-2"></i> Dashboard
@@ -50,7 +50,7 @@
             </li>
             <li class="nav-item mb-3">
                 <a href="{{ route('jobseeker.applications.index') }}" class="nav-link text-white {{ request()->routeIs('jobseeker.applications.index') ? 'active' : '' }}">
-                    <i class="bi bi-inbox me-2"></i> Applications
+                    <i class="bi bi-inbox me-2"></i> Recent Applications
 
                 </a>
             </li>
@@ -69,7 +69,6 @@
             <li class="nav-item mb-3">
                 <a href="{{ route('logout') }}" class="nav-link text-white {{ request()->routeIs('logout') ? 'active' : '' }}">
                     <i class="bi bi-box-arrow-right"></i> Logout
-
                 </a>
             </li>
         </ul>

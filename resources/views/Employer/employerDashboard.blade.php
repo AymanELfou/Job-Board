@@ -1,8 +1,8 @@
 <x-apps.app-employer>
     <x-slot name="header">
-        <h2 class="h2 text-dark">
+        <h1 class="h2 text-dark" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
             {{ __('Dashboard') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="py-4">

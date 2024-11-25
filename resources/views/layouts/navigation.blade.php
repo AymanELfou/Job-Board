@@ -1,43 +1,81 @@
-<nav x-data="{ open: false }" style="width: 350px; background-color: #343a40;">
+<style>
+    /* General link styles */
+    li a {
+        text-decoration: none;
+        color: white;
+        font-size: 22px;
+        padding: 10px 20px;
+        text-align: left;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+        font-family: 'Montserrat', sans-serif;
+
+    }
+    h5{
+        text-align: left;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Active state for links */
+    li a.active, li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Icons alignment */
+    .nav-item i {
+        margin-right: 10px;
+    }
+    ul li {
+        font-size: 19px;
+    }
+</style>
+
+<nav x-data="{ open: false }" class="text-white" style="width: 330px; background-color: rgb(43, 43, 129)" >
     <div class="d-flex flex-column align-items-center p-3 min-vh-100">
         <!-- Centered Logo -->
-        <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center mb-4 text-decoration-none text-white">
-            <img src="{{ asset('imgs/Admin.png') }}" alt="modify" style="width: 280px; height: 250px;" />
+        <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center text-decoration-none text-white">
+            <img src="{{ asset('imgs/admin.avif') }}" alt="modify" style="width: 260px; height: 250px; border-radius: 30px" />
         </a>
 
-        <!-- Centered Navigation Links --> 
-        <div class="mt-5" >
-            <ul class="nav nav-pills flex-column w-100 text-center mt-5" style="width: 500px">
-                <li class="nav-item ">
-                    <a href="{{ route('admin.dashboard') }}" class="mx-5 nav-link fs-5 text-white fw-bold {{ request()->routeIs('dashboard') ? 'active  danger' : '' }}" style=" background-color: rgba(107, 180, 92, 0.705); 
-        border-radius: 15px; 
-        color: white;
-        transition: background-color 0.3s; padding:10px; ">
-                        Dashboard
+        <!-- Centered Navigation Links -->
+        <div class="mt-5">
+            <ul class="nav flex-column w-100 text-center">
+                <li class="nav-item mb-3">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                        <i class="bi bi-grid"></i>Dashboard
                     </a>
                 </li>
                 <li>
-                    <i><h3 class="mb-2 mt-5 text-white">Management</h3></i>
+                    <h5 class="mb-3 mt-2 ml-4 text-white">                        
+                        <i class="bi bi-gear me-1 "></i> Management
+                    </h5>
                 </li>
-                <li>
-                    <a href="{{ route('jobs.index') }}" class="nav-link fs-5 text-white fw-bold mt-4 {{ request()->routeIs('jobs.index') ? 'active  ' : '' }}">
-                        Job Management
+                <li class="nav-item mb-3 ml-4">
+                    <a href="{{ route('jobs.index') }}" class="nav-link text-white  {{ request()->routeIs('jobs.index') ? 'active' : '' }}">
+                        <i class="bi bi-briefcase me-2"></i> Job Management
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('jobseeker.index') }}" class="nav-link fs-5 text-white fw-bold mt-4 {{ request()->routeIs('jobseeker.index') ? 'active  ' : '' }}">
-                        User Management
+                <li class="nav-item mb-3 ml-4">
+                    <a href="{{ route('jobseeker.index') }}" class="nav-link text-white  {{ request()->routeIs('jobseeker.index') ? 'active' : '' }}">
+                        <i class="bi bi-person-fill me-2 "></i> User Management
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('applications.index') }}" class="nav-link fs-5 text-white fw-bold mt-4 {{ request()->routeIs('applications.index') ? 'active  ' : '' }}">
-                        Application Management
+                <li class="nav-item mb-3 ml-4">
+                    <a href="{{ route('applications.index') }}" class="nav-link text-white  {{ request()->routeIs('applications.index') ? 'active' : '' }}">
+                        <i class="bi bi-file-earmark-text me-2"></i> Application Management
+                    </a>
+                </li>
+                <li class="nav-item mb-3 ml-1">
+                    <a href="{{ route('admin.logout') }}" class="nav-link text-white {{ request()->routeIs('logout') ? 'active' : '' }}">
+                        <i class="bi bi-box-arrow-right"></i>Logout
                     </a>
                 </li>
                 <!-- Add more links here as needed -->
             </ul>
         </div>
-        
     </div>
 </nav>
 

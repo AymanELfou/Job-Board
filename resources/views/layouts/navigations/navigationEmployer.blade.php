@@ -29,7 +29,7 @@
     }
 </style>
 
-<nav x-data="{ open: false }" class=" text-white" style="width: 340px; background-color: #a31b1b;">
+<nav x-data="{ open: false }" class=" text-white" style="width: 330px; background-color: #a31b1b;">
     <div class="d-flex flex-column align-items-center p-3 min-vh-100">
         <!-- Centered Logo -->
         <a href="{{ route('employer.dashboard') }}" class="d-flex align-items-center mb-4 text-decoration-none text-white">
@@ -60,7 +60,7 @@
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="{{ route('profile.edit') }}" class="nav-link text-white {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
+                <a href="{{ route('employer.profile.edit') }}" class="nav-link text-white {{ request()->routeIs('employer.profile.edit') ? 'active' : '' }}">
                     <i class="bi bi-person-circle"></i> Company Profile
 
                 </a>

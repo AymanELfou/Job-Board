@@ -14,7 +14,7 @@ class AdminProfilJobseekerController extends Controller
     //Display a listing of job seekers' profiles.
 
     public function index(){
-        $Jobseekers=ProfilJobseeker::all();
+        $Jobseekers=ProfilJobseeker::paginate(3);
         return view('Admin.Jobseekers.AllJobseekers',compact('Jobseekers'));
     }
 

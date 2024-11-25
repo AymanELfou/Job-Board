@@ -67,7 +67,7 @@
 
         <div>
             <x-input-label for="competences" :value="__('Competences')" />
-            <x-text-input id="competences" name="competences" class="mt-1 block w-full">{{ old('competences', $profile->competences ?? 'none') }}</x-text-input>
+            <x-text-input id="competences" name="competences" class="mt-1 block w-full" :value="old('competences', $profile->competences ?? '')"></x-text-input>
             <x-input-error class="mt-2" :messages="$errors->get('competences')" />
         </div>
 

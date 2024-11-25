@@ -61,7 +61,25 @@ class AdminApplicationController extends Controller
     }
 
 
-
+    public function updateStatus(Request $request, Application $application)
+    {
+        // Validate the incoming request
+        $validated = $request->validate([
+            'status' => 'required|in:pending,approved,rejected', // Ensure valid statuses
+        ]);
+    
+       /*  // Verify that the application belongs to the employer's job
+        if ($application->job->employer_id !== auth()->id()) {
+            return redirect()->back()->with('error', 'Unauthorized access.');
+        } */
+    
+        // Assign the new status and save the application
+        $application->status = $validated['status'];
+        $application->save();
+    
+        // Optionally, add a success message
+        return redirect()->back()->with('success', 'Status updated successfully.');
+    }
 
 
     

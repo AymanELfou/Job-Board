@@ -11,6 +11,18 @@ class ProfilEmployer extends Model
 
 
 
+    protected $fillable = [
+        'nom_entreprise',
+        'adresse',
+        'description',
+        'telephone',
+        'secteur_activite',
+    ];
+
+
+
+
+
     //Relashionships:
 
     public function user()

@@ -1,6 +1,6 @@
-<x-apps.app-jobseeker>
+<x-apps.app-employer>
     <x-slot name="header">
-        <h1 class=" ml-4 text-gray-800 leading-tight" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+        <h1 class="  text-gray-800 leading-tight">
             {{ __('Profile') }}
         </h1>
     </x-slot>
@@ -9,21 +9,21 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+                    @include('Employer.profile.profile-information')
                 </div>
             </div>
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
+                    @include('Employer.profile.update-password')
                 </div>
             </div>
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+                    @include('Employer.profile.delete-user')
                 </div>
             </div>
         </div>
     </div>
-</x-apps.app-jobseeker>
+</x-apps.app-employer>

@@ -1,8 +1,10 @@
 <style>
   .card {
+    border:1px solid ;
     border-color: red;
     border-width: 2px;
-    border-radius: 10px;
+    border-radius: 13px;
+     
     transition: transform 0.2s; /* Ajoute une animation de transition */
   }
 

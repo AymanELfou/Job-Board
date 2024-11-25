@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="h2 text-dark">
+        <h2 class="h1 text-dark" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
@@ -15,3 +15,8 @@
         </div>
     </div>
 </x-app-layout>
+
+
+
+
+

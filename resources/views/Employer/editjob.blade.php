@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <div class="flex items-center justify-center h-screen">
-            <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-3xl text-gray-800 leading-tight "style="font-family: Verdana, Geneva, Tahoma, sans-serif">
                 {{ __('Edit job') }}
             </h2>
         </div>

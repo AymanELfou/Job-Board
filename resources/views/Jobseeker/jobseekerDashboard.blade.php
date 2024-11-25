@@ -1,6 +1,6 @@
 <x-apps.app-jobseeker>
     <x-slot name="header">
-        <h2 class="h2 text-dark">
+        <h2 class="h2 text-dark" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
