@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Application;
 use App\Models\Job;
+use App\Models\ProfilJobseeker;
 use Illuminate\Http\Request;
 
 class EmployerJobController extends Controller
@@ -11,7 +13,32 @@ class EmployerJobController extends Controller
 
 
     public function dashboardEmployer(){
-        return view('Employer.employerDashboard');
+
+        $monthlyPostings = Job::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        ->groupBy('month')->orderBy('month')->get();
+
+        $monthlyApplications = Application::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+
+        $candidateQuality  = ProfilJobseeker::selectRaw('education, COUNT(*) as count')
+        ->groupBy('education')
+        ->get();
+
+        $totalJobs = Job::distinct('id_employeur')->count();
+       
+            $employerId = auth()->user()->id;
+            
+        $totaltApplications =Application::whereHas('job',function ($query) use ($employerId){
+            $query->where('id_employeur',$employerId); // Filtrer les emplois de cet employeur          
+        })->with('job','profilJobseeker')->get()->count();
+
+
+        $totalJobseekers = Application::distinct('id_jobseeker')->count('id_jobseeker');
+
+
+        return view('Employer.employerDashboard',compact('monthlyPostings', 'monthlyApplications', 'candidateQuality','totalJobs','totaltApplications','totalJobseekers'));
     }
 
     public function create()

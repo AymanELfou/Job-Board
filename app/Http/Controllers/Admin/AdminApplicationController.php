@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Jobseeker\ProfileJobseekerController;
 use App\Models\Application;
+use App\Models\Job;
+use App\Models\ProfilEmployer;
+use App\Models\ProfilJobseeker;
 use Illuminate\Http\Request;
 
 class AdminApplicationController extends Controller
@@ -16,9 +20,14 @@ class AdminApplicationController extends Controller
 
         $applications = Application::with(['job','profilJobseeker'])->get();
 
-        // Retrieve applications with related job and jobseeker data
+        $totalJobs = Job::count();
+        $recentApplications = Application::orderBy('created_at','desc')->take(5)->get();
+        $totalJobseekers = ProfilJobseeker::count();
+        $totalEmployers = ProfilEmployer::count();
 
-        return view('Admin.Application.Applications',compact('applications'));
+        $totalUsers = $totalJobseekers + $totalEmployers;
+
+        return view('Admin.Application.Applications',compact('applications','totalJobs','recentApplications','totalUsers'));
     }
 
 
