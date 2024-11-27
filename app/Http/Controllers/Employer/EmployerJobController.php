@@ -12,34 +12,61 @@ class EmployerJobController extends Controller
 {
 
 
-    public function dashboardEmployer(){
-
+    public function dashboardEmployer() {
+        // Get the ID of the currently authenticated employer
+        $employerId = auth()->user()->id;
+    
+        // Retrieve the monthly job postings for the authenticated employer
         $monthlyPostings = Job::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-        ->groupBy('month')->orderBy('month')->get();
-
+            ->where('id_employeur', $employerId) // Filter jobs by the authenticated employer
+            ->groupBy('month') // Group results by month
+            ->orderBy('month') // Order results by month
+            ->get(); // Execute the query and get the results
+    
+        // Retrieve the monthly applications for jobs associated with the authenticated employer
         $monthlyApplications = Application::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-        ->groupBy('month')
-        ->orderBy('month')
-        ->get();
-
-        $candidateQuality  = ProfilJobseeker::selectRaw('education, COUNT(*) as count')
-        ->groupBy('education')
-        ->get();
-
-        $totalJobs = Job::distinct('id_employeur')->count();
-       
-            $employerId = auth()->user()->id;
-            
-        $totaltApplications =Application::whereHas('job',function ($query) use ($employerId){
-            $query->where('id_employeur',$employerId); // Filtrer les emplois de cet employeur          
-        })->with('job','profilJobseeker')->get()->count();
-
-
-        $totalJobseekers = Application::distinct('id_jobseeker')->count('id_jobseeker');
-
-
-        return view('Employer.employerDashboard',compact('monthlyPostings', 'monthlyApplications', 'candidateQuality','totalJobs','totaltApplications','totalJobseekers'));
+            ->whereHas('job', function ($query) use ($employerId) {
+                $query->where('id_employeur', $employerId); // Filter applications by jobs of this employer
+            })
+            ->groupBy('month') // Group results by month
+            ->orderBy('month') // Order results by month
+            ->get(); // Execute the query and get the results
+    
+        // Retrieve the candidate quality based on education levels of job seekers who applied for the employer's jobs
+        $candidateQuality = ProfilJobseeker::selectRaw('education, COUNT(*) as count')
+            ->whereHas('applications', function ($query) use ($employerId) {
+                $query->whereHas('job', function ($query) use ($employerId) {
+                    $query->where('id_employeur', $employerId); // Filter by jobs of this employer
+                });
+            })
+            ->groupBy('education') // Group results by education level
+            ->get(); // Execute the query and get the results
+    
+        // Count the total number of jobs posted by the authenticated employer
+        $totalJobs = Job::where('id_employeur', $employerId)->count(); // Count total jobs
+    
+        // Count the total applications for the employer's jobs, eager loading related models 
+        $totaltApplications = Application::whereHas('job', function ($query) use ($employerId) {
+            $query->where('id_employeur', $employerId); // Filter applications by jobs of this employer
+        })->with('job', 'profilJobseeker') // Eager load related job and job seeker profiles
+        ->get()->count(); // Execute the query and count the results
+    
+        // Count distinct job seekers who applied for the employer's jobs (Total Candidates)
+        $totalJobseekers = Application::whereHas('job', function ($query) use ($employerId) {
+            $query->where('id_employeur', $employerId); // Filter applications by jobs of this employer
+        })
+        ->distinct('id_jobseeker') // Ensure distinct job seekers
+        ->count('id_jobseeker'); // Count distinct job seekers
+    
+        // Return the view with all the collected data for the employer's dashboard
+        return view('Employer.employerDashboard', compact('monthlyPostings', 'monthlyApplications', 'candidateQuality', 'totalJobs', 'totaltApplications', 'totalJobseekers'));
     }
+    
+
+
+
+
+
 
     public function create()
     {
