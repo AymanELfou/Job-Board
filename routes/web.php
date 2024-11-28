@@ -15,7 +15,9 @@ use App\Http\Controllers\Jobseeker\JobseekerJobController;
 use App\Http\Controllers\Jobseeker\ProfileJobseekerController;
 use App\Http\Controllers\Jobseeker\SavedJobsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestEmailController;
 use App\Models\ProfilJobseeker;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -131,7 +133,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
         // Profile Management Routes
         Route::controller(ProfileController::class)->group(function () {
-            Route::get('/profil', 'create')->name('profile.create');
+            Route::get('/jobseeker/profile/create', 'create')->name('jobseeker.profile.create');
             Route::post('/profil', 'store')->name('profile.store');
             Route::delete('/profile', 'destroy')->name('profile.destroy');
         });
@@ -187,14 +189,35 @@ Route::middleware(['auth','role:admin'])->group(function () {
     });
 
 
+    Route::get('/test', [TestEmailController::class, 'testEmail']);
 
 
+ /*    Route::get('/test', function () {
+        try {
+            Mail::raw('This is a test email!', function ($message) {
+                $message->to('aymanel2025@gmail.com')
+                        ->subject('Test Email')
+                        ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+            });
+            return 'Test email sent!';
+        } catch (\Exception $e) {
+            return 'Error: ' . $e->getMessage();
+        }
+    });
+ */
 
 
-
-
-
-
+   /*  Route::get('/test', function () {
+        dd(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+    }); */
+    
+  /*   Route::get('/test', function () {
+        return [
+            'MAIL_FROM_ADDRESS' => env('MAIL_FROM_ADDRESS'),
+            'MAIL_FROM_NAME' => env('MAIL_FROM_NAME'),
+        ];
+    }); */
+    
 
 
 

@@ -25,12 +25,6 @@ class Job extends Model
 
 
 
-
-
-
-
-
-
     public function profilEmployer()
     {
         return $this->belongsTo(ProfilEmployer::class, 'id_employeur');

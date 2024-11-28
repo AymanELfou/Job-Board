@@ -56,7 +56,7 @@
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="4" required>{{ $job->description }}</textarea>
             </div>
-            <button type="submit" class="btn" style="background-color: ">Edit Job</button>
+            <button type="submit" class="btn btn-danger" style="background-color: ">Save Job</button>
         </form>
     </div>
     

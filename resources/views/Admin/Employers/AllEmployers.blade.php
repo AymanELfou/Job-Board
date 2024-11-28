@@ -74,7 +74,7 @@
 
 <!-- Search Bar and Button aligned in the same row -->
 <!-- Search Bar and Button aligned in the same row -->
-<div class="container col-12 col-md-6 col-lg-4">
+<div class="container col-12 col-md-6 col-lg-4 mb-3">
     <form action="{{ route('employers.search') }}" method="GET" class="d-flex align-items-center mt-5">
         <input class="form-control me-2 search-input flex-grow-1" name="nom_entreprise" type="search" placeholder="Search by Company" aria-label="Search">
         <button class="btn search-btn flex-shrink-0" type="submit" style="background-color: rgba(245, 16, 0, 0.705); border-radius: 10px; color: white">Search</button>
@@ -87,10 +87,12 @@
 
 
 
-
+    @include('incs.alert') 
     <div class="row">
+        
         @foreach($Employers as $Employer)
             <div class="col-xs-12 col-sm-6 col-md-4 mb-4 mt-5">
+               
                 <div class="card rounded-3 shadow-sm h-100">
                     <div class="card-body d-flex flex-column ">
                         <!-- Header du job -->

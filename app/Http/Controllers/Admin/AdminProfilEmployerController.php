@@ -59,7 +59,7 @@ class AdminProfilEmployerController extends Controller
    public function edit($id)
    {
        $Employer = ProfilEmployer::findOrFail($id);
-       return view('Employers.editEmployer',compact('Employer'));
+       return view('Admin.Employers.editEmployer',compact('Employer'));
    }
 
     public function update(Request $request, $id)

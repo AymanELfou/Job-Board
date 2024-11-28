@@ -115,7 +115,7 @@ class AdminProfilJobseekerController extends Controller
         $Jobseeker=ProfilJobseeker::findOrFail($id);
         $Jobseeker->delete();
 
-        return redirect()->route('jobseeker.index')->with('success', 'Profile deleted successfully.');
+        return redirect()->route('jobseeker.index')->with('success', 'JobSeeker deleted successfully.');
     }
 
 

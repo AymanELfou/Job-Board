@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Jobseeker;
 
 use App\Http\Controllers\Controller;
+use App\Mail\JobApplicationMail;
 use App\Models\Application;
 use App\Models\Job;
 use App\Models\SavedJob;
+use App\Notifications\JobApplicationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class JobseekerJobController extends Controller
 {
@@ -26,7 +29,10 @@ class JobseekerJobController extends Controller
 
 
 
+    
     public function apply(Request $request, Job $job){
+
+        
         $request->validate([
             'resume' => 'nullable|file|max:2048', // Validate uploaded file
             'cover_letter' => 'required|string|max:2000',
@@ -37,11 +43,56 @@ class JobseekerJobController extends Controller
         $application->id_jobseeker = Auth::id();
         $application->resume = $request->file('resume')->store('resumes', 'public'); // Store resume in 'storage/app/public/resumes'
         $application->cover_letter = $request->cover_letter;
-
         $application->save();
-        return redirect()->back()->with('success', 'Your application has been submitted successfully!');
 
+
+
+        // Send email notification to the employer
+    $employer = $job->profilEmployer; 
+    $jobSeekerName = Auth::user()->fullName; 
+    $jobTitle = $job->titre; 
+
+    dd($employer);
+    if ($employer && $employer->user->email) {
+        try {
+            Mail::to($employer->user->email)->send(new JobApplicationMail($jobTitle, $jobSeekerName));
+            
+            return redirect()->back()->with('success', 'Your application has been submitted successfully! Email sent.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('success', 'Your application has been submitted, but the email could not be sent: ' . $e->getMessage());
+        }
+    } else {
+        return redirect()->back()->with('success', 'Your application has been submitted, but no valid employer email found.');
     }
+
+
+ 
+       /*  return redirect()->back()->with('success', 'Your application has been submitted successfully!'); */
+    }
+    
+    
+    
+    
+    
+    
+   /*  public function apply(Request $request, Job $job){
+
+        
+        $request->validate([
+            'resume' => 'nullable|file|max:2048', // Validate uploaded file
+            'cover_letter' => 'required|string|max:2000',
+        ]);
+
+        $application = new Application();
+        $application->id_job = $job->id;
+        $application->id_jobseeker = Auth::id();
+        $application->resume = $request->file('resume')->store('resumes', 'public'); // Store resume in 'storage/app/public/resumes'
+        $application->cover_letter = $request->cover_letter;
+        $application->save();
+
+ 
+        return redirect()->back()->with('success', 'Your application has been submitted successfully!');
+    } */
 
 
 

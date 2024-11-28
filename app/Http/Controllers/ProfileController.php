@@ -141,7 +141,7 @@ public function store(Request $request)
     $Jobseeker->save();
 
     // Redirect to the jobseeker applications index with a success message
-    return redirect()->route('jobseeker.applications.index')->with('success', 'Profile created successfully.');
+    return redirect()->route('jobseeker.jobs.index')->with('success', 'Profile created successfully.');
 }
 
 

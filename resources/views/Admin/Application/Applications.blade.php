@@ -98,6 +98,9 @@
 
         <div class="row">
             @include('incs.alert')
+            @if($applications->isEmpty())
+            <div class="alert alert-info">No Application existed yet.</div>
+           @else
     @foreach($applications as $application)
         <div class="card rounded-3 mb-4">
             <div class="card-body p-4">
@@ -108,13 +111,13 @@
                     </div>
 
                     <!-- Job Title -->
-                    <div class="col-3">
-                        <h5 class="text-dark mb-0">{{ $application->job->titre ?? 'Job Title' }}</h5>
+                    <div class="col-3"><i><span class="text-danger fs-4 mb-3">Job Title:</span></i>
+                        <h5 class="text-dark mb-0 mt-2">{{ $application->job->titre ?? 'Job Title' }}</h5>
                     </div>
 
                     <!-- Applicant's Name -->
-                    <div class="col-3">
-                        <h5 class="mb-0">{{ $application->profilJobseeker->fullName ?? "Applicant's name" }}</h5>
+                    <div class="col-3"><i><span class="text-danger fs-4 mb-3">Applicant's name:</span></i>
+                        <h5 class="mb-0 mt-2">{{ $application->profilJobseeker->fullName ?? "Applicant's name" }}</h5>
                     </div>
 
                     <!-- Status -->
@@ -123,8 +126,8 @@
                             @csrf
                             @method('PUT')
                     
-                            <!-- Menu déroulant pour changer le statut -->
-                            <select name="status" id="status-{{ $application->id }}" class="form-select" onchange="this.form.submit()">
+                            <!-- Menu déroulant pour changer le statut --><i><span class="text-danger fs-4 mb-3">Status:</span></i>
+                            <select name="status" id="status-{{ $application->id }}" class="form-select mt-1" onchange="this.form.submit()">
                                 <option value="pending" {{ $application->status == 'pending' ? 'selected' : '' }}>Pending</option>
                                 <option value="approved" {{ $application->status == 'approved' ? 'selected' : '' }}>Approved</option>
                                 <option value="rejected" {{ $application->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
@@ -132,29 +135,32 @@
                         </form>
                     </div>
 
-                    <!-- View Details Button -->
-                    <div class="col-2">
+                    
+                    <div class="col-2 mt-4">
+                        
+                        <!-- View Details Button -->
                         <a href="{{ route('applications.show', $application->id) }}" class="btn btn-sm" role="button">
                             <img src="{{ asset('imgs/eye.png') }}" alt="delete" style="width: 42px; height: 42px;" />
                         </a>
-                        <button type="submit" class="btn btn-link p-0" onclick="return confirm('Are you sure you want to delete?')">
-                            <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 30px; height: 30px;" />
-                        </button>
-                    </div>
 
-                    <!-- Delete Button -->
-                    <div class="text-center">
+                        <!-- Delete Button -->
                         <form action="{{ route('applications.destroy', $application->id) }}" method="post" class="d-inline">
                             @csrf
                             @method('delete')
-                            
+                            <button type="submit" class="btn btn-link p-0" onclick="return confirm('Are you sure you want to delete?')">
+                                <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 30px; height: 30px;" />
+                            </button>
                         </form>
                     </div>
+
+                    
+                   
                 </div>
             </div>
         </div>
     @endforeach
 </div>
+@endif
 
         
     </div>

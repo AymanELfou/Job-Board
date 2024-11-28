@@ -28,6 +28,12 @@
 
         <div class="row">
              @include('incs.alert') 
+
+            @if($applications->isEmpty())
+             <div class="alert alert-info">No Application have applied for your jobs.</div>
+            @else
+
+
             @foreach($applications as $application)
                 <div class="card rounded-3 mb-4">
                     <div class="card-body p-4">
@@ -89,8 +95,8 @@
                     </div>
                 </div>
             @endforeach
-
         </div>
+        @endif
     </div>
 
 

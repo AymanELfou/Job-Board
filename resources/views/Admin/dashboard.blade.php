@@ -39,8 +39,16 @@
     <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
+                <h5 class="card-title">Recent Applications</h5>
+                <span class="display-2 font-weight-bold">{{ $totaltApplications }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
                 <h5 class="card-title">Total Users</h5>
-                <span class="display-2 font-weight-bold">{{ $totalUsers }}</span>
+                <span class="display-2 font-weight-bold">{{ $totalUsers }}</span> <!-- Placeholder value -->
             </div>
         </div>
     </div>
@@ -49,14 +57,6 @@
             <div class="card-body">
                 <h5 class="card-title">Total Jobs</h5>
                 <span class="display-2 font-weight-bold">{{ $totalJobs }}</span> <!-- Placeholder value -->
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title">Recent Applications</h5>
-                <span class="display-2 font-weight-bold">{{ $totaltApplications }}</span> <!-- Placeholder value -->
             </div>
         </div>
     </div>

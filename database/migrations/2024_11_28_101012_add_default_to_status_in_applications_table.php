@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->string('status')->default('pending'); // Add the status column
+            $table->string('status')->default('pending')->change();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->dropColumn('status'); // Remove the status column if rolled back
+            $table->string('status')->nullable()->change();
         });
     }
 };

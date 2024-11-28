@@ -70,9 +70,9 @@
                                         <!-- Actions: View, Download Resume, Update Status -->
                                         <a href="{{ route('candidates.show', $candidate->id) }}" class="btn btn-info btn-sm m-1">View Profile</a>
 
-                                        @if ($candidate->resume)
+                                        {{-- @if ($candidate->resume)
                                             <a href="{{ asset('storage/' . $candidate->resume) }}" target="_blank" class="btn btn-secondary btn-sm">Download Resume</a>
-                                        @endif
+                                        @endif --}}
 
                                         <form action="{{ route('applications.updateStatus', $candidate->id) }}" method="POST" class="d-inline m-1">
                                             @csrf

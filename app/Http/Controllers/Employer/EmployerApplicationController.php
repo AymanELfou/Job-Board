@@ -58,9 +58,9 @@ class EmployerApplicationController extends Controller
 
         $application->delete();
 
-        return redirect()->route('applications.index')->with('success', 'Status updated successfully.');
+        return redirect()->route('employer.jobs.index')->with('success', 'Application deleted successfully.');
     }
-
+    
 
 
 

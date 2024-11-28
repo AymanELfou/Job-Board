@@ -36,6 +36,7 @@
         <div class="container">
             <div class="row mt-5"></div>
             <ul class="row">
+                @include('incs.alert') 
                 @foreach($Jobseekers as $jobseeker)
                 <li class="col-12 col-md-6 col-lg-4">
                     <div class="cnt-block">
@@ -43,8 +44,8 @@
                         <h3>{{ $jobseeker['fullName'] }}</h3>
                         <p>Freelance Web Developer</p>
                         <p class="pd"><b>Contact information:</b> {{ $jobseeker['contact_information'] }}</p>
-                        <p class="pd"><b>Skills:</b> Skills: {{ $jobseeker['competences'] }}</p>
-                        <p class="pd"><b>Education:</b> Education: {{ $jobseeker['education'] }}</p>
+                        <p class="pd"><b>Skills:</b> {{ $jobseeker['competences'] }}</p>
+                        <p class="pd"><b>Education:</b> {{ $jobseeker['education'] }}</p>
                         <p class="pd"><b> Experience:</b> {{ $jobseeker['experience'] }}</p>
                         <p class="pd">Resume: {{ $jobseeker['resume'] }}</p>
 

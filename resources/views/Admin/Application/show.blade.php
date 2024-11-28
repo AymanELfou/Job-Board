@@ -61,7 +61,7 @@
                 
     
                 <!-- Buttons -->
-                <div class="mt-4">
+                <div class="">
                     <a href="{{ route('applications.index') }}" class=""> 
                         <img src="{{ asset('imgs/arrow.png') }}" alt="delete" style="width: 50px; height: 50px;"  />                
                     </a>

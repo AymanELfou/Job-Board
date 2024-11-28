@@ -50,9 +50,9 @@
             <div>
                 <label for="resume" class="block text-sm font-medium text-gray-700">Resume</label>
                 <input type="file" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="resume" name="resume" value="{{ $Jobseeker->resume }}" accept=".pdf">
-                @if ($Jobseeker->resume)
+               {{--  @if ($Jobseeker->resume)
                     <p class="text-sm text-gray-600 mt-2">Current resume: <a href="{{ asset('storage/' . $Jobseeker->resume) }}" target="_blank" class="text-blue-500 underline">View Resume</a></p>
-                @endif
+                @endif --}}
             </div>
 
             <button type="submit" class="btn btn-primary mt-4 text-3xl bg-blue-500 leading-tight text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">

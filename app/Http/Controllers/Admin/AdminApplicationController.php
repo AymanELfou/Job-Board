@@ -36,15 +36,14 @@ class AdminApplicationController extends Controller
         $application = Application::with(['job','profilJobseeker'])->find($id);
 
         return view('Admin.Application.show',compact('application'));
-
     }
 
     public function destroy($id){
-        $application = Application::find($id);
+        $application = Application::findorFail($id);
 
         $application->delete();
 
-        return redirect()->route('applications.index');
+        return redirect()->route('applications.index')->with('success', 'Application deleted successfully.');
     }
 
 
