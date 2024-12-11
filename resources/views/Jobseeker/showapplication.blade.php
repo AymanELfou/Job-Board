@@ -47,11 +47,11 @@
                     <button type="submit" class="btn btn-primary">Update Status</button>
                 </form> --}}
 
-                <form action="{{ route('jobseeker.applications.destroy', $application->id) }}" method="POST" class="mt-3">
+                {{-- <form action="{{ route('jobseeker.applications.destroy', $application->id) }}" method="POST" class="mt-3">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Withdraw Application</button>
-                </form>
+                </form> --}}
             </div>
         </div>
 

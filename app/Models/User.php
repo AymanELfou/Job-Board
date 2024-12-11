@@ -12,7 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'profile_id', // Include profile_id here
     ];
 
     /**
@@ -45,8 +45,21 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    //Relashionships:
+    // Relationships:
+    public function profile(){
 
+    if ($this->role === 'admin') {
+        return $this->belongsTo(ProfileAdmin::class, 'profile_id'); // Use profile_id
+    } elseif ($this->role === 'jobseeker') {
+        return $this->belongsTo(ProfilJobseeker::class, 'profile_id'); // Use profile_id
+    } elseif ($this->role === 'employer') {
+        return $this->belongsTo(ProfilEmployer::class, 'profile_id'); // Use profile_id
+    }
+
+    return null;
+}
+
+    /* 
     public function profilEmployer()
     {
         return $this->hasOne(ProfilEmployer::class, 'id_utilisateur');
@@ -54,11 +67,12 @@ class User extends Authenticatable
 
     public function profilJobseeker()
     {
-        return $this->hasOne(ProfilJobseeker::class,'id_utilisateur');
+        return $this->hasOne(ProfilJobseeker::class, 'id_utilisateur');
     }
 
     public function notifications()
     {
         return $this->hasMany(Notification::class, 'id_utilisateur');
-    }
+    } 
+    */
 }

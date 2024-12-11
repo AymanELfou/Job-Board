@@ -25,23 +25,33 @@
                 
             </div>
 
-            <div>
-                <label for="company" class="block text-sm font-medium text-gray-700 m-2 h5">Company</label><!-- Label for company name -->
-                <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="company" name="company" required>
-            </div>
+            
 
             <div>
                 <label for="location" class="block text-sm font-medium text-gray-700 m-2 h5">Location</label><!-- Label for Localisation -->
                 <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="location" name="location" required><!-- Input for job location -->
             </div>
+
             <div>
                 <label for="type" class="block text-sm font-medium text-gray-700 m-2 h5">Type</label> <!-- Label for job type -->
-                <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="type" name="job_type" required> <!-- Input for job type -->
+                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500 form-select" id="type" name="job_type" required> <!-- Dropdown for job type -->
+                    <option value="" disabled selected>Select job type</option> <!-- Placeholder option -->
+                    <option value="full_time">Full Time</option> <!-- Full Time option -->
+                    <option value="part_time">Part Time</option> <!-- Part Time option -->
+                </select>
             </div>
+
             
             <div>
                 <label for="category" class="block text-sm font-medium text-gray-700 m-2 h5">Category</label> <!-- Label for job category -->
-                <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="category" name="categorie" required> <!-- Input for job category -->
+                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="category" name="categorie" required> <!-- Dropdown for job category -->
+                    <option value="" disabled selected>Select category</option> <!-- Placeholder option -->
+                    <option value="tech">Tech</option> <!-- Tech option -->
+                    <option value="sells">Sells</option> <!-- Sells option -->
+                    <option value="marketing">Marketing</option> <!-- Marketing option -->
+                    <option value="finance">Finance</option> <!-- Finance option -->
+                    <option value="education">Education</option> <!-- Education option -->
+                </select>
             </div>
             
             <div>
@@ -51,8 +61,13 @@
             
             <div>
                 <label for="type_contrat" class="block text-sm font-medium text-gray-700 m-2 h5">Type Contrat</label> <!-- Label for contract type -->
-                <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="type_contrat" name="type_contrat" required> <!-- Input for contract type -->
+                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="type_contrat" name="type_contrat" required> <!-- Dropdown for contract type -->
+                    <option value="" disabled selected>Select contract type</option> <!-- Placeholder option -->
+                    <option value="cdd">CDD (Contrat à Durée Déterminée)</option> <!-- CDD option -->
+                    <option value="cdi">CDI (Contrat à Durée Indéterminée)</option> <!-- CDI option -->
+                </select>
             </div>
+            
             
             <div>
                 <label for="date_publication" class="block text-sm font-medium text-gray-700 m-2 h5">Date publication</label> <!-- Label for publication date -->

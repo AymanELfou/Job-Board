@@ -42,16 +42,11 @@
 </style>
 
 <!-- Button to add a new job -->
-<div class="d-flex justify-content-start mb-4">
-    <a href="{{ route('jobs.create') }}" class="btn btn-primary add-job-btn d-flex align-items-center text-dark font-semibold px-2 p-3" style="border-radius: 15px; background-color: #FFD700">
-        <img src="{{ asset('imgs/plus.png') }}" alt="Add" class="me-2" style="width: 30px; height: 30px;">
-       <h5>Add Job</h5> 
-    </a>
-</div>
+
 
 <!-- Search Bar and Button aligned in the same row -->
-<div class="container">
-    <form action="{{ route('jobseeker.search') }}" method="GET" class="d-flex align-items-center mt-4">
+<div class="container mt-5">
+    <form action="{{ route('jobs.search') }}" method="GET" class="d-flex align-items-center mt-4">
         <input class="form-control me-2 search-input flex-grow-1" name="keyword" type="search" placeholder="Job category, location, job type" aria-label="Search">
         <button class="btn search-btn flex-shrink-0 add-job-btn" type="submit">Search</button>
     </form>

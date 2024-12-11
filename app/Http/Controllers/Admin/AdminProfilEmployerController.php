@@ -16,7 +16,7 @@ class AdminProfilEmployerController extends Controller
        return view('Admin.Employers.AllEmployers', compact('Employers'));
    }
 
-   // Show the form for creating a new employer profile
+  /*  // Show the form for creating a new employer profile
    public function create()
    {
        return view('Admin.Employers.createEmployer');
@@ -46,7 +46,7 @@ class AdminProfilEmployerController extends Controller
     $Employer->save();
 
     return redirect()->route('employers.index')->with('success', 'Employer created successfully.');
-    }
+    } */
 
    // Display the specified employer
    public function show($id)

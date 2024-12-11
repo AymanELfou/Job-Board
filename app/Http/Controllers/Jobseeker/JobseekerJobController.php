@@ -16,13 +16,13 @@ class JobseekerJobController extends Controller
 {
 
     public function dashboardJobseker(){
-        return view('Jobseeker.jobseekerDashboard');
+        return view('Jobseeker.jobseekerDashboard')->with('success', 'You have logged in as a Jobseeker.');
     }
 
 
 
     public function index(){
-        $jobs=Job::all();
+        $jobs=Job::paginate(3);
 
         return view('Jobseeker.jobs',compact("jobs"));
     }
@@ -32,7 +32,7 @@ class JobseekerJobController extends Controller
     
     public function apply(Request $request, Job $job){
 
-        
+
         $request->validate([
             'resume' => 'nullable|file|max:2048', // Validate uploaded file
             'cover_letter' => 'required|string|max:2000',
@@ -48,26 +48,23 @@ class JobseekerJobController extends Controller
 
 
         // Send email notification to the employer
-    $employer = $job->profilEmployer; 
-    $jobSeekerName = Auth::user()->fullName; 
-    $jobTitle = $job->titre; 
+        $employer = $job->profilEmployer; 
+        $jobSeekerName = Auth::user()->name; 
+        $jobTitle = $job->titre; 
 
-    dd($employer);
-    if ($employer && $employer->user->email) {
-        try {
-            Mail::to($employer->user->email)->send(new JobApplicationMail($jobTitle, $jobSeekerName));
-            
-            return redirect()->back()->with('success', 'Your application has been submitted successfully! Email sent.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('success', 'Your application has been submitted, but the email could not be sent: ' . $e->getMessage());
+
+        if ($employer && $employer->user->email) {
+            try {
+                Mail::to($employer->user->email)->send(new JobApplicationMail($jobTitle, $jobSeekerName));
+                return redirect()->back()->with('success', 'Your application has been submitted successfully! Email sent.');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('success', 'Your application has been submitted, but the email could not be sent: ' . $e->getMessage());
+            }
+
+        } else {
+            return redirect()->back()->with('success', 'Your application has been submitted, but no valid employer email found.');
         }
-    } else {
-        return redirect()->back()->with('success', 'Your application has been submitted, but no valid employer email found.');
-    }
 
-
- 
-       /*  return redirect()->back()->with('success', 'Your application has been submitted successfully!'); */
     }
     
     
@@ -123,7 +120,7 @@ class JobseekerJobController extends Controller
         }
 
         // Execute the query and get the results
-        $jobs = $query->get();
+        $jobs = $query->paginate(10);
 
         // Return the view with the search results
         return view('Jobseeker.jobs', compact('jobs'));

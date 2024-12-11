@@ -25,7 +25,7 @@ class AdminDashboardController extends Controller
     // Monthly application counts
     $monthlyApplications = Application::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
         ->groupBy('month')
-        ->orderBy('month')
+        ->orderBy('month')   
         ->get();
 
     // Monthly user counts for ProfilJobseeker
@@ -73,7 +73,8 @@ class AdminDashboardController extends Controller
     ));
 
     return view('Admin.dashboard', compact('applications', 'totalJobs', 'totalUsers', 
-    'totaltApplications', 'monthlyApplications', 'monthlyUsersGrouped','jobPostingsLabels', 'jobPostingsCounts'));
+    'totaltApplications', 'monthlyApplications', 'monthlyUsersGrouped','jobPostingsLabels', 'jobPostingsCounts'))
+    ->with('success', 'You have logged in as ADMIN.');
 }
 
 

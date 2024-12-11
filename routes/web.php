@@ -58,10 +58,10 @@ Route::middleware(['auth','role:admin'])->group(function () {
     // Job Management for Admin
     Route::prefix('jobs')->group(function () {
         Route::get('/', [AdminJobController::class, 'index'])->name('jobs.index');
-        Route::get('/create', [AdminJobController::class, 'create'])->name('jobs.create');
+       /*  Route::get('/create', [AdminJobController::class, 'create'])->name('jobs.create');
         Route::post('/', [AdminJobController::class, 'store'])->name('jobs.store');
         Route::get('/{id}/edit', [AdminJobController::class, 'edit'])->name('jobs.edit');
-        Route::put('/{id}', [AdminJobController::class, 'update'])->name('jobs.update');
+        Route::put('/{id}', [AdminJobController::class, 'update'])->name('jobs.update'); */
         Route::delete('/{id}', [AdminJobController::class, 'destroy'])->name('jobs.destroy');
         Route::get('/search', [AdminJobController::class, 'search'])->name('jobs.search');
     });
@@ -70,10 +70,10 @@ Route::middleware(['auth','role:admin'])->group(function () {
     // Job Seeker Management
     Route::prefix('jobseekers')->group(function () {
         Route::get('/', [AdminProfilJobseekerController::class, 'index'])->name('jobseeker.index');
-        Route::get('/create', [AdminProfilJobseekerController::class, 'create'])->name('jobseeker.create');
+       /*  Route::get('/create', [AdminProfilJobseekerController::class, 'create'])->name('jobseeker.create');
         Route::post('/', [AdminProfilJobseekerController::class, 'store'])->name('jobseeker.store');
         Route::get('/{id}/edit', [AdminProfilJobseekerController::class, 'edit'])->name('jobseeker.edit');
-        Route::put('/{id}', [AdminProfilJobseekerController::class, 'update'])->name('jobseeker.update');
+        Route::put('/{id}', [AdminProfilJobseekerController::class, 'update'])->name('jobseeker.update'); */
         Route::delete('/{id}', [AdminProfilJobseekerController::class, 'destroy'])->name('jobseeker.destroy');
         Route::get('/search', [AdminProfilJobseekerController::class, 'search'])->name('jobseeker.search');
     });
@@ -135,7 +135,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/jobseeker/profile/create', 'create')->name('jobseeker.profile.create');
             Route::post('/profil', 'store')->name('profile.store');
-            Route::delete('/profile', 'destroy')->name('profile.destroy');
+            Route::delete('/profil', 'destroy')->name('profile.destroy');
         });
 
         // Edit and Update Job Seeker Profile
@@ -182,6 +182,8 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::post('/profileEmployer', [ProfilEmployerController::class, 'store'])->name('employer.profile.store'); 
         Route::get('/profileEmployer/edit', [ProfilEmployerController::class, 'edit'])->name('employer.profile.edit'); // Show form to edit employer profile
         Route::put('/profileEmployer/update', [ProfilEmployerController::class, 'update'])->name('employer.profile.update'); // Update employer profile
+        Route::delete('/profile',[ProfileController::class , 'destroy'])->name('profile.destroy');
+
 
 
         //logout Employer dashboard

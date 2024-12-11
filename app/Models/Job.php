@@ -9,6 +9,18 @@ class Job extends Model
 {
     use HasFactory;
 
+    
+    protected $fillable = [
+        'titre',
+        'description',
+        'location',
+        'job_type',
+        'salaire',
+        'categorie',
+        'type_contrat',
+        'date_publication',
+        'company'
+    ];
 
 
     public function savedJobs()
@@ -16,7 +28,8 @@ class Job extends Model
         return $this->hasMany(SavedJob::class, 'id_job');
     }
 
-    // Define the isSavedBy method
+
+
     public function isSavedBy($user)
     {
         // Check if the job is saved by the given user
@@ -30,8 +43,9 @@ class Job extends Model
         return $this->belongsTo(ProfilEmployer::class, 'id_employeur');
     }
 
+
     public function Applications()
     {
-        return $this->hasMany(Application::class, 'id_job');
+        return $this->hasMany(Application::class,'id_job');
     }
 }

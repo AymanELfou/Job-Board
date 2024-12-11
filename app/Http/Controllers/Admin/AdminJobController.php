@@ -18,12 +18,12 @@ class AdminJobController extends Controller
     // Afficher toutes les offres d'emploi
     public function index()
     {
-        $jobs = Job::all();
+        $jobs = Job::paginate(3);
         return view("Admin.Jobs.jobs", compact('jobs'));
     }
 
     // Créer une nouvelle offre d'emploi
-    public function store(Request $request)
+    /* public function store(Request $request)
 {
     $request->validate([
         'titre' => 'required|string',
@@ -88,7 +88,7 @@ class AdminJobController extends Controller
 
         return redirect()->route('jobs.index');
     }
-
+ */
     // Supprimer une offre d'emploi
     public function destroy($id)
     {
@@ -114,7 +114,7 @@ class AdminJobController extends Controller
         });
     }
 
-    $jobs = $query->get();
+    $jobs = $query->paginate(10);
 
     return view("Admin.Jobs.jobs", compact('jobs'));
 }

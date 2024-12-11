@@ -24,7 +24,9 @@
 
 
     <div class="container mt-5">
-
+        @if($applications->isEmpty())
+        <div class="alert alert-info">You have not applied to any jobs yet.</div>
+       @else
     <div class="row">
         @foreach($applications as $application)
             <div class="card rounded-3 mb-4">
@@ -73,6 +75,7 @@
             </div>
         @endforeach
     </div>
+    @endif
 </div>
 
             

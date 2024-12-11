@@ -23,10 +23,7 @@
                 <x-input-label  for="titre"  :value="__('Job Title')"/>
                 <input type="text" class="form-control" id="titre" name="titre" value="{{ $job->titre }}" required>
             </div>
-            <div class="mb-3">
-                <label for="company" class="form-label">Company</label>
-                <input type="text" class="form-control" id="company" name="company" value="{{ $job->company }}" required>
-            </div>
+            
             <div class="mb-3">
                 <label for="location" class="form-label">Location</label>
                 <input type="text" class="form-control" id="location" name="location" value="{{ $job->location }}" required>

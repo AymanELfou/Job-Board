@@ -30,10 +30,6 @@ class EmployerApplicationController extends Controller
             'status' => 'required|in:pending,approved,rejected', // Ensure valid statuses
         ]);
     
-       /*  // Verify that the application belongs to the employer's job
-        if ($application->job->employer_id !== auth()->id()) {
-            return redirect()->back()->with('error', 'Unauthorized access.');
-        } */
     
         // Assign the new status and save the application
         $application->status = $validated['status'];

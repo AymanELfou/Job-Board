@@ -59,7 +59,8 @@ class EmployerJobController extends Controller
         ->count('id_jobseeker'); // Count distinct job seekers
     
         // Return the view with all the collected data for the employer's dashboard
-        return view('Employer.employerDashboard', compact('monthlyPostings', 'monthlyApplications', 'candidateQuality', 'totalJobs', 'totaltApplications', 'totalJobseekers'));
+        return view('Employer.employerDashboard', compact('monthlyPostings', 'monthlyApplications', 'candidateQuality', 'totalJobs', 'totaltApplications', 'totalJobseekers'))
+        ->with('success', 'You have logged in as a Employer.');
     }
     
 
@@ -75,7 +76,7 @@ class EmployerJobController extends Controller
 
     public function index()
     {
-        $jobs = Job::all();
+        $jobs = Job::paginate(3);
         return view("Employer.jobs", compact('jobs'));
     }
 
@@ -83,7 +84,7 @@ class EmployerJobController extends Controller
     // Store a newly created job posting
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string',
             'location' => 'required|string|max:255',
@@ -92,22 +93,16 @@ class EmployerJobController extends Controller
             'salaire' => 'nullable|numeric',
             'type_contrat' => 'nullable|string',
             'date_publication' => 'required|date',
-            'company' => 'nullable|string|max:255',
         ]);
 
-        $job = new Job();
-        $job->id_employeur = auth()->user()->id; // Set the employer ID from the logged-in user
-        $job->titre = $request->titre;
-        $job->description = $request->description;
-        $job->location = $request->location;
-        $job->job_type = $request->job_type;
-        $job->categorie = $request->categorie;
-        $job->salaire = $request->salaire;
-        $job->type_contrat = $request->type_contrat;
-        $job->company = $request->company;
-        $job->date_publication = $request->date_publication;
-        $job->save();
+        
+        auth()->user()->profile->jobs()->create($data);
 
+        /*
+        $data["id_employeur"] = auth()->user()->profilEmployer->id;
+        $job = Job::create(
+            $data
+        );*/
         return redirect()->route('employer.jobs.index')->with('success', 'Job posted successfully!');
     }
 
@@ -138,7 +133,7 @@ class EmployerJobController extends Controller
             'salaire' => 'nullable|numeric',
             'type_contrat' => 'nullable|string',
             'date_publication' => 'nullable|date',
-            'company' => 'nullable|string|max:255',
+            
         ]);
 
         $job->titre = $request->titre ?? $job->titre;
@@ -148,7 +143,6 @@ class EmployerJobController extends Controller
         $job->categorie = $request->categorie ?? $job->categorie;
         $job->salaire = $request->salaire ?? $job->salaire;
         $job->type_contrat = $request->type_contrat ?? $job->type_contrat;
-        $job->company = $request->company;
         $job->date_publication = $request->date_publication ?? $job->date_publication;
         $job->save();
 

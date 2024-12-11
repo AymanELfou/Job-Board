@@ -12,17 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->string('status')->default('pending')->change();
+            // Add the 'status' column with a default value of 'pending'
+            $table->string('status')->default('pending')->after('cover_letter'); // Specify the position if needed
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->string('status')->nullable()->change();
+            // Drop the 'status' column when rolling back
+            $table->dropColumn('status');
         });
     }
+    
 };

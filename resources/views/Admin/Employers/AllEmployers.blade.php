@@ -119,9 +119,9 @@
                                   <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 40px; height: 40px;" />
                                 </button>
                             </form>
-                            <a href="employers/{{ $Employer->id }}/edit" class="">
+                           {{--  <a href="employers/{{ $Employer->id }}/edit" class="">
                               <img src="{{ asset('imgs/penc.png') }}" alt="modify" style="width: 40px; height: 40px;" />
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                 </div>

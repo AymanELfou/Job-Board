@@ -7,10 +7,10 @@
 
 
 
-    <div class="mx-5 mt-5">
-        <a href="{{ route('employer.jobs.create') }}" class="btn  add-job-btn d-flex align-items-center text-white" style="width: 160px;">
-            <img src="{{ asset('imgs/plus.png') }}" alt="Add" class="me-2" style="width: 30px; height: 30px;">
-            <h5>Add Job</h5>
+    <div class="mt-5">
+        <a href="{{ route('employer.jobs.create') }}" class="" style="width: 160px;">
+            <img src="{{ asset('imgs/plusg.png') }}" alt="Add"  style="width: 65px; height: 65px;">
+            
         </a>
     </div>
     
@@ -18,10 +18,13 @@
     
     <!-- Search Bar and Button aligned in the same row -->
     <div class="container col-12 col-md-6 col-lg-4">
-        <form action="{{ route('employer.jobs.search') }}" method="GET" class="d-flex align-items-center mt-4">
+        <div class="row">
+          <form action="{{ route('employer.jobs.search') }}" method="GET" class="d-flex align-items-center ">
             <input class="form-control me-2 search-input flex-grow-1" name="keyword" type="search" placeholder="Title, Job type, Location" aria-label="Search">
             <button class="btn search-btn flex-shrink-0" type="submit" style="background-color: rgba(245, 16, 0, 0.705); border-radius: 10px; color: white">Search</button>
         </form>
+        </div>
+        
     </div>
 
 
@@ -101,7 +104,7 @@
                         
                         <!-- Description -->
                         <h5>Description:</h5>
-                        <p class="card-text">{{ \Illuminate\Support\Str::limit($job['description'], 200, '...') }}</p>
+                        <p class="card-text">{{ \Illuminate\Support\Str::limit($job['description'], 250, '...') }}</p>
                         
                         <!-- Boutons d'actions -->
                         <div class="mt-auto d-flex justify-content-center">
@@ -109,17 +112,20 @@
                                 @csrf
                                 @method('delete')
                                 <button type="submit"  onclick="return confirm('Are you sure you want to delete?')">
-                                  <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 30px; height: 30px;" />
+                                  <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 35px; height: 35px;" class="mt-1"/>
                                 </button>
                             </form>
-                            <a href="/employer/jobs/{{ $job->id }}/edit" >
-                              <img src="{{ asset('imgs/penc.png') }}" alt="modify" style="width: 30px; height: 30px;" />
+                            <a href="/employer/jobs/{{ $job->id }}/edit" class="" >
+                              <img src="{{ asset('imgs/editb.png') }}" alt="modify" style="width: 45px; height: 45px;" />
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
+        <div class="mt-4 d-flex justify-content-center">
+          {{ $jobs->links() }}
+        </div>
       </div>
 
 

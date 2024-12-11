@@ -9,6 +9,7 @@ class Notification extends Model
 {
     use HasFactory;
 
+    
 
 
     public function user()

@@ -25,6 +25,7 @@ public function store(EmployerRequest $request)
    
     // Create a new profile for the job seeker
     $Employer = new ProfilEmployer();
+     // Link to the currently logged-in user
     $Employer->id_utilisateur = auth()->user()->id; // Link to the currently logged-in user
 
     
@@ -40,7 +41,7 @@ public function store(EmployerRequest $request)
     $Employer->save();
 
     // Redirect to the jobseeker applications index with a success message
-    return redirect()->route('employer.jobs.index')->with('success', 'Profile created successfully.');
+    return redirect()->route('employer.dashboard')->with('success', 'Profile created successfully.');
 }
 
 
@@ -49,17 +50,22 @@ public function store(EmployerRequest $request)
     public function edit(Request $request) {
         // Retrieve the currently authenticated user
         $user = $request->user();
-    
-        // Get the job seeker profile associated with the user
-        // Ensure that a relationship has been defined in the User model
-        $EmployerProfile = $user->profilEmployer;
-    
+        
+        // Get the employer profile associated with the user using the profile() method
+        $employerProfile = $user->profile;
+
+        if (!$employerProfile || $user->role !== 'employer') {
+            // Handle the case where the employer profile does not exist or user is not an employer
+            return redirect()->route('employer.dashboard')->with('error', 'Employer profile not found.');
+        }
+
         // Return the edit view for the profile, passing the user and their profile data
         return view('Employer.editEmployer', [
             'user' => $user,
-            'profile' => $EmployerProfile,
+            'profile' => $employerProfile,
         ]);
     }
+    
 
 
 
@@ -70,10 +76,14 @@ public function store(EmployerRequest $request)
         $user = $request->user();
     
         // Get the user's employer profile
-        $employerProfile = $user->profilEmployer; // Adjusted to reference the employer profile
+        $employerProfile = $user->profile; // Adjusted to reference the employer profile
     
         
-    
+        if (!$employerProfile || $user->role !== 'employer') {
+            // Handle the case where the employer profile does not exist or user is not an employer
+            return redirect()->route('employer.dashboard')->with('error', 'Employer profile not found.');
+        }
+
         // Update the employer profile with the validated data from the request
         $employerProfile->update($request->validated());
     

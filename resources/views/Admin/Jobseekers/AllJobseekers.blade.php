@@ -16,15 +16,15 @@
         </a>
     </div>
 
-    <div class="mx-5 col-2 mt-1">
+    {{-- <div class="mx-5 col-2 mt-1">
         <a href="{{ route('jobseeker.create') }}" class="btn  d-flex align-items-center text-dark font-semibold  px-3 p-3 " style="background-color: #FFD700; border-radius: 20px; ">
             <img src="{{ asset('imgs/plus.png') }}" alt="Add" class="me-2" style="width: 30px; height: 30px;">
             <h5>Add Jobseeker</h5>
         </a>
-    </div>
+    </div> --}}
 
     <!-- Search Bar and Button aligned in the same row -->
-    <div class="container col-12 col-md-6 col-lg-4">
+    <div class="container col-12 col-md-6 col-lg-4 mt-5">
         <form action="{{ route('jobseeker.search') }}" method="GET" class="d-flex align-items-center mt-4">
             <input class="form-control me-2 search-input flex-grow-1" name="fullName" type="search" placeholder="Name" aria-label="Search">
             <button class="btn search-btn flex-shrink-0" type="submit" style="background-color: rgba(245, 16, 0, 0.705); border-radius: 10px; color: white">Search</button>
@@ -50,9 +50,9 @@
                         <p class="pd">Resume: {{ $jobseeker['resume'] }}</p>
 
                         <div class="d-flex justify-content-center mt-2">
-                            <a href="{{ route('jobseeker.edit', $jobseeker->id) }}" class="btn col-3">
+                           {{--  <a href="{{ route('jobseeker.edit', $jobseeker->id) }}" class="btn col-3">
                                 <img src="{{ asset('imgs/penc.png') }}" alt="modify" style="width: 40px; height: 40px;" />
-                            </a>
+                            </a> --}}
 
                             <form action="{{ route('jobseeker.destroy', $jobseeker->id) }}" method="post">
                                 @csrf

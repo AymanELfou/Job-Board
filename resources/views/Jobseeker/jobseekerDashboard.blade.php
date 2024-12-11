@@ -5,16 +5,15 @@
         </h2>
     </x-slot>
 
-    <div class="py-4">
-        <div class="container">
-            <div class="card shadow-sm">
-                <div class="card-body text-dark">
-                    {{ __("You're logged in As Job Seeker!") }}
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
+    @if (isset($success))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ $success }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    </div>
+    @endif
 
 
 <style>

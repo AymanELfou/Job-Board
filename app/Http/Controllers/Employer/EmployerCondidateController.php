@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class EmployerCondidateController extends Controller
 {
+
+
+    
     public function candidates(){
 
         $employerId = auth()->user()->id; // ID de l'employeur connecté

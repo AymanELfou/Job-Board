@@ -25,7 +25,7 @@ class ProfilJobseeker extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_utilisateur');
+        return $this->belongsTo(User::class, 'profile_id');
     }
 
     public function Applications()

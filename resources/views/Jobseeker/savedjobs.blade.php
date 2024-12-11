@@ -50,7 +50,10 @@
 
 <div class="container mt-3 pt-4">
     @include('incs.alert')
-    
+
+        @if($savedjobs->isEmpty())
+            <div class="alert alert-info">You have not saved any jobs yet.</div>
+        @else
         <div class="row">
             @foreach($savedjobs as $savedjob)
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
@@ -120,6 +123,7 @@
                 </div><!--end modal-->
             @endforeach
         </div><!--end row-->
+        @endif
 </div><!--end container-->
 
 

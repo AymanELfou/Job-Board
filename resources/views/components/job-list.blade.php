@@ -68,14 +68,17 @@
                             <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 30px; height: 30px;" />
                           </button>
                       </form>
-                      <a href="jobs/{{ $job->id }}/edit" class="btn">
+                     {{--  <a href="jobs/{{ $job->id }}/edit" class="btn">
                         <img src="{{ asset('imgs/penc.png') }}" alt="modify" style="width: 30px; height: 30px;" />
-                      </a>
+                      </a> --}}
                   </div>
               </div>
           </div>
       </div>
   @endforeach
+  <div class="mt-4 d-flex justify-content-center">
+    {{ $jobs->links() }}
+  </div>
 </div>
 
 

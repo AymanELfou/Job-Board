@@ -90,9 +90,16 @@
                         
                         <div class="mt-3">
                                 {{-- Apply button --}}
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal{{ $job->id }}">
-                                <i class="bi bi-check-circle fill"></i> Apply
-                            </button>
+                                
+                                @if ($job->applications->where('id_jobseeker', auth()->id())->isEmpty())
+                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal{{ $job->id }}">
+                                         <i class="bi bi-check-circle fill"></i> Apply
+                                     </button>
+                                 @else
+                                     <button class="btn btn-dark" disabled>
+                                         <i class="bi bi-check-circle fill"></i> Already Applied
+                                     </button>
+                                 @endif
 
                             {{-- Save button --}}
                             <form action="{{ route('jobs.save',$job->id) }}" method="POST" class="d-inline">
@@ -147,6 +154,9 @@
             @endif
 
         </div><!--end row-->
+        <div class="mt-4 d-flex justify-content-center">
+            {{ $jobs->links() }}
+          </div>
     </div><!--end container-->
 
 

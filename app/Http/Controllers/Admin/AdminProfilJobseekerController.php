@@ -18,7 +18,7 @@ class AdminProfilJobseekerController extends Controller
         return view('Admin.Jobseekers.AllJobseekers',compact('Jobseekers'));
     }
 
-
+/* 
     //Show the form for creating a new job seeker profile.
 
      public function create()
@@ -63,12 +63,12 @@ class AdminProfilJobseekerController extends Controller
     
     $Jobseeker->save();
 
-    return redirect()->route('jobseeker.index');/* ->with('success', 'Profile created successfully.') */
-}
+    return redirect()->route('jobseeker.index');
+} */
 
 
 
-
+/* 
     public function edit($id){
         $Jobseeker=ProfilJobseeker::find($id);
         return view('Admin.Jobseekers.editJobseeker',compact('Jobseeker'));
@@ -105,7 +105,7 @@ class AdminProfilJobseekerController extends Controller
     $Jobseeker->save();
 
     return redirect()->route('jobseeker.index')->with('success', 'Profile updated successfully.');
-}
+} */
 
 
 
@@ -129,7 +129,7 @@ class AdminProfilJobseekerController extends Controller
         ]);
     
         // Perform search on the 'fullName' column in the 'profil_jobseekers' table
-        $Jobseekers = ProfilJobseeker::where('fullName', 'like', '%' . $query . '%')->get();
+        $Jobseekers = ProfilJobseeker::where('fullName', 'like', '%' . $query . '%')->paginate(10);
     
         // Return search results to a view (replace 'jobseekers.index' with your view name)
         return view('Admin.Jobseekers.AllJobseekers',compact('Jobseekers'));
