@@ -25,7 +25,7 @@ class Job extends Model
 
     public function savedJobs()
     {
-        return $this->hasMany(SavedJob::class, 'id_job');
+        return $this->hasMany(SavedJob::class, 'job_id');
     }
 
 

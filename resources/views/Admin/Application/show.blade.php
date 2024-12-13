@@ -22,7 +22,7 @@
             <div class="row m-3 ">
                 <i><h4 class="mb-4 text-danger ">Job Information</h4></i>
                 <p><strong>Job Title:</strong> {{ $application->job->titre ?? 'N/A' }}</p>
-                <p><strong>Company:</strong> {{ $application->job->company ?? 'N/A' }}</p>
+                <p><strong>Company:</strong> {{ $application->job->profilEmployer->nom_entreprise ?? 'N/A' }}</p>
                 <p><strong>Location:</strong> {{ $application->job->location ?? 'N/A' }}</p>
                 <p><strong>Job Description:</strong> {{ $application->job->description ?? 'N/A' }}</p>
             </div>

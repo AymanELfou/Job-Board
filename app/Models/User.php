@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     if ($this->role === 'admin') {
         return $this->belongsTo(ProfileAdmin::class, 'profile_id'); // Use profile_id
-    } elseif ($this->role === 'jobseeker') {
+    } elseif ($this->role === 'Job Seeker') {
         return $this->belongsTo(ProfilJobseeker::class, 'profile_id'); // Use profile_id
     } elseif ($this->role === 'employer') {
         return $this->belongsTo(ProfilEmployer::class, 'profile_id'); // Use profile_id

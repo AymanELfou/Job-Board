@@ -91,7 +91,7 @@
                     <div class="card-body d-flex flex-column ">
                         <!-- Header du job -->
                         <h5 class="card-title text-primary mb-2">{{ $job['titre'] }}</h5>
-                        <p class="mb-2"><b><i class="bi bi-building-check"></i> Company:</b> {{ $job['company'] }} - <i class="bi bi-geo-alt-fill"></i> <b>Location:</b> {{ $job['location'] }}</p>
+                        <p class="mb-2"><i class="bi bi-geo-alt-fill"></i> <b>Location:</b> {{ $job['location'] }}</p>
                         
                         <!-- Détails du job -->
                         <ul class="list-unstyled mb-3">

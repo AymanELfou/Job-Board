@@ -28,30 +28,51 @@
                 <label for="location" class="form-label">Location</label>
                 <input type="text" class="form-control" id="location" name="location" value="{{ $job->location }}" required>
             </div>
-            <div class="mb-3">
-                <label for="type" class="form-label">Type</label>
-                <input type="text" class="form-control" id="type" name="job_type" value="{{ $job->job_type }}" required>
+            <div>
+                <label for="type" class="block text-sm font-medium text-gray-700 m-2 mt-2">Type</label> <!-- Label for job type -->
+                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500 form-select" id="type" name="job_type" required> <!-- Dropdown for job type -->
+                    <option value="" disabled selected>Select job type</option> <!-- Placeholder option -->
+                    <option value="full_time">Full Time</option> <!-- Full Time option -->
+                    <option value="part_time">Part Time</option> <!-- Part Time option -->
+                </select>
             </div>
-            <div class="mb-3">
-                <label for="category" class="form-label">Catégorie</label>
-                <input type="text" class="form-control" id="category" name="categorie" value="{{ $job->categorie }}" required>
+
+            <div>
+                <label for="category" class="block text-sm font-medium text-gray-700 m-2 mt-2">Category</label> <!-- Label for job category -->
+                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="category" name="categorie" required> <!-- Dropdown for job category -->
+                    <option value="" disabled selected>Select category</option> <!-- Placeholder option -->
+                    <option value="tech">Tech</option> <!-- Tech option -->
+                    <option value="sells">Sells</option> <!-- Sells option -->
+                    <option value="marketing">Marketing</option> <!-- Marketing option -->
+                    <option value="finance">Finance</option> <!-- Finance option -->
+                    <option value="education">Education</option> <!-- Education option -->
+                </select>
             </div>
+
             <div class="mb-3">
                 <label for="salaire" class="form-label">Salaire</label>
                 <input type="text" class="form-control" id="salaire" name="salaire" value="{{ $job->salaire }}" required>
             </div>
-            <div class="mb-3">
-                <label for="type_contrat" class="form-label">Type Contrat</label>
-                <input type="text" class="form-control" id="type_contrat" name="type_contrat" value="{{ $job->type_contrat }}" required>
+
+            <div>
+                <label for="type_contrat" class="block text-sm font-medium text-gray-700 m-2 mt-2">Type Contrat</label> <!-- Label for contract type -->
+                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="type_contrat" name="type_contrat" required> <!-- Dropdown for contract type -->
+                    <option value="" disabled selected>Select contract type</option> <!-- Placeholder option -->
+                    <option value="cdd">CDD (Contrat à Durée Déterminée)</option> <!-- CDD option -->
+                    <option value="cdi">CDI (Contrat à Durée Indéterminée)</option> <!-- CDI option -->
+                </select>
             </div>
+
             <div class="mb-3">
                 <label for="date_publication" class="form-label">Date publication</label>
                 <input type="date" class="form-control" id="date_publication" name="date_publication" value="{{ $job->date_publication }}" required>
             </div>
+
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="4" required>{{ $job->description }}</textarea>
             </div>
+            
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>

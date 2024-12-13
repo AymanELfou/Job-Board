@@ -14,7 +14,7 @@ class EmployerJobController extends Controller
 
     public function dashboardEmployer() {
         // Get the ID of the currently authenticated employer
-        $employerId = auth()->user()->id;
+        $employerId = auth()->user()->profile->id;
     
         // Retrieve the monthly job postings for the authenticated employer
         $monthlyPostings = Job::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
@@ -76,7 +76,9 @@ class EmployerJobController extends Controller
 
     public function index()
     {
-        $jobs = Job::paginate(3);
+        $employerId = auth()->user()->profile->id;
+        $jobs = Job::where('id_employeur',$employerId)->paginate(3);
+        
         return view("Employer.jobs", compact('jobs'));
     }
 
@@ -97,12 +99,7 @@ class EmployerJobController extends Controller
 
         
         auth()->user()->profile->jobs()->create($data);
-
-        /*
-        $data["id_employeur"] = auth()->user()->profilEmployer->id;
-        $job = Job::create(
-            $data
-        );*/
+        
         return redirect()->route('employer.jobs.index')->with('success', 'Job posted successfully!');
     }
 
@@ -172,6 +169,7 @@ class EmployerJobController extends Controller
     $query = Job::query();
 
     if ($keyword) {
+        // Apply filters based on the keyword
         $query->where(function ($q) use ($keyword) {
             $q->where('location', 'like', '%' . $keyword . '%')
               ->orWhere('categorie', 'like', '%' . $keyword . '%')
@@ -180,11 +178,11 @@ class EmployerJobController extends Controller
         });
     }
 
-    $jobs = $query->get();
+    // Get paginated results
+    $jobs = $query->paginate(3);
 
     return view("Employer.jobs", compact('jobs'));
 }
-
 }
 
 

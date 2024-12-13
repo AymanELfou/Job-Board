@@ -16,37 +16,6 @@ class AdminProfilEmployerController extends Controller
        return view('Admin.Employers.AllEmployers', compact('Employers'));
    }
 
-  /*  // Show the form for creating a new employer profile
-   public function create()
-   {
-       return view('Admin.Employers.createEmployer');
-   }
-
-   // Store a newly created employer in storage
-   public function store(Request $request){
-    $request->validate([
-        'nom_entreprise' => 'required|string|max:255',
-        'adresse' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'telephone' => 'nullable|string|max:20',
-        'secteur_activite' => 'nullable|string|max:255',
-    ]);
-
-    // Create a new instance of ProfilEmployer
-    $Employer = new ProfilEmployer();
-    $Employer->id_utilisateur = auth()->user()->id; // Links the employer to the current user
-    $Employer->nom_entreprise = $request->nom_entreprise;
-    $Employer->adresse = $request->adresse;
-    $Employer->description = $request->description;
-    $Employer->telephone = $request->telephone;
-    $Employer->secteur_activite = $request->secteur_activite;
-    $Employer->derniere_mise_a_jour = now();
-
-    // Save the employer to the database
-    $Employer->save();
-
-    return redirect()->route('employers.index')->with('success', 'Employer created successfully.');
-    } */
 
    // Display the specified employer
    public function show($id)

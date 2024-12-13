@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminApplicationController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminJobController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminProfilEmployerController;
 use App\Http\Controllers\Admin\AdminProfilJobseekerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Jobseeker\ProfileJobseekerController;
 use App\Http\Controllers\Jobseeker\SavedJobsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestEmailController;
+use App\Models\ProfileAdmin;
 use App\Models\ProfilJobseeker;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +56,12 @@ Route::middleware(['auth','role:admin'])->group(function () {
     // Dashboard for Admin
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
 
+    Route::prefix('profileAdmin')->group( function (){
+        Route::get('/create', [AdminProfileController::class, 'create'])->name('admin.profile.create');
+        Route::post('/', [AdminProfileController::class, 'store'])->name('admin.profile.store');
+    });
+        
+    
 
     // Job Management for Admin
     Route::prefix('jobs')->group(function () {
@@ -102,6 +110,8 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
     //logout Employer dashboard
     Route::get('/admin/logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
+
+    
 });
 
 
@@ -134,7 +144,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
         // Profile Management Routes
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/jobseeker/profile/create', 'create')->name('jobseeker.profile.create');
-            Route::post('/profil', 'store')->name('profile.store');
+            Route::post('/jobseeker/profile', 'store')->name('profile.store');
             Route::delete('/profil', 'destroy')->name('profile.destroy');
         });
 
@@ -144,6 +154,8 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
         // Logout Jobseeker Route
         Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+        
     });
 
 

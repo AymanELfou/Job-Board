@@ -30,42 +30,44 @@ class JobseekerJobController extends Controller
 
 
     
-    public function apply(Request $request, Job $job){
+    public function apply(Request $request, Job $job)
+{
+    // Get the authenticated user's profile
+    $user = auth()->user();
 
+    
 
-        $request->validate([
-            'resume' => 'nullable|file|max:2048', // Validate uploaded file
-            'cover_letter' => 'required|string|max:2000',
-        ]);
+    $request->validate([
+        'resume' => 'nullable|file|max:2048', // Validate uploaded file
+        'cover_letter' => 'required|string|max:2000',
+    ]);
 
-        $application = new Application();
-        $application->id_job = $job->id;
-        $application->id_jobseeker = Auth::id();
-        $application->resume = $request->file('resume')->store('resumes', 'public'); // Store resume in 'storage/app/public/resumes'
-        $application->cover_letter = $request->cover_letter;
-        $application->save();
+    $application = new Application();
+    $application->id_job = $job->id;
+    $application->id_jobseeker = $user->profile->id; // Ensure you're accessing the correct profile ID
+    $application->resume = $request->file('resume') ? $request->file('resume')->store('resumes', 'public') : null; // Store resume if provided
+    $application->cover_letter = $request->cover_letter;
+    $application->save();
 
+    // Send email notification to the employer
+    $employer = $job->profilEmployer;
 
-
-        // Send email notification to the employer
-        $employer = $job->profilEmployer; 
-        $jobSeekerName = Auth::user()->name; 
+    // Check if employer exists and has a user with an email
+    if ($employer && $employer->user && $employer->user->email) {
+        $jobSeekerName = $user->name; 
         $jobTitle = $job->titre; 
 
-
-        if ($employer && $employer->user->email) {
-            try {
-                Mail::to($employer->user->email)->send(new JobApplicationMail($jobTitle, $jobSeekerName));
-                return redirect()->back()->with('success', 'Your application has been submitted successfully! Email sent.');
-            } catch (\Exception $e) {
-                return redirect()->back()->with('success', 'Your application has been submitted, but the email could not be sent: ' . $e->getMessage());
-            }
-
-        } else {
-            return redirect()->back()->with('success', 'Your application has been submitted, but no valid employer email found.');
+        try {
+            Mail::to($employer->user->email)->send(new JobApplicationMail($jobTitle, $jobSeekerName));
+            return redirect()->back()->with('success', 'Your application has been submitted successfully! Email sent.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('success', 'Your application has been submitted, but the email could not be sent: ' . $e->getMessage());
         }
-
+    } else {
+        return redirect()->back()->with('success', 'Your application has been submitted, but no valid employer email found.');
     }
+}
+
     
     
     
@@ -129,11 +131,11 @@ class JobseekerJobController extends Controller
 
 
     public function saveJob(Request $request, $id){
-        $user = auth()->user();
+        $user = auth()->user()->profile;
 
          // Vérifiez si l'emploi est déjà sauvegardé
             $existingSave = SavedJob::where('id_utilisateur', $user->id)
-            ->where('id_job', $id)
+            ->where('job_id', $id)
             ->first();
 
         if ($existingSave) {
@@ -146,10 +148,13 @@ class JobseekerJobController extends Controller
         // Sinon, sauvegardez l'emploi
         $savedJob = new SavedJob();
         $savedJob->id_utilisateur = $user->id;
-        $savedJob->id_job = $id;
+        $savedJob->job_id = $id;
+        $savedJob->profile_id = $user->id;
 
         // Sauvegarder l'emploi en base de données avec save()
         $savedJob->save();
+        
+
 
         return back()->with('success', 'Job saved successfully.');
 

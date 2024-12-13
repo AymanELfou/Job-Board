@@ -11,7 +11,7 @@ class EmployerApplicationController extends Controller
     
     public function index(){
 
-        $employerId = auth()->user()->id; // ID de l'employeur connecté
+        $employerId = auth()->user()->profile->id; // ID de l'employeur connecté
 
         $applications =Application::whereHas('job',function ($query) use ($employerId){
             $query->where('id_employeur',$employerId); // Filtrer les emplois de cet employeur

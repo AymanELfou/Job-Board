@@ -13,10 +13,10 @@ class EmployerCondidateController extends Controller
     
     public function candidates(){
 
-        $employerId = auth()->user()->id; // ID de l'employeur connecté
+        $employerId = auth()->user()->profile->id; // ID de l'employeur connecté
 
         $candidates =Application::whereHas('job',function ($query) use ($employerId){
-            $query->where('id_employeur',$employerId); // Filtrer les emplois de cet employeur
+            $query->where('id_employeur', $employerId); // Filtrer les emplois de cet employeur
         })->with('job','profilJobseeker')->get();
 
         return view('Employer.condidates',compact('candidates'));

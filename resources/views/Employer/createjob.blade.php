@@ -36,8 +36,9 @@
                 <label for="type" class="block text-sm font-medium text-gray-700 m-2 h5">Type</label> <!-- Label for job type -->
                 <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500 form-select" id="type" name="job_type" required> <!-- Dropdown for job type -->
                     <option value="" disabled selected>Select job type</option> <!-- Placeholder option -->
-                    <option value="full_time">Full Time</option> <!-- Full Time option -->
-                    <option value="part_time">Part Time</option> <!-- Part Time option -->
+                    <option value="Full Time">Full Time</option> <!-- Full Time option -->
+                    <option value="Part Time">Part Time</option>
+                    <option value="Internship">Internship</option> <!-- Part Time option -->
                 </select>
             </div>
 

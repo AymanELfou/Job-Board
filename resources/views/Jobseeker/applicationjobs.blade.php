@@ -44,7 +44,7 @@
     
                         <!-- Applicant's Name -->
                         <div class="col-3"> <span class="text-danger fs-5 m-1">Company:</span>
-                            <h4 class="mb-0 fs-5 m-1">{{ $application->job->company ?? "Applicant's name" }}</h4>
+                            <h4 class="mb-0 fs-5 m-1">{{ $application->job->profilEmployer->nom_entreprise ?? "Applicant's name" }}</h4>
                         </div>
     
                         <!-- Status -->

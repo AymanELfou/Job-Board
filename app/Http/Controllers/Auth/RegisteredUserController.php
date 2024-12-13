@@ -49,11 +49,16 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         if($request->role ==='Job Seeker'){
+           
             return redirect()->route('jobseeker.profile.create');
         }
 
         if($request->role ==='employer'){
             return redirect()->route('employer.profile.create');
+        }
+
+        if($request->role ==='admin'){
+            return redirect()->route('admin.profile.create');
         }
 
         return redirect()->route('admin.dashboard');

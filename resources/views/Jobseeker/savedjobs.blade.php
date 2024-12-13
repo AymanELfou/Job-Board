@@ -63,7 +63,7 @@
                             <h4>{{ $savedjob->job->titre }}</h4>
                             <div class="mt-3">
                                 <span class="text-muted d-block mb-2"><i class="bi bi-geo-alt-fill"></i> {{ $savedjob->job->location }}</span>
-                                <span class="text-muted d-block mb-2"><i class="bi bi-building-check"></i> {{ $savedjob->job->company }} - {{ $savedjob->job->categorie }}</span>
+                                <span class="text-muted d-block mb-2"><i class="bi bi-building-check"></i> {{ $savedjob->job->profilEmployer->nom_entreprise }} - {{ $savedjob->job->categorie }}</span>
                                 <span class="text-muted d-block mb-2"><i class="bi bi-currency-dollar"></i> {{ $savedjob->job->salaire }} - <i class="bi bi-file-earmark-text"></i> {{ $savedjob->job->type_contrat }}</span>
                                 <span class="text-muted d-block">Description:</span>
                                 <p class="card-text">{{ \Illuminate\Support\Str::limit($savedjob->job->description, 200, '...') }}</p>
@@ -80,7 +80,7 @@
                                     @csrf
                                     <button type="submit" class="btn btn-danger">
                                         
-                                        @if($savedjob->job->isSavedBy(auth()->user())) 
+                                        @if($savedjob->job->isSavedBy(auth()->user()->profile)) 
                                         <i class="bi bi-bookmark-x save-icon"></i>
                                         UnSave
                                         @else 

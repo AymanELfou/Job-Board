@@ -22,7 +22,7 @@ public function edit(Request $request): View
 
     // Get the job seeker profile associated with the user
     // Ensure that a relationship has been defined in the User model
-    $jobSeekerProfile = $user->profilJobseeker;
+    $jobSeekerProfile = $user->profile;
 
     // Return the edit view for the profile, passing the user and their profile data
     return view('profile.edit', [
@@ -61,7 +61,7 @@ public function update(ProfileUpdateRequest $request)
     ]);
 
     // Update the job seeker profile with the new data
-    $user->profilJobseeker()->update($profileData);
+    $user->profile->update($profileData);
 
     // Redirect to the profile edit page with a success message
     return Redirect::route('profile.edit')->with('success', 'profile-updated');
@@ -137,8 +137,18 @@ public function store(Request $request)
     $Jobseeker->education = $request->education;
     $Jobseeker->derniere_mise_a_jour = now(); // Set the last updated timestamp
 
+    
     // Save the job seeker profile
     $Jobseeker->save();
+
+    $user = auth()->user(); //authenticated user
+    $currentProfileId = $user->profile_id; // get the current profile Id
+    $newProfileId = $Jobseeker->id; // get the new profile Id
+
+    $user->profile_id = $newProfileId; // Assign the new profile ID
+    
+    /** @var \App\Models\User $user */
+    $user->save(); // Save the user
 
     // Redirect to the jobseeker applications index with a success message
     return redirect()->route('jobseeker.jobs.index')->with('success', 'Profile created successfully.');

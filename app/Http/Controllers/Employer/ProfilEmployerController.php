@@ -22,11 +22,12 @@ class ProfilEmployerController extends Controller
  */
 public function store(EmployerRequest $request)
 {
+    $user = auth()->user();
    
     // Create a new profile for the job seeker
     $Employer = new ProfilEmployer();
      // Link to the currently logged-in user
-    $Employer->id_utilisateur = auth()->user()->id; // Link to the currently logged-in user
+    $Employer->id_utilisateur = $user->id; // Link to the currently logged-in user
 
     
     // Assign other profile data from the request to the job seeker profile
@@ -40,6 +41,11 @@ public function store(EmployerRequest $request)
     // Save the job seeker profile
     $Employer->save();
 
+    
+    /** @var \App\Models\User $user */
+    $user->update(['profile_id' => $Employer->id]);
+   
+    
     // Redirect to the jobseeker applications index with a success message
     return redirect()->route('employer.dashboard')->with('success', 'Profile created successfully.');
 }

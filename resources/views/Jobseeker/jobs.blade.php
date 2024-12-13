@@ -82,7 +82,7 @@
                         <h4>{{ $job['titre'] }}</h4>
                         <div class="mt-3">
                             <span class="text-muted d-block mb-2"><i class="bi bi-geo-alt-fill"></i>  {{ $job['location'] }}</span>
-                            <span class="text-muted d-block mb-2"><i class="bi bi-building-check"></i>   {{ $job['company'] }} - {{ $job['categorie'] }}</span>
+                            <span class="text-muted d-block mb-2"><i class="bi bi-building-check"></i>   {{ $job->profilEmployer->nom_entreprise }} - {{ $job['categorie'] }}</span>
                             <span class="text-muted d-block mb-2"><i class="bi bi-currency-dollar"></i>  {{ $job['salaire'] }} - <i class="bi bi-file-earmark-text"></i>  {{ $job['type_contrat'] }}</span>
                             <span class="text-muted d-block"></i> Description: </span><p class="card-text">{{ \Illuminate\Support\Str::limit($job['description'], 200, '...') }}</p>
 
@@ -91,7 +91,7 @@
                         <div class="mt-3">
                                 {{-- Apply button --}}
                                 
-                                @if ($job->applications->where('id_jobseeker', auth()->id())->isEmpty())
+                                @if ($job->applications->where('id_jobseeker', auth()->user()->profile->id)->isEmpty())
                                      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal{{ $job->id }}">
                                          <i class="bi bi-check-circle fill"></i> Apply
                                      </button>
@@ -105,7 +105,7 @@
                             <form action="{{ route('jobs.save',$job->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 <button type="submit" class="">
-                                    @if($job->isSavedBy(auth()->user())) 
+                                    @if($job->isSavedBy(auth()->user()->profile)) 
                                     <span class="btn btn-danger"><i class="bi bi-bookmark-x save-icon"></i>
                                         UnSave</span>
                                 @else 

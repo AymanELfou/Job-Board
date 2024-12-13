@@ -12,10 +12,10 @@ class SavedJobsController extends Controller
     public function index(){
 
         // Get the authenticated user
-        $user = auth()->user();
+        $user = auth()->user()->profile;
 
         // Retrieve saved jobs for the user
-        $savedjobs = SavedJob::with('job')->where('id_utilisateur',$user->id)->get();
+        $savedjobs = SavedJob::with('job')->where('profile_id',$user->id)->get();
 
         // Pass saved jobs to the view
         return view('Jobseeker.savedjobs',compact('savedjobs'));
