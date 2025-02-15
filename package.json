@@ -1,0 +1,20 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.5.2",
+        "alpinejs": "^3.4.2",
+        "autoprefixer": "^10.4.2",
+        "axios": "^1.6.4",
+        "postcss": "^8.4.31"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.3",
+        "laravel-vite-plugin": "^1.0.5",
+        "vite": "^5.4.10"
+    }
+}

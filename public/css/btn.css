@@ -1,0 +1,287 @@
+/* btn77 */
+.button-77 {
+  align-items: center;
+  appearance: none;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: Eina01, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  justify-content: center;
+  line-height: 24px;
+  min-height: 64px;
+  padding: 19px 26px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  border-radius: 80px;
+  overflow: hidden;
+  z-index: 0;
+  transition: color 100ms ease-out;
+  
+}
+
+@media (min-width: 768px) {
+  .button-77 {
+    padding: 19px 32px;
+  }
+}
+
+/* Background and Hover Effect */
+.button-77:before,
+.button-77:after {
+  content: "";
+  position: absolute;
+  border-radius: 80px;
+}
+
+.button-77:before {
+  background-color: rgba(249, 58, 19, 0.32);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.button-77:after {
+  background-image: linear-gradient(92.83deg, #ff7426 0%, #f93a13 100%);
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  transition: all 100ms ease-out;
+  z-index: -1;
+}
+
+.button-77:hover:not(:disabled):after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition-timing-function: ease-in;
+}
+
+.button-77:active:not(:disabled) {
+  color: #ccc;
+}
+
+.button-77:active:not(:disabled):after {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(92.83deg, #ff7426 0%, #f93a13 100%);
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+}
+
+.button-77:disabled {
+  cursor: default;
+  opacity: 0.24;
+}
+
+
+
+/* btn78 */
+.button-78 {
+    align-items: center;
+    appearance: none;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: Eina01, sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    justify-content: center;
+    line-height: 24px;
+    min-height: 64px;
+    padding: 19px 26px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    border-radius: 80px;
+    overflow: hidden;
+    z-index: 0;
+    transition: color 100ms ease-out;
+    
+  }
+  
+  @media (min-width: 768px) {
+    .button-78 {
+      padding: 19px 32px;
+    }
+  }
+  
+  /* Background and Hover Effect */
+  .button-78:before,
+  .button-78:after {
+    content: "";
+    position: absolute;
+    border-radius: 80px;
+  }
+  
+  .button-78:before {
+    background-color: rgba(249, 58, 19, 0.32);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+  
+  .button-78:after {
+    background-image: linear-gradient(92.83deg, #6b6460 0%, #471910 100%);
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    transition: all 100ms ease-out;
+    z-index: -1;
+  }
+  
+  .button-78:hover:not(:disabled):after {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition-timing-function: ease-in;
+  }
+  
+  .button-78:active:not(:disabled) {
+    color: #ccc;
+  }
+  
+  .button-78:active:not(:disabled):after {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(92.83deg, #ff7426 0%, #f93a13 100%);
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+  }
+  
+  .button-78:disabled {
+    cursor: default;
+    opacity: 0.24;
+  }
+
+
+
+
+
+
+
+   /* Section Heading */
+.row.heading h2 {
+    color: #fff;
+    font-size: 52.52px;
+    line-height: 95px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 40px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* General List Styling */
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.heading.heading-icon {
+    display: block;
+}
+
+.padding-lg {
+    display: block;
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+.practice-area.padding-lg {
+    padding-bottom: 55px;
+    padding-top: 55px;
+}
+
+/* Card Container */
+
+/* Card Styling */
+.our-webcoderskull .cnt-block {
+    background: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    border: 2px solid #d5d5d5;
+    border-radius: 10px;
+    margin: 0 0 28px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    height: 570px; /* Set height to make card larger */
+}
+
+.our-webcoderskull .cnt-block:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Card Content */
+.our-webcoderskull .cnt-block figure {
+    width: 148px;
+    height: 148px;
+    border-radius: 100%;
+    display: inline-block;
+    margin-bottom: 15px;
+    
+}
+
+.our-webcoderskull .cnt-block img {
+    width: 148px;
+    height: 148px;
+    border-radius: 100%;
+}
+
+.our-webcoderskull .cnt-block h3 {
+    color: #2a2a2a;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 10px 0;
+    text-transform: uppercase;
+}
+
+.our-webcoderskull .cnt-block h3 a {
+    text-decoration: none;
+    color: #2a2a2a;
+}
+
+.our-webcoderskull .cnt-block h3 a:hover {
+    color: #337ab7;
+}
+
+.our-webcoderskull .cnt-block p {
+    color: #2a2a2a;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+/* Follow Us Section */
+.our-webcoderskull .cnt-block .pd {
+    margin: 20px 0 0;
+    font-size: 14px;
+    color: #3c3c3c;
+    line-height: 1.5;
+   
+}
+
+.our-webcoderskull .cnt-block  {
+    display: block;
+    margin: 5px 0;
+    padding: 30px;
+}
+
