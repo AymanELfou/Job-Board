@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('id_job')->constrained('jobs')->onDelete('cascade');
             $table->string('resume')->nullable();
             $table->string('cover_letter')->nullable(); 
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

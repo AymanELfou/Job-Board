@@ -4,15 +4,14 @@
         text-decoration: none;
         color: white;
         font-size: 22px;
-        padding: 10px 20px;
+        padding: 12px 20px;
         text-align: left;
         width: 100%;
         display: flex;
         align-items: center;
-        border-radius: 10px;
-        transition: background-color 0.3s;
+        border-radius: 12px;
+        transition: all 0.3s ease;
         font-family: 'Montserrat', sans-serif;
-
     }
     h5{
         text-align: left;
@@ -29,11 +28,11 @@
         margin-right: 10px;
     }
     ul li {
-        font-size: 19px;
+        font-size: 20px;
     }
 </style>
 
-<nav x-data="{ open: false }" class="text-white" style="width: 330px; background-color: rgb(43, 43, 129)" >
+<nav x-data="{ open: false }" class="text-white border-e border-slate-800" style="width: 380px; background-color: #0f172a" >
     <div class="d-flex flex-column align-items-center p-3 min-vh-100">
         <!-- Centered Logo -->
         <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center text-decoration-none text-white">

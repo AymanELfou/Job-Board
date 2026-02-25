@@ -28,14 +28,14 @@
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow-sm">
-                    <div class="container py-4">
+                    <div class="container py-2">
                         {{ $header }}
                     </div>
                 </header>
             @endif
 
             <!-- Page Content -->
-            <main class="container my-4">
+            <main class="container my-6">
                 {{ $slot }}
             </main>
         </div>

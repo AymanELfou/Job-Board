@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('saved_jobs', function (Blueprint $table) {
             $table->id(); // Auto-incrementing ID for the saved_jobs table
-            $table->foreignId('id_utilisateur')->constrained()->onDelete('cascade'); // Foreign key for users
-            $table->foreignId('job_id')->constrained()->onDelete('cascade'); // Foreign key for jobs
-            $table->foreignId('profile_id')->constrained()->onDelete('cascade'); // Foreign key for profiles
+            $table->foreignId('id_utilisateur')->constrained('users')->onDelete('cascade'); // Foreign key for users
+            $table->foreignId('job_id')->constrained('jobs')->onDelete('cascade'); // Foreign key for jobs
+            $table->unsignedBigInteger('profile_id')->nullable(); // Reference without constraint since there are multiple profile tables
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

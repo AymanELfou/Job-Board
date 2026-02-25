@@ -19,8 +19,7 @@
     li a.active, li a:hover {
         background-color: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(233, 225, 225, 0.3); /* Reduced border on hover and active */
-        transition: 0.3s, border 0.5ms;
-        tar 
+        transition: 0.3s;
     }
 
     /* Icons alignment */

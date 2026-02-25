@@ -1,92 +1,168 @@
 <x-apps.app-employer>
     <x-slot name="header">
-        <h1 class="h2 text-dark" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
-            {{ __('Dashboard') }}
-        </h1>
+        <h2 class="fw-bold text-dark m-0" style="font-family: 'Inter', sans-serif; letter-spacing: -0.025em;">
+            Dashboard Overview
+        </h2>
     </x-slot>
 
  
-    @if (isset($success))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ $success }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
 
 
     <style>
-        .card {
-            border: 1px solid #007bff; /* Bordure bleue */
-            border-radius: 10px; /* Coins arrondis */
-            transition: transform 0.3s; /* Animation de transformation */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
-            margin-top: 
+        .stats-card {
+            border: none;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            position: relative;
         }
     
-        .card:hover {
-            transform: scale(1.05); /* Zoom au survol */
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .stats-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #a31b1b;
         }
     
-        .card-title {
-            color: #007bff; /* Couleur du titre */
-            
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            background: rgba(163, 27, 27, 0.1);
+            color: #a31b1b;
+            font-size: 1.5rem;
         }
     
-        .display-2 {
-            color: #333; /* Couleur du nombre */
-            font-size: 2.5rem; /* Taille de police */
+        .stat-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1a202c;
+            line-height: 1;
         }
-    
-        .card-body {
-            padding: 20px; /* Espacement intérieur */
+
+        .stat-label {
+            color: #718096;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            font-size: 0.875rem;
+        }
+
+        .chart-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.25rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            height: clamp(300px, 40vh, 400px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-container {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .chart-header {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
         }
     </style>
     
-    <!-- Overview Cards -->
-    <div class="row mb-4 mt-5">
-        <div class="col-md-4">
-            <div class="card text-center ">
-                <div class="card-body">
-                    <h5 class="card-title">Total Jobs</h5>
-                    <span class="display-2 font-weight-bold">{{ $totalJobs }}</span>
-                </div>
+    <div class="py-6">
+        <!-- Welcoming Alert -->
+        <div class="alert border-0 shadow-sm d-flex align-items-center p-4 mb-5" style="background: white; border-radius: 16px;">
+            <div class="bg-success-subtle p-3 rounded-circle me-3">
+                <i class="bi bi-check2-circle text-success fs-3"></i>
+            </div>
+            <div>
+                <h4 class="mb-1 fw-bold">Welcome back!</h4>
+                <p class="mb-0 text-secondary">You are currently managed as an <span class="badge bg-danger">Employer</span>. Everything looks great today.</p>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Total Applications</h5>
-                    <span class="display-2 font-weight-bold">{{ $totaltApplications }}</span> <!-- Placeholder value -->
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Total Candidates</h5>
-                    <span class="display-2 font-weight-bold">{{ $totalJobseekers }}</span> <!-- Placeholder value -->
-                </div>
-            </div>
-        </div>
-    </div>
-    
 
-            <!-- Charts Section -->
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="chart-container">
-                        <canvas id="jobPostingsChart" width="600" height="600"></canvas>
+        <!-- Overview Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="stats-card p-4">
+                    <div class="card-icon">
+                        <i class="bi bi-briefcase"></i>
+                    </div>
+                    <div class="stat-label mb-1">Total Job Postings</div>
+                    <div class="stat-value">{{ $totalJobs }}</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card p-4">
+                    <div class="card-icon">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+                    <div class="stat-label mb-1">Total Applications</div>
+                    <div class="stat-value">{{ $totaltApplications }}</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card p-4">
+                    <div class="card-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div class="stat-label mb-1">Active Candidates</div>
+                    <div class="stat-value">{{ $totalJobseekers }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Charts Section -->
+        <div class="row g-4 overflow-hidden">
+            <div class="col-lg-4">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <i class="bi bi-bar-chart-line text-danger"></i>
+                        Monthly Job Postings
+                    </div>
+                    <div class="chart-container text-center">
+                        <canvas id="jobPostingsChart"></canvas>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="chart-container">
-                        <canvas id="applicationsChart" width="600" height="600"></canvas>
+            </div>
+            <div class="col-lg-4">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <i class="bi bi-graph-up text-danger"></i>
+                        Applications Received
+                    </div>
+                    <div class="chart-container text-center">
+                        <canvas id="applicationsChart"></canvas>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="chart-container">
-                        <canvas id="candidateQualityChart" width="600" height="600"></canvas>
+            </div>
+            <div class="col-lg-4">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <i class="bi bi-pie-chart text-danger"></i>
+                        Candidate Demographics
+                    </div>
+                    <div class="chart-container text-center">
+                        <canvas id="candidateQualityChart"></canvas>
                     </div>
                 </div>
             </div>

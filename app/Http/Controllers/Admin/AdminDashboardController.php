@@ -70,11 +70,7 @@ class AdminDashboardController extends Controller
         'monthlyUsersGrouped', 
         'jobPostingsLabels', 
         'jobPostingsCounts'
-    ));
-
-    return view('Admin.dashboard', compact('applications', 'totalJobs', 'totalUsers', 
-    'totaltApplications', 'monthlyApplications', 'monthlyUsersGrouped','jobPostingsLabels', 'jobPostingsCounts'))
-    ->with('success', 'You have logged in as ADMIN.');
+    ))->with('success', 'You have logged in as ADMIN.');
 }
 
 
