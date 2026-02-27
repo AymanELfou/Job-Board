@@ -1,117 +1,123 @@
 <x-apps.app-jobseeker>
 
     <x-slot name="header">
-        <h1 class=" text-3xl text-gray-800 leading-tight" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
-            {{ __('My Applications') }}
-        </h1>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-1 px-4 gap-2">
+            <div class="ml-2">
+                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">
+                    My <span class="text-[#a31b1b]">Applications</span>
+                </h2>
+                <p class="text-gray-400 text-sm font-medium">Track the status of your recent job applications</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <a href="{{ route('jobseeker.jobs.index') }}" class="inline-flex items-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm">
+                    <i class="bi bi-search text-lg"></i>
+                    Find More Jobs
+                </a>
+            </div>
+        </div>
     </x-slot>
 
+    <div class="py-10 bg-gray-50/50 min-h-screen">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            
+            @include('incs.alert')
 
-    <style>
-        .card {
-        border-width: 2px;
-        border-radius: 10px;
-        transition: transform 0.2s; /* Ajoute une animation de transition */
-        background-color: 0 4px 20px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée au survol */
-      }
-    
-      .card:hover {
-        transform: scale(1.05); /* Agrandit la carte au survol */
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée au survol */
-    } 
-    </style>
+            @if($applications->isEmpty())
+                <div class="bg-white border border-gray-100 rounded-[2rem] p-12 text-center shadow-sm">
+                    <div class="text-gray-300 mb-6 flex justify-center">
+                        <i class="bi bi-journal-x text-6xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">No applications found</h3>
+                    <p class="text-gray-500 mb-8 max-w-md mx-auto">You haven't applied to any jobs yet. Start exploring opportunities and apply to get noticed by top employers.</p>
+                    <a href="{{ route('jobseeker.jobs.index') }}" class="inline-flex items-center gap-2 bg-[#a31b1b] hover:bg-[#8a1717] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-sm">
+                        <i class="bi bi-briefcase"></i>
+                        Explore Jobs
+                    </a>
+                </div>
+            @else
+                
+                <div class="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden">
+                    <!-- List Header -->
+                    <div class="hidden md:grid grid-cols-12 gap-4 px-8 py-5 border-b border-gray-100 bg-gray-50/50 text-xs font-bold text-gray-500 uppercase tracking-wider">
+                        <div class="col-span-4">Job Info</div>
+                        <div class="col-span-3">Company</div>
+                        <div class="col-span-3">Status</div>
+                        <div class="col-span-2 text-right">Actions</div>
+                    </div>
 
+                    <!-- List Body -->
+                    <div class="divide-y divide-gray-100">
+                        @foreach($applications as $application)
+                            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 px-6 md:px-8 py-6 items-center hover:bg-gray-50/80 transition-colors duration-200 group">
+                                
+                                <!-- Job Info -->
+                                <div class="col-span-1 md:col-span-4 flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-gray-100 text-gray-500 rounded-xl flex shrink-0 items-center justify-center border border-gray-200 shadow-sm group-hover:bg-[#a31b1b] group-hover:text-white group-hover:border-[#a31b1b] transition-colors">
+                                        <i class="bi bi-file-earmark-text text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-gray-900 leading-tight mb-1">{{ $application->job->titre ?? 'Job Title' }}</h4>
+                                        <p class="text-gray-500 text-sm font-medium flex items-center gap-1.5">
+                                            <i class="bi bi-clock"></i> Applied on {{ $application->created_at->format('M d, Y') }}
+                                        </p>
+                                    </div>
+                                </div>
 
-    <div class="container mt-5">
-        @if($applications->isEmpty())
-        <div class="alert alert-info">You have not applied to any jobs yet.</div>
-       @else
-    <div class="row">
-        @foreach($applications as $application)
-            <div class="card rounded-3 mb-4">
-                <div class="card-body p-4">
-                    <div class="row d-flex align-items-center">
-                        <!-- Job Icon -->
-                        <div class="col-2 text-center">
-                            <img src="{{ asset('imgs/jobapp.jpg') }}" alt="job" style="width: 70px; height: 70px;" class="rounded" />
-                        </div>
-    
-                        <!-- Job Title -->
-                        <div class="col-3"><span class="text-danger fs-5 m-1">Job Title:</span>
-                            <h4 class="text-dark mb-0 m-1">{{ $application->job->titre ?? 'Job Title' }}</h4>
-                        </div>
-    
-                        <!-- Applicant's Name -->
-                        <div class="col-3"> <span class="text-danger fs-5 m-1">Company:</span>
-                            <h4 class="mb-0 fs-5 m-1">{{ $application->job->profilEmployer->nom_entreprise ?? "Applicant's name" }}</h4>
-                        </div>
-    
-                        <!-- Status -->
-                        <div class="col-2 text-warning"><span class="text-danger fs-5 m-1">Status:</span>
-                            <h5 class="mb-0 m-1">{{ $application->status ?? 'Status' }}</h5>
-                        </div>
-    
-                        <!-- View Details Button -->
-                        <div class="col-2">
-                            <a href="{{ route('jobseeker.applications.show', $application->id) }}" class="btn btn-sm" role="button">
-                                <img src="{{ asset('imgs/eye.png') }}" alt="delete" style="width: 42px; height: 42px;" />
-                            </a>
-                            <form action="{{ route('jobseeker.applications.destroy', $application->id) }}" method="post" class="d-inline">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-link p-0" onclick="return confirm('Are you sure you want to delete?')">
-                                    <img src="{{ asset('imgs/square_14034319.png') }}" alt="delete" style="width: 30px; height: 30px;" />
-                                </button>
-                            </form>
-                        </div>
-    
-                        <!-- Delete Button -->
-                        <div class="text-center">
-                            
-                        </div>
+                                <!-- Company -->
+                                <div class="col-span-1 md:col-span-3 flex items-center gap-2 border-t md:border-t-0 border-gray-100 pt-3 md:pt-0">
+                                    <span class="md:hidden text-xs font-bold text-gray-400 uppercase tracking-wider w-20">Company:</span>
+                                    <div class="flex items-center gap-2 text-gray-700 font-semibold">
+                                        <i class="bi bi-building text-gray-400"></i>
+                                        {{ $application->job->profilEmployer->nom_entreprise ?? "Not specified" }}
+                                    </div>
+                                </div>
+
+                                <!-- Status -->
+                                <div class="col-span-1 md:col-span-3 flex items-center gap-2 border-t md:border-t-0 border-gray-100 pt-3 md:pt-0">
+                                    <span class="md:hidden text-xs font-bold text-gray-400 uppercase tracking-wider w-20">Status:</span>
+                                    @php
+                                        $statusClass = 'bg-yellow-50 text-yellow-700 border-yellow-200';
+                                        $statusIcon = 'bi-hourglass-split';
+                                        
+                                        $status = strtolower($application->status ?? 'pending');
+                                        if (in_array($status, ['accepted', 'approved', 'hired'])) {
+                                            $statusClass = 'bg-green-50 text-green-700 border-green-200';
+                                            $statusIcon = 'bi-check-circle-fill';
+                                        } elseif (in_array($status, ['rejected', 'declined'])) {
+                                            $statusClass = 'bg-red-50 text-red-700 border-red-200';
+                                            $statusIcon = 'bi-x-circle-fill';
+                                        } elseif (in_array($status, ['reviewed', 'viewed'])) {
+                                            $statusClass = 'bg-blue-50 text-blue-700 border-blue-200';
+                                            $statusIcon = 'bi-eye-fill';
+                                        }
+                                    @endphp
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase border flex items-center gap-1.5 {{ $statusClass }}">
+                                        <i class="bi {{ $statusIcon }}"></i>
+                                        {{ $application->status ?? 'Pending' }}
+                                    </span>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="col-span-1 md:col-span-2 flex items-center md:justify-end gap-2 border-t md:border-t-0 border-gray-100 pt-4 md:pt-0">
+                                    <a href="{{ route('jobseeker.applications.show', $application->id) }}" class="flex-1 md:flex-none text-center bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-bold p-2.5 rounded-xl transition-colors shadow-sm" title="View Details">
+                                        <i class="bi bi-eye text-lg"></i>
+                                    </a>
+                                    
+                                    <form action="{{ route('jobseeker.applications.destroy', $application->id) }}" method="post" class="flex-1 md:flex-none inline" onsubmit="return confirm('Are you sure you want to withdraw this application?');">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="w-full text-center bg-white border border-gray-200 hover:bg-red-50 hover:border-red-200 text-red-500 hover:text-red-700 font-bold p-2.5 rounded-xl transition-colors shadow-sm" title="Withdraw Application">
+                                            <i class="bi bi-trash text-lg"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
-    @endif
-</div>
-
+            @endif
             
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </div>
+    </div>
 </x-apps.app-jobseeker>

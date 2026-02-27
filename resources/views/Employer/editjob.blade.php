@@ -1,84 +1,117 @@
 <x-apps.app-employer>
-
-
     <x-slot name="header">
-        <div class="flex items-center justify-center h-screen">
-            <h2 class="font-semibold text-3xl text-gray-800 leading-tight "style="font-family: Verdana, Geneva, Tahoma, sans-serif">
-                {{ __('Edit job') }}
-            </h2>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-1 px-4 gap-2">
+            <div class="ml-2">
+                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">
+                    Edit <span class="text-[#a31b1b]">Job Post</span>
+                </h2>
+                <p class="text-gray-400 text-sm font-medium">Update existing job details</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <a href="{{ route('employer.jobs.index') }}" class="inline-flex items-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm">
+                    <i class="bi bi-arrow-left text-lg"></i>
+                    Back to Jobs
+                </a>
+            </div>
         </div>
     </x-slot>
 
+    <div class="py-10 bg-gray-50/50 min-h-screen">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            
+            <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden">
+                <div class="p-8 md:p-10">
+                    <form action="{{ route('employer.jobs.update', $job->id) }}" method="POST" class="space-y-6">
+                        @csrf
+                        @method("PUT")
+                
+                        <!-- Grid 2 cols for shorter inputs -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Job Title -->
+                            <div class="col-span-1 md:col-span-2">
+                                <label for="titre" class="block text-sm font-bold text-gray-700 mb-2">Job Title</label>
+                                <input type="text" id="titre" name="titre" value="{{ $job->titre }}" required
+                                    class="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-[#a31b1b] focus:border-[#a31b1b] p-3 transition-colors duration-200">
+                            </div>
 
+                            <!-- Location -->
+                            <div>
+                                <label for="location" class="block text-sm font-bold text-gray-700 mb-2">Location</label>
+                                <input type="text" id="location" name="location" value="{{ $job->location }}" required
+                                    class="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-[#a31b1b] focus:border-[#a31b1b] p-3 transition-colors duration-200">
+                            </div>
 
+                            <!-- Salary -->
+                            <div>
+                                <label for="salaire" class="block text-sm font-bold text-gray-700 mb-2">Salary Estimate</label>
+                                <input type="text" id="salaire" name="salaire" value="{{ $job->salaire }}" required
+                                    class="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-[#a31b1b] focus:border-[#a31b1b] p-3 transition-colors duration-200">
+                            </div>
 
+                            <!-- Job Type -->
+                            <div>
+                                <label for="type" class="block text-sm font-bold text-gray-700 mb-2">Employment Type</label>
+                                <select id="type" name="job_type" required
+                                    class="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-[#a31b1b] focus:border-[#a31b1b] p-3 transition-colors duration-200">
+                                    <option value="full_time" <?php echo ($job->job_type == 'full_time' || $job->job_type == 'Full Time') ? 'selected' : ''; ?>>Full Time</option>
+                                    <option value="part_time" <?php echo ($job->job_type == 'part_time' || $job->job_type == 'Part Time') ? 'selected' : ''; ?>>Part Time</option>
+                                    <option value="Internship" <?php echo ($job->job_type == 'Internship') ? 'selected' : ''; ?>>Internship</option>
+                                </select>
+                            </div>
 
-    <div class="container my-5">
-        <form action="{{ route('employer.jobs.update', $job->id) }}" method="POST" class="mb-4">
-            @csrf
-            @method("PUT")
-    
-    
-            <div class="mb-3">
-                <x-input-label  for="titre"  :value="__('Job Title')"/>
-                <input type="text" class="form-control" id="titre" name="titre" value="{{ $job->titre }}" required>
+                            <!-- Category -->
+                            <div>
+                                <label for="category" class="block text-sm font-bold text-gray-700 mb-2">Category</label>
+                                <select id="category" name="categorie" required
+                                    class="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-[#a31b1b] focus:border-[#a31b1b] p-3 transition-colors duration-200">
+                                    <option value="tech" <?php echo ($job->categorie == 'tech') ? 'selected' : ''; ?>>Technology</option>
+                                    <option value="sells" <?php echo ($job->categorie == 'sells') ? 'selected' : ''; ?>>Sales</option>
+                                    <option value="marketing" <?php echo ($job->categorie == 'marketing') ? 'selected' : ''; ?>>Marketing</option>
+                                    <option value="finance" <?php echo ($job->categorie == 'finance') ? 'selected' : ''; ?>>Finance</option>
+                                    <option value="education" <?php echo ($job->categorie == 'education') ? 'selected' : ''; ?>>Education</option>
+                                    <option value="other" <?php echo ($job->categorie == 'other') ? 'selected' : ''; ?>>Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Contract Type -->
+                            <div>
+                                <label for="type_contrat" class="block text-sm font-bold text-gray-700 mb-2">Contract Type</label>
+                                <select id="type_contrat" name="type_contrat" required
+                                    class="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-[#a31b1b] focus:border-[#a31b1b] p-3 transition-colors duration-200">
+                                    <option value="cdd" <?php echo ($job->type_contrat == 'cdd') ? 'selected' : ''; ?>>CDD (Fixed-term)</option>
+                                    <option value="cdi" <?php echo ($job->type_contrat == 'cdi') ? 'selected' : ''; ?>>CDI (Permanent)</option>
+                                </select>
+                            </div>
+
+                            <!-- Publication Date -->
+                            <div>
+                                <label for="date_publication" class="block text-sm font-bold text-gray-700 mb-2">Publication Date</label>
+                                <input type="date" id="date_publication" name="date_publication" value="{{ $job->date_publication }}" required
+                                    class="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-[#a31b1b] focus:border-[#a31b1b] p-3 transition-colors duration-200">
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="pt-4">
+                            <label for="description" class="block text-sm font-bold text-gray-700 mb-2">Job Description & Requirements</label>
+                            <textarea id="description" name="description" rows="6" required
+                                class="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-[#a31b1b] focus:border-[#a31b1b] p-3 transition-colors duration-200">{{ $job->description }}</textarea>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="pt-6 border-t border-gray-100 flex justify-end">
+                            <button type="submit" class="bg-[#a31b1b] hover:bg-[#8a1717] text-white px-8 py-3.5 rounded-xl font-bold text-lg transition-all duration-300 shadow-sm hover:shadow-md flex items-center gap-2">
+                                <i class="bi bi-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
             
-            <div class="mb-3">
-                <label for="location" class="form-label">Location</label>
-                <input type="text" class="form-control" id="location" name="location" value="{{ $job->location }}" required>
-            </div>
-            <div>
-                <label for="type" class="block text-sm font-medium text-gray-700 m-2 mt-2">Type</label> <!-- Label for job type -->
-                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500 form-select" id="type" name="job_type" required> <!-- Dropdown for job type -->
-                    <option value="" disabled selected>Select job type</option> <!-- Placeholder option -->
-                    <option value="full_time">Full Time</option> <!-- Full Time option -->
-                    <option value="part_time">Part Time</option> <!-- Part Time option -->
-                </select>
-            </div>
-
-            <div>
-                <label for="category" class="block text-sm font-medium text-gray-700 m-2 mt-2">Category</label> <!-- Label for job category -->
-                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="category" name="categorie" required> <!-- Dropdown for job category -->
-                    <option value="" disabled selected>Select category</option> <!-- Placeholder option -->
-                    <option value="tech">Tech</option> <!-- Tech option -->
-                    <option value="sells">Sells</option> <!-- Sells option -->
-                    <option value="marketing">Marketing</option> <!-- Marketing option -->
-                    <option value="finance">Finance</option> <!-- Finance option -->
-                    <option value="education">Education</option> <!-- Education option -->
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="salaire" class="form-label">Salaire</label>
-                <input type="text" class="form-control" id="salaire" name="salaire" value="{{ $job->salaire }}" required>
-            </div>
-
-            <div>
-                <label for="type_contrat" class="block text-sm font-medium text-gray-700 m-2 mt-2">Type Contrat</label> <!-- Label for contract type -->
-                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500" id="type_contrat" name="type_contrat" required> <!-- Dropdown for contract type -->
-                    <option value="" disabled selected>Select contract type</option> <!-- Placeholder option -->
-                    <option value="cdd">CDD (Contrat à Durée Déterminée)</option> <!-- CDD option -->
-                    <option value="cdi">CDI (Contrat à Durée Indéterminée)</option> <!-- CDI option -->
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="date_publication" class="form-label">Date publication</label>
-                <input type="date" class="form-control" id="date_publication" name="date_publication" value="{{ $job->date_publication }}" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4" required>{{ $job->description }}</textarea>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+        </div>
     </div>
-    
-
-
 </x-apps.app-employer>
 
 

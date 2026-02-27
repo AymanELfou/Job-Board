@@ -1,124 +1,124 @@
 <x-apps.app-employer>
-
     <x-slot name="header">
-        <h2 class="font-semibold text-3xl text-gray-800 leading-tight text-white fs-1 text-center">
-            {{ __('View Application') }}
-        </h2>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-1 px-4 gap-2">
+            <div class="ml-2">
+                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">
+                    Application <span class="text-[#a31b1b]">Details</span>
+                </h2>
+                <p class="text-gray-400 text-sm font-medium">Review candidate application information</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <a href="{{ route('employer.applications.index') }}" class="inline-flex items-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm">
+                    <i class="bi bi-arrow-left text-lg"></i>
+                    Back to Applications
+                </a>
+            </div>
+        </div>
     </x-slot>
 
-    <style>
-        .container {
-            background-color: rgb(105, 101, 96);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .card {
-            border-radius: 10px;
-            transition: box-shadow 0.3s;
-        }
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        .card-header {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-        .badge {
-            font-size: 1rem;
-            padding: 0.5em 1em;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .badge.bg-warning:hover {
-            background-color: #ffc107;
-        }
-        .badge.bg-success:hover {
-            background-color: #28a745;
-        }
-        .badge.bg-danger:hover {
-            background-color: #dc3545;
-        }
-        /* .form-select {
-            border-radius: 5px;
-            border: 1px solid #ced4da;
-            transition: border-color 0.3s;
-        }
-        .form-select:focus {
-            border-color: #80bdff;
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        } */
-        .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-            border-color: #545b62;
-            transform: translateY(-2px);
-        }
-    </style>
-             @include('incs.alert') 
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <!-- Application Card -->
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <i><h3 class="mb-0">Application Details</h3></i>
+    <div class="py-10 bg-gray-50/50 min-h-screen">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            
+            <div class="mb-6">
+                @include('incs.alert')
+            </div>
+
+            <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden">
+                <!-- Header part -->
+                <div class="px-8 py-6 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
+                    <h3 class="text-xl font-bold text-gray-800">Application Overview</h3>
+                    
+                    <span class="px-3 py-1 rounded-full text-sm font-bold border
+                        {{ $application->status == 'pending' ? 'bg-yellow-50 text-yellow-700 border-yellow-200' : '' }}
+                        {{ $application->status == 'approved' ? 'bg-green-50 text-green-700 border-green-200' : '' }}
+                        {{ $application->status == 'rejected' ? 'bg-red-50 text-red-700 border-red-200' : '' }}">
+                        {{ ucfirst($application->status) }}
+                    </span>
+                </div>
+                
+                <div class="p-8 md:p-10 space-y-10">
+                    
+                    <!-- Job Information -->
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center">
+                                <i class="bi bi-briefcase-fill text-lg"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-gray-900">Job Information</h5>
+                        </div>
+                        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="md:col-span-2">
+                                    <p class="text-sm font-bold text-gray-400 uppercase tracking-wide mb-1">Title</p>
+                                    <p class="font-bold text-gray-900">{{ $application->job->titre }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-400 uppercase tracking-wide mb-1">Posted by</p>
+                                    <p class="font-bold text-gray-900">{{ $application->job->company }}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-400 uppercase tracking-wide mb-1">Description</p>
+                                <p class="text-gray-600 text-sm leading-relaxed">{{ $application->job->description }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <!-- Job Information -->
-                        <i><h5 class="card-title mb-3">Job Information</h5></i>
-                        <p><strong>Title:</strong> {{ $application->job->titre }}</p>
-                        <p><strong>Posted by:</strong> {{ $application->job->company }}</p>
-                        <p><strong>Job Description:</strong> {{ $application->job->description }}</p>
-                        <hr>
 
-                        <!-- Applicant Information -->
-                        <i><h5 class="card-title mb-3">Applicant Information</h5></i>
-                        <p><strong>Name:</strong> {{ $application->profilJobseeker->fullName ?? 'N/A' }}</p>
-                        <p><strong>Email:</strong> {{ $application->profilJobseeker->contact_information ?? 'N/A' }}</p>
-                        <hr>
+                    <!-- Applicant Information -->
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-[#a31b1b]/10 text-[#a31b1b] flex items-center justify-center">
+                                <i class="bi bi-person-badge-fill text-lg"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-gray-900">Applicant Information</h5>
+                        </div>
+                        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-sm font-bold text-gray-400 uppercase tracking-wide mb-1">Name</p>
+                                    <p class="font-bold text-gray-900">{{ $application->profilJobseeker->fullName ?? 'N/A' }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-400 uppercase tracking-wide mb-1">Contact Email</p>
+                                    @if($application->profilJobseeker && $application->profilJobseeker->contact_information)
+                                    <a href="mailto:{{ $application->profilJobseeker->contact_information }}" class="font-bold text-[#a31b1b] hover:underline">{{ $application->profilJobseeker->contact_information }}</a>
+                                    @else
+                                    <p class="font-bold text-gray-900">N/A</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <!-- Application Status -->
-                        <i><h5 class="card-title mb-3">Application Status</h5></i>
-                        <p> <strong>Current Status:</strong>  
-                            <span class="badge m-1 
-                                {{ $application->status == 'pending' ? 'bg-warning' : '' }}
-                                {{ $application->status == 'approved' ? 'bg-success' : '' }}
-                                {{ $application->status == 'rejected' ? 'bg-danger' : '' }}">
-                                {{ $application->status }}
-                            </span>
-                        </p>
-
-                        <!-- Status Update Form -->
-                        <form action="{{ route('applications.updateStatus', $application->id) }}" method="POST" class="mt-3">
+                    <!-- Action: Update Status -->
+                    <div class="border-t border-gray-100 pt-8">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-500 flex items-center justify-center">
+                                <i class="bi bi-arrow-repeat text-lg"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-gray-900">Update Application Status</h5>
+                        </div>
+                        
+                        <form action="{{ route('applications.updateStatus', $application->id) }}" method="POST" class="bg-gray-50 rounded-xl p-6 border border-gray-100 flex flex-col sm:flex-row items-end gap-4">
                             @csrf
                             @method('PUT')
-                            <div class="form-group">
-                                <label for="status" class="form-label">Update Status:</label>
-                                <select name="status" id="status" class="form-select" onchange="this.form.submit()">
+                            <div class="flex-grow w-full">
+                                <label for="status" class="block text-sm font-bold text-gray-700 mb-2">Change Status:</label>
+                                <select name="status" id="status" class="w-full bg-white border border-gray-200 text-gray-900 rounded-xl focus:ring-[#a31b1b] focus:border-[#a31b1b] p-3 transition-colors duration-200 font-bold">
                                     <option value="pending" {{ $application->status == 'pending' ? 'selected' : '' }}>Pending</option>
                                     <option value="approved" {{ $application->status == 'approved' ? 'selected' : '' }}>Approved</option>
                                     <option value="rejected" {{ $application->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
                                 </select>
                             </div>
+                            <button type="submit" class="w-full sm:w-auto bg-[#a31b1b] hover:bg-[#8a1717] text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm hover:shadow-md whitespace-nowrap">
+                                Update Status
+                            </button>
                         </form>
                     </div>
-                    <div class="card-footer text-end">
-                        <a href="{{ route('employer.applications.index') }}" class="btn btn-secondary">Back to Applications</a>
-                    </div>
+
                 </div>
             </div>
+            
         </div>
     </div>
-
 </x-apps.app-employer>
