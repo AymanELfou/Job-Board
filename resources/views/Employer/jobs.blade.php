@@ -8,7 +8,7 @@
                 <p class="text-gray-400 text-sm font-medium">Manage your job postings</p>
             </div>
             <div class="mt-4 md:mt-0">
-                <a href="{{ route('employer.jobs.create') }}" class="inline-flex items-center gap-2 bg-[#a31b1b] hover:bg-[#8a1717] text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm hover:shadow-md">
+                <a href="{{ route('employer.jobs.create') }}" class="inline-flex items-center gap-2 bg-[#a31b1b] hover:bg-[#8a1717] text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm hover:shadow-md no-underline">
                     <i class="bi bi-plus-lg text-lg"></i>
                     Add Job
                 </a>
@@ -54,10 +54,15 @@
                         
                         <!-- Details -->
                         <div class="space-y-3 mb-6 bg-gray-50/50 p-4 rounded-xl border border-gray-50">
-                            <div class="flex items-center gap-3 text-sm text-gray-700">
-                                <i class="bi bi-briefcase text-gray-400 w-5"></i>
-                                <span class="font-medium text-gray-500 w-24">Type:</span>
-                                <span class="font-bold">{{ $job['job_type'] }}</span>
+                            <div class="flex items-center justify-between text-sm py-1 border-b border-gray-100 pb-3 mb-2">
+                                <div class="flex items-center gap-2">
+                                    <i class="bi bi-briefcase text-[#a31b1b]/70"></i>
+                                    <span class="font-bold text-gray-900 whitespace-nowrap">{{ $job['job_type'] }}</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-gray-500">
+                                    <i class="bi bi-calendar3 text-gray-400"></i>
+                                    <span class="font-medium whitespace-nowrap text-xs">{{ $job['date_publication'] }}</span>
+                                </div>
                             </div>
                             <div class="flex items-center gap-3 text-sm text-gray-700">
                                 <i class="bi bi-tag text-gray-400 w-5"></i>
@@ -74,11 +79,7 @@
                                 <span class="font-medium text-gray-500 w-24">Contract:</span>
                                 <span class="font-bold px-2 py-1 bg-white border border-gray-200 rounded-md text-xs">{{ $job['type_contrat'] }}</span>
                             </div>
-                            <div class="flex items-center gap-3 text-sm text-gray-700">
-                                <i class="bi bi-clock-history text-gray-400 w-5"></i>
-                                <span class="font-medium text-gray-500 w-24">Published:</span>
-                                <span class="font-bold">{{ $job['date_publication'] }}</span>
-                            </div>
+
                         </div>
                         
                         <!-- Description -->
