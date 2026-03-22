@@ -131,7 +131,8 @@ class JobseekerJobController extends Controller
 
 
     public function saveJob(Request $request, $id){
-        $user = auth()->user()->profile;
+        $user = auth()->user();
+        $profile = $user->profile;
 
          // Vérifiez si l'emploi est déjà sauvegardé
             $existingSave = SavedJob::where('id_utilisateur', $user->id)
@@ -149,12 +150,10 @@ class JobseekerJobController extends Controller
         $savedJob = new SavedJob();
         $savedJob->id_utilisateur = $user->id;
         $savedJob->job_id = $id;
-        $savedJob->profile_id = $user->id;
+        $savedJob->profile_id = $profile ? $profile->id : null;
 
         // Sauvegarder l'emploi en base de données avec save()
         $savedJob->save();
-        
-
 
         return back()->with('success', 'Job saved successfully.');
 

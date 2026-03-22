@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="text-white h-screen fixed sticky top-0 font-sans" style="width: 260px; background-color: #1a1a1a; overflow-y: hidden;">
+<nav x-data="{ open: false }" class="text-white h-screen fixed sticky top-0" style="width: 260px; background-color: #1a1a1a; overflow-y: hidden;">
     <div class="flex flex-col items-center p-4 h-full">
         <!-- Centered Logo -->
         <a href="{{ route('employer.dashboard') }}" class="flex items-center mb-6 no-underline">
@@ -57,7 +57,7 @@
 </nav>
 
 <!-- Responsive Navigation Menu -->
-<div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-[#1a1a1a] font-sans">
+<div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-[#1a1a1a]">
     <div class="pt-2 pb-3 space-y-1">
         <x-responsive-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('employer.dashboard')" class="text-white hover:bg-white/10 no-underline text-base font-medium">
             {{ __('Dashboard') }}

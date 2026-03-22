@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="text-white h-screen fixed sticky top-0 font-sans border-r border-slate-800" style="width: 260px; background-color: #0f172a; overflow-y: hidden;">
+<nav x-data="{ open: false }" class="text-white h-screen fixed sticky top-0 border-r border-slate-800" style="width: 260px; background-color: #0f172a; overflow-y: hidden;">
     <div class="flex flex-col items-center p-4 h-full">
         
         <!-- Centered Logo -->
@@ -56,7 +56,7 @@
 </nav>
 
 <!-- Responsive Navigation Menu (Mobile) -->
-<div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden bg-[#0f172a] border-b border-slate-800 font-sans">
+<div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden bg-[#0f172a] border-b border-slate-800">
     <div class="pt-2 pb-3 space-y-1">
         <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" class="text-white hover:bg-slate-800 no-underline text-base font-bold">
             <i class="bi bi-grid-fill mr-2"></i> {{ __('Dashboard') }}

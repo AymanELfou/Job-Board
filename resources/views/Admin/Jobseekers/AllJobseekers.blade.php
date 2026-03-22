@@ -102,9 +102,15 @@
                                             <i class="bi bi-trash3 me-1"></i> Delete
                                         </button>
                                     </form>
-                                    <a href="#" class="px-4 py-2.5 rounded-xl bg-[#a31b1b] text-white hover:bg-[#821515] transition-all font-bold text-sm shadow-sm">
-                                        <i class="bi bi-file-earmark-pdf me-1"></i> CV
-                                    </a>
+                                    @if($jobseeker->resume)
+                                        <a href="{{ asset('storage/' . $jobseeker->resume) }}" download="{{ Str::slug($jobseeker->fullName ?? 'candidate') }}_CV.pdf" class="px-4 py-2.5 rounded-xl bg-[#a31b1b] text-white hover:bg-[#821515] transition-all font-bold text-sm shadow-sm text-center no-underline">
+                                            <i class="bi bi-file-earmark-pdf me-1"></i> CV
+                                        </a>
+                                    @else
+                                        <span class="px-4 py-2.5 rounded-xl bg-gray-200 text-gray-400 font-bold text-sm shadow-sm cursor-not-allowed text-center" title="No CV uploaded">
+                                            <i class="bi bi-file-earmark-x me-1"></i> No CV
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>

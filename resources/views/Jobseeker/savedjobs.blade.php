@@ -9,7 +9,7 @@
                 <p class="text-gray-400 text-sm font-medium">Manage the opportunities you've bookmarked</p>
             </div>
             <div class="mt-4 md:mt-0">
-                <a href="{{ route('jobseeker.jobs.index') }}" class="inline-flex items-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm">
+                <a href="{{ route('jobseeker.jobs.index') }}" class="inline-flex items-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm no-underline">
                     <i class="bi bi-search text-lg"></i>
                     Find More Jobs
                 </a>
@@ -29,7 +29,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-3">No saved jobs yet</h3>
                     <p class="text-gray-500 mb-8 max-w-md mx-auto">When you see a job you like, click the bookmark icon to save it here for later.</p>
-                    <a href="{{ route('jobseeker.jobs.index') }}" class="inline-flex items-center gap-2 bg-[#a31b1b] hover:bg-[#8a1717] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-sm">
+                    <a href="{{ route('jobseeker.jobs.index') }}" class="inline-flex items-center gap-2 bg-[#a31b1b] hover:bg-[#8a1717] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-sm no-underline">
                         <i class="bi bi-briefcase"></i>
                         Explore Jobs
                     </a>

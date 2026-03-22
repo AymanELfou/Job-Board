@@ -32,7 +32,7 @@
                         <i class="bi bi-stars text-[#a31b1b]"></i>
                         Recommended Jobs
                     </h3>
-                    <a href="{{ route('jobseeker.jobs.index') }}" class="text-sm font-bold text-[#a31b1b] hover:text-[#8a1717] transition-colors flex items-center gap-1">
+                    <a href="{{ route('jobseeker.jobs.index') }}" class="text-sm font-bold text-[#a31b1b] hover:text-[#8a1717] transition-colors flex items-center gap-1 no-underline">
                         View All <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>

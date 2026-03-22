@@ -10,7 +10,7 @@
             </div>
             
             <div class="mt-4 md:mt-0">
-                <a href="{{ route('jobseeker.applications.index') }}" class="inline-flex items-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm">
+                <a href="{{ route('jobseeker.applications.index') }}" class="inline-flex items-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm no-underline">
                     <i class="bi bi-arrow-left text-lg"></i>
                     Back to Applications
                 </a>

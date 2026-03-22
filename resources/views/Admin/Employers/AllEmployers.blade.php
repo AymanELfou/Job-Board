@@ -61,8 +61,8 @@
                         <div class="col-xs-12 col-sm-6 col-lg-4">
                             <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group flex flex-col h-100 overflow-hidden">
                                 <div class="flex items-center gap-4 mb-6">
-                                    <div class="w-16 h-16 rounded-2xl bg-[#a31b1b]/5 flex items-center justify-center text-2xl text-[#a31b1b] border border-[#a31b1b]/10 group-hover:bg-[#a31b1b] group-hover:text-white transition-all duration-300">
-                                        <i class="bi bi-building-check"></i>
+                                    <div class="w-16 h-16 rounded-2xl bg-[#a31b1b] flex items-center justify-center text-3xl text-white shadow-md shadow-[#a31b1b]/20 transition-all duration-300 group-hover:scale-105">
+                                        <i class="bi bi-building"></i>
                                     </div>
                                     <div>
                                         <h3 class="text-xl font-extrabold text-gray-900 leading-tight">{{ $Employer['nom_entreprise'] }}</h3>
@@ -100,9 +100,6 @@
                                             <i class="bi bi-trash3 me-1"></i> Terminate
                                         </button>
                                     </form>
-                                    <a href="#" class="px-6 py-2.5 rounded-xl bg-[#a31b1b] text-white hover:bg-[#821515] transition-all font-bold text-sm shadow-md shadow-[#a31b1b]/10">
-                                        Profile
-                                    </a>
                                 </div>
                             </div>
                         </div>
