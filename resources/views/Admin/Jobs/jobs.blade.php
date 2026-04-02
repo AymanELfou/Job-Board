@@ -1,10 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center py-2 px-4 mb-4">
-            <h2 class="text-5xl font-extrabold text-gray-900 tracking-tight">
-                Job <span class="text-[#a31b1b]">Management</span>
-            </h2>
-            <nav class="flex text-xl font-extrabold text-[#a31b1b] gap-6">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full">
+            <div>
+                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight m-0">
+                    Job <span class="text-[#a31b1b]">Management</span>
+                </h2>
+            </div>
+            <nav class="flex text-lg font-extrabold text-[#a31b1b] gap-6 mt-2 md:mt-0">
                 <span class="border-b-4 border-[#a31b1b] pb-1 cursor-default">All Listings</span>
             </nav>
         </div>

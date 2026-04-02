@@ -53,13 +53,26 @@ class AdminDashboardController extends Controller
     })->values();
 
 
-    $jobPostingsTrends = Job::selectRaw('job_type, COUNT(*) as count')
+    $jobPostingsTrendsRaw = Job::selectRaw('job_type, COUNT(*) as count')
         ->groupBy('job_type')
         ->get();
 
-    // Prepare data for Job Postings Trends Chart
-    $jobPostingsLabels = $jobPostingsTrends->pluck('job_type');
-    $jobPostingsCounts = $jobPostingsTrends->pluck('count');
+    // Standardize labels mapping variations to a unified format
+    $standardizedTrends = collect();
+    foreach ($jobPostingsTrendsRaw as $trend) {
+        $type = strtolower(str_replace(['_', '-'], ' ', $trend->job_type));
+        $type = ucwords($type ?: 'Unspecified');
+        
+        if ($standardizedTrends->has($type)) {
+            $standardizedTrends[$type] += $trend->count;
+        } else {
+            $standardizedTrends[$type] = $trend->count;
+        }
+    }
+
+    // Prepare data for Job Postings Distribution Chart
+    $jobPostingsLabels = $standardizedTrends->keys();
+    $jobPostingsCounts = $standardizedTrends->values();
 
     return view('Admin.dashboard', compact(
         'applications', 

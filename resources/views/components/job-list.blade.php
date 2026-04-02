@@ -134,11 +134,11 @@
                     </span>
                     
                     <div class="flex gap-2">
-                        <form action="{{ route('jobs.destroy', $job->id) }}" method="post">
+                        <form action="{{ route('jobs.destroy', $job->id) }}" method="post" class="m-0">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="action-btn-admin action-btn-delete" onclick="return confirm('Are you sure you want to delete this job posting?')">
-                                <i class="bi bi-trash3"></i>
+                            <button type="submit" class="w-10 h-10 rounded-xl bg-[#a31b1b] text-white flex items-center justify-center hover:bg-[#8a1717] transition-all duration-300 shadow-sm" onclick="return confirm('Are you sure you want to delete this job posting?')">
+                                <i class="bi bi-trash-fill text-lg"></i>
                             </button>
                         </form>
                         {{-- <a href="{{ route('jobs.edit', $job->id) }}" class="action-btn-admin">

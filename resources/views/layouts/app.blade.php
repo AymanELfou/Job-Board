@@ -27,8 +27,8 @@
         <div class="flex-grow-1">
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow-sm">
-                    <div class="container py-2">
+                <header class="bg-white shadow-sm mb-6 border-b border-gray-100">
+                    <div class="container py-4">
                         {{ $header }}
                     </div>
                 </header>

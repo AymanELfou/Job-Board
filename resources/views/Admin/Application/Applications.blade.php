@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-2 gap-4">
-            <div class="mt-4">
-                <h2 class="text-5xl font-extrabold text-gray-900 tracking-tight">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full">
+            <div>
+                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight m-0">
                     Application <span class="text-[#a31b1b]">Management</span>
                 </h2>
-                <p class="text-gray-500 text-lg mt-1 font-medium">Review and track candidate submissions</p>
+                <p class="text-gray-500 text-sm font-medium mt-1 mb-0">Review and track candidate submissions</p>
             </div>
         </div>
     </x-slot>

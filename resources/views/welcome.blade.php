@@ -117,9 +117,9 @@
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="nav-link-jb">Find Jobs</a>
-                    <a href="#" class="nav-link-jb">Browse Companies</a>
-                    <a href="#" class="nav-link-jb">Salary Guide</a>
+                    <a href="{{ route('register') }}" class="nav-link-jb">Find Jobs</a>
+                    <a href="{{ route('register') }}" class="nav-link-jb">Browse Companies</a>
+                    <a href="{{ route('register') }}" class="nav-link-jb">Salary Guide</a>
                 </div>
 
                 <div class="flex items-center space-x-4">
@@ -167,10 +167,10 @@
                             <i class="bi bi-geo-alt text-gray-400 mr-3"></i>
                             <input type="text" placeholder="City or remote" class="w-full py-3 border-none focus:ring-0 outline-none placeholder-gray-400 font-medium" />
                         </div>
-                        <button class="btn-primary-jb w-full sm:w-auto flex items-center justify-center gap-2">
+                        <a href="{{ route('register') }}" class="btn-primary-jb w-full sm:w-auto flex items-center justify-center gap-2 no-underline">
                             <span>Search</span>
                             <i class="bi bi-arrow-right"></i>
-                        </button>
+                        </a>
                     </div>
 
                     <div class="flex items-center justify-center lg:justify-start space-x-6 text-sm text-gray-500 font-medium">
@@ -257,7 +257,7 @@
                     <p class="text-gray-600 leading-relaxed mb-6">
                         Your data is encrypted and protected. We value your privacy and ensure a safe environment for all professional connections.
                     </p>
-                    <a href="#" class="text-[#a31b1b] text-lg font-extrabold flex items-center gap-2 hover:gap-3 transition-all no-underline">
+                    <a href="{{ route('register') }}" class="text-[#a31b1b] text-lg font-extrabold flex items-center gap-2 hover:gap-3 transition-all no-underline">
                         Learn about Security <i class="bi bi-chevron-right"></i>
                     </a>
                 </div>
@@ -275,10 +275,10 @@
                 </div>
 
                 <div class="flex space-x-8 text-base font-bold text-gray-500">
-                    <a href="#" class="hover:text-[#a31b1b] no-underline transition-colors">About Us</a>
-                    <a href="#" class="hover:text-[#a31b1b] no-underline transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-[#a31b1b] no-underline transition-colors">Terms of Service</a>
-                    <a href="#" class="hover:text-[#a31b1b] no-underline transition-colors">Contact</a>
+                    <a href="{{ route('register') }}" class="hover:text-[#a31b1b] no-underline transition-colors">About Us</a>
+                    <a href="{{ route('register') }}" class="hover:text-[#a31b1b] no-underline transition-colors">Privacy Policy</a>
+                    <a href="{{ route('register') }}" class="hover:text-[#a31b1b] no-underline transition-colors">Terms of Service</a>
+                    <a href="{{ route('register') }}" class="hover:text-[#a31b1b] no-underline transition-colors">Contact</a>
                 </div>
 
                 <div class="text-sm text-gray-400 font-medium">

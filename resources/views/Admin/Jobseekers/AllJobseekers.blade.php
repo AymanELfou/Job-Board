@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-2 gap-4">
-            <div class="mt-4">
-                <h2 class="text-5xl font-extrabold text-gray-900 tracking-tight">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full">
+            <div>
+                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight m-0">
                     User <span class="text-[#a31b1b]">Management</span>
                 </h2>
-                <p class="text-gray-500 text-lg mt-1 font-medium">Review and manage platform participants</p>
+                <p class="text-gray-500 text-sm font-medium mt-1 mb-0">Review and manage platform participants</p>
             </div>
             
             <!-- Segmented Control Hub -->
-            <div class="flex bg-gray-100 p-1.5 rounded-2xl border border-gray-200 w-full md:w-auto">
+            <div class="flex bg-gray-100 p-1.5 rounded-2xl border border-gray-200 mt-3 md:mt-0 w-full md:w-auto">
                 <a href="{{ route('jobseeker.index') }}" class="flex-1 md:flex-none px-6 py-2 rounded-xl text-sm font-bold transition-all shadow-sm bg-white text-[#a31b1b] border border-gray-100">
                     <i class="bi bi-person-badge me-2"></i>Job Seekers
                 </a>
